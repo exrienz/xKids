@@ -871,6 +871,30 @@
                         <div class="score-label">🎯 النتيجة - Score</div>
                         <div class="score-display" id="scoreDisplay">0/24</div>
                         
+                        <!-- Range Selection Controls -->
+                        <div class="range-selection mb-4" style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,0.2);">
+                            <div class="range-title" style="font-weight: 600; margin-bottom: 0.75rem; text-align: center; color: var(--text-primary);">
+                                📍 اختيار المدى - Select Range
+                            </div>
+                            <div class="row g-2 mb-3">
+                                <div class="col-6">
+                                    <select id="startLetter" class="form-select" style="border-radius: var(--radius-md); font-family: 'Amiri', serif; font-size: 1.1rem;">
+                                        <!-- Options will be populated by JavaScript -->
+                                    </select>
+                                    <small style="color: var(--text-muted); font-size: 0.8rem;">من - From</small>
+                                </div>
+                                <div class="col-6">
+                                    <select id="endLetter" class="form-select" style="border-radius: var(--radius-md); font-family: 'Amiri', serif; font-size: 1.1rem;">
+                                        <!-- Options will be populated by JavaScript -->
+                                    </select>
+                                    <small style="color: var(--text-muted); font-size: 0.8rem;">إلى - To</small>
+                                </div>
+                            </div>
+                            <button class="btn btn-neutral-enhanced btn-enhanced btn-sm" onclick="applyRange()" style="width: 100%; font-size: 0.9rem;">
+                                ✅ تطبيق المدى - Apply Range
+                            </button>
+                        </div>
+
                         <div class="d-grid gap-3 mb-4">
                             <button class="btn btn-primary-enhanced btn-enhanced" onclick="refreshHarakat()">
                                 🔄 حركات جديدة - New Vowels
@@ -932,6 +956,7 @@
         let currentMode = 'normal';
         let correctCount = 0;
         let incorrectCount = 0;
+        let selectedRange = { start: 0, end: baseLetters.length - 1 };
 
         function generateCombinations() {
             allCombinations = [];
@@ -948,8 +973,79 @@
             });
         }
 
+        function populateRangeSelectors() {
+            const startSelect = document.getElementById('startLetter');
+            const endSelect = document.getElementById('endLetter');
+            
+            // Clear existing options
+            startSelect.innerHTML = '';
+            endSelect.innerHTML = '';
+            
+            // Populate with all letters
+            baseLetters.forEach((letter, index) => {
+                const startOption = document.createElement('option');
+                startOption.value = index;
+                startOption.textContent = letter;
+                startSelect.appendChild(startOption);
+                
+                const endOption = document.createElement('option');
+                endOption.value = index;
+                endOption.textContent = letter;
+                endSelect.appendChild(endOption);
+            });
+            
+            // Set default values
+            startSelect.value = 0;
+            endSelect.value = baseLetters.length - 1;
+        }
+
+        function getLettersInRange(startIndex, endIndex) {
+            // Ensure indices are valid
+            const start = Math.max(0, Math.min(startIndex, endIndex));
+            const end = Math.min(baseLetters.length - 1, Math.max(startIndex, endIndex));
+            
+            return baseLetters.slice(start, end + 1);
+        }
+
+        function getCombinationsInRange(startIndex, endIndex) {
+            const rangeLetters = getLettersInRange(startIndex, endIndex);
+            const rangeCombinations = [];
+            
+            rangeLetters.forEach(letter => {
+                harakat.forEach((mark, index) => {
+                    rangeCombinations.push({
+                        letter: letter,
+                        mark: mark,
+                        combined: letter + mark,
+                        type: harakatTypes[index],
+                        key: letter + harakatTypes[index]
+                    });
+                });
+            });
+            
+            return rangeCombinations;
+        }
+
+        function applyRange() {
+            const startIndex = parseInt(document.getElementById('startLetter').value);
+            const endIndex = parseInt(document.getElementById('endLetter').value);
+            
+            if (startIndex > endIndex) {
+                showCustomAlert('⚠️ تحذير: يجب أن يكون الحرف الأول قبل الحرف الأخير! - Warning: Start letter must come before end letter!', 'warning');
+                return;
+            }
+            
+            selectedRange = { start: startIndex, end: endIndex };
+            refreshHarakat();
+            
+            const startLetter = baseLetters[startIndex];
+            const endLetter = baseLetters[endIndex];
+            showCustomAlert(`✅ تم تطبيق المدى من ${startLetter} إلى ${endLetter} - Range applied from ${startLetter} to ${endLetter}`, 'success');
+        }
+
         function initGame() {
             generateCombinations();
+            populateRangeSelectors();
             refreshHarakat();
             addFloatingShapes();
         }
@@ -977,8 +1073,15 @@
             currentMode = 'normal';
             updateModeIndicator();
             
-            const shuffled = [...allCombinations].sort(() => 0.5 - Math.random());
-            currentCombinations = shuffled.slice(0, 24);
+            // Get combinations from selected range
+            const rangeCombinations = getCombinationsInRange(selectedRange.start, selectedRange.end);
+            
+            // Shuffle the range combinations
+            const shuffled = [...rangeCombinations].sort(() => 0.5 - Math.random());
+            
+            // Take up to 24 combinations, or all available if less than 24
+            const maxCombinations = Math.min(24, rangeCombinations.length);
+            currentCombinations = shuffled.slice(0, maxCombinations);
             
             combinationStatus = {};
             currentCombinations.forEach(combo => {

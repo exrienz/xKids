@@ -316,23 +316,11 @@
         }
         
         .word-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.6s ease;
+            display: none !important;
         }
         
         .word-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(45deg, rgba(255,255,255,0.1), transparent);
-            opacity: 0;
-            transition: var(--transition-smooth);
+            display: none !important;
         }
         
         .word-card:hover {
@@ -340,17 +328,9 @@
             box-shadow: var(--shadow-xl);
         }
         
-        .word-card:hover::before {
-            left: 100%;
-        }
-        
-        .word-card:hover::after {
-            opacity: 1;
-        }
         
         .word-card:active {
             transform: translateY(-3px) scale(1.01);
-            background: inherit !important;
         }
         
         .three-letter-display {
@@ -446,18 +426,11 @@
         }
         
         .btn-enhanced::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
+            display: none !important;
         }
         
         .btn-enhanced:hover::before {
-            left: 100%;
+            display: none !important;
         }
         
         .btn-enhanced:hover {
@@ -467,7 +440,6 @@
         
         .btn-enhanced:active {
             transform: translateY(-1px) scale(1.01);
-            background: inherit !important;
             box-shadow: var(--shadow-sm) !important;
         }
         
@@ -735,24 +707,21 @@
         .btn-enhanced:hover,
         .btn-enhanced:focus,
         .btn-enhanced:active {
-            color: inherit !important;
-            background-color: inherit !important;
+            color: white !important;
             border-color: transparent !important;
         }
         
         .word-card:hover,
         .word-card:focus,
         .word-card:active {
-            color: inherit !important;
-            background-color: inherit !important;
+            color: white !important;
             border-color: transparent !important;
         }
         
         .letter-select:hover,
         .letter-select:focus,
         .letter-select:active {
-            color: inherit !important;
-            background-color: inherit !important;
+            color: var(--text-primary) !important;
             border-color: transparent !important;
         }
         
@@ -823,7 +792,7 @@
         }
         
         /* Comprehensive fixes for white blinking/flashing */
-        .btn-enhanced, .word-card, .help-word-card, .letter-button {
+        .btn-enhanced, .word-card, .help-word-card {
             -webkit-appearance: none; -moz-appearance: none; appearance: none;
             border: none !important; outline: none !important;
             -webkit-tap-highlight-color: transparent !important;
@@ -841,13 +810,15 @@
             border: none !important; outline: none !important;
         }
         
-        .letter-button:active, .letter-button:focus, .letter-button:hover {
-            background: var(--secondary-gradient) !important; color: white !important;
-            border: none !important; outline: none !important;
+        .word-card.unmarked { background: var(--primary-gradient) !important; color: white !important; transition: none !important; }
+        .word-card.correct { background: var(--success-gradient) !important; color: white !important; transition: none !important; }
+        .word-card.incorrect { background: var(--error-gradient) !important; color: white !important; transition: none !important; }
+        /* Remove flickering pseudo-elements */
+        .word-card::before, .word-card::after { display: none !important; }
+        .word-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease !important;
         }
         
-        .word-card.correct { background: var(--success-gradient) !important; }
-        .word-card.incorrect { background: var(--error-gradient) !important; }
         .word-card.correct:active, .word-card.correct:focus, .word-card.correct:hover {
             background: var(--success-gradient) !important;
         }
@@ -885,85 +856,6 @@
             <p class="app-subtitle">تعلم الكلمات الثلاثية - Learn Three Letter Words with Harakat</p>
         </header>
 
-        <!-- Letter Selection Panel -->
-        <div class="letter-selection">
-            <div class="selection-title">🎯 اختر نطاق الحروف - Choose Letter Range</div>
-            <div class="letter-range-controls">
-                <div class="range-control">
-                    <div class="range-label">من - From</div>
-                    <select id="startLetter" class="letter-select">
-                        <option value="0">ا</option>
-                        <option value="1">ب</option>
-                        <option value="2">ت</option>
-                        <option value="3">ث</option>
-                        <option value="4" selected>ج</option>
-                        <option value="5">ح</option>
-                        <option value="6">خ</option>
-                        <option value="7">د</option>
-                        <option value="8">ذ</option>
-                        <option value="9">ر</option>
-                        <option value="10">ز</option>
-                        <option value="11">س</option>
-                        <option value="12">ش</option>
-                        <option value="13">ص</option>
-                        <option value="14">ض</option>
-                        <option value="15">ط</option>
-                        <option value="16">ظ</option>
-                        <option value="17">ع</option>
-                        <option value="18">غ</option>
-                        <option value="19">ف</option>
-                        <option value="20">ق</option>
-                        <option value="21">ك</option>
-                        <option value="22">ل</option>
-                        <option value="23">م</option>
-                        <option value="24">ن</option>
-                        <option value="25">ه</option>
-                        <option value="26">و</option>
-                        <option value="27">ي</option>
-                    </select>
-                </div>
-                <div class="range-control">
-                    <div class="range-label">إلى - To</div>
-                    <select id="endLetter" class="letter-select">
-                        <option value="0">ا</option>
-                        <option value="1">ب</option>
-                        <option value="2">ت</option>
-                        <option value="3">ث</option>
-                        <option value="4">ج</option>
-                        <option value="5">ح</option>
-                        <option value="6">خ</option>
-                        <option value="7">د</option>
-                        <option value="8">ذ</option>
-                        <option value="9" selected>ر</option>
-                        <option value="10">ز</option>
-                        <option value="11">س</option>
-                        <option value="12">ش</option>
-                        <option value="13">ص</option>
-                        <option value="14">ض</option>
-                        <option value="15">ط</option>
-                        <option value="16">ظ</option>
-                        <option value="17">ع</option>
-                        <option value="18">غ</option>
-                        <option value="19">ف</option>
-                        <option value="20">ق</option>
-                        <option value="21">ك</option>
-                        <option value="22">ل</option>
-                        <option value="23">م</option>
-                        <option value="24">ن</option>
-                        <option value="25">ه</option>
-                        <option value="26">و</option>
-                        <option value="27">ي</option>
-                    </select>
-                </div>
-                <button class="btn btn-primary-enhanced btn-enhanced" onclick="updateLetterRange()" style="width: auto; padding: 0.75rem 1.5rem;">
-                    🔄 تحديث - Update
-                </button>
-            </div>
-            <div class="selected-range">
-                <div class="range-display" id="rangeDisplay">ج - ر</div>
-                <div class="range-info" id="rangeInfo">من حرف الجيم إلى حرف الراء - From Jim to Raa</div>
-            </div>
-        </div>
 
         <div class="mode-indicator" id="modeIndicator">
             📚 Mode: تعلم الكلمات الثلاثية - Learning Three Letter Words
@@ -986,6 +878,30 @@
                         <div class="score-label">🎯 النتيجة - Score</div>
                         <div class="score-display" id="scoreDisplay">0/20</div>
                         
+                        <!-- Range Selection Controls -->
+                        <div class="range-selection mb-4" style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,0.2);">
+                            <div class="range-title" style="font-weight: 600; margin-bottom: 0.75rem; text-align: center; color: var(--text-primary);">
+                                📍 اختيار المدى - Select Range
+                            </div>
+                            <div class="row g-2 mb-3">
+                                <div class="col-6">
+                                    <select id="startLetter" class="form-select" style="border-radius: var(--radius-md); font-family: 'Amiri', serif; font-size: 1.1rem;">
+                                        <!-- Options will be populated by JavaScript -->
+                                    </select>
+                                    <small style="color: var(--text-muted); font-size: 0.8rem;">من - From</small>
+                                </div>
+                                <div class="col-6">
+                                    <select id="endLetter" class="form-select" style="border-radius: var(--radius-md); font-family: 'Amiri', serif; font-size: 1.1rem;">
+                                        <!-- Options will be populated by JavaScript -->
+                                    </select>
+                                    <small style="color: var(--text-muted); font-size: 0.8rem;">إلى - To</small>
+                                </div>
+                            </div>
+                            <button class="btn btn-neutral-enhanced btn-enhanced btn-sm" onclick="applyRange()" style="width: 100%; font-size: 0.9rem;">
+                                ✅ تطبيق المدى - Apply Range
+                            </button>
+                        </div>
+
                         <div class="d-grid gap-3 mb-4">
                             <button class="btn btn-primary-enhanced btn-enhanced" onclick="refreshWords()">
                                 🔄 كلمات جديدة - New Words
@@ -1046,9 +962,64 @@
         let currentMode = 'normal';
         let correctCount = 0;
         let incorrectCount = 0;
+        let selectedRange = { start: 0, end: allLetters.length - 1 };
+
+        function populateRangeSelectors() {
+            const startSelect = document.getElementById('startLetter');
+            const endSelect = document.getElementById('endLetter');
+            
+            // Clear existing options
+            startSelect.innerHTML = '';
+            endSelect.innerHTML = '';
+            
+            // Populate with all letters
+            allLetters.forEach((letter, index) => {
+                const startOption = document.createElement('option');
+                startOption.value = index;
+                startOption.textContent = letter;
+                startSelect.appendChild(startOption);
+                
+                const endOption = document.createElement('option');
+                endOption.value = index;
+                endOption.textContent = letter;
+                endSelect.appendChild(endOption);
+            });
+            
+            // Set default values
+            startSelect.value = 0;
+            endSelect.value = allLetters.length - 1;
+        }
+
+        function getLettersInRange(startIndex, endIndex) {
+            // Ensure indices are valid
+            const start = Math.max(0, Math.min(startIndex, endIndex));
+            const end = Math.min(allLetters.length - 1, Math.max(startIndex, endIndex));
+            
+            return allLetters.slice(start, end + 1);
+        }
+
+        function applyRange() {
+            const startIndex = parseInt(document.getElementById('startLetter').value);
+            const endIndex = parseInt(document.getElementById('endLetter').value);
+            
+            if (startIndex > endIndex) {
+                showCustomAlert('⚠️ تحذير: يجب أن يكون الحرف الأول قبل الحرف الأخير! - Warning: Start letter must come before end letter!', 'warning');
+                return;
+            }
+            
+            selectedRange = { start: startIndex, end: endIndex };
+            selectedLetters = getLettersInRange(startIndex, endIndex);
+            refreshWords();
+            
+            const startLetter = allLetters[startIndex];
+            const endLetter = allLetters[endIndex];
+            showCustomAlert(`✅ تم تطبيق المدى من ${startLetter} إلى ${endLetter} - Range applied from ${startLetter} to ${endLetter}`, 'success');
+        }
 
         function initGame() {
-            updateLetterRange();
+            populateRangeSelectors();
+            selectedLetters = getLettersInRange(selectedRange.start, selectedRange.end);
+            refreshWords();
             addFloatingShapes();
         }
 
@@ -1071,23 +1042,6 @@
             }
         }
 
-        function updateLetterRange() {
-            const startIndex = parseInt(document.getElementById('startLetter').value);
-            const endIndex = parseInt(document.getElementById('endLetter').value);
-            
-            if (startIndex > endIndex) {
-                showCustomAlert('⚠️ الحرف الأول يجب أن يكون قبل الحرف الأخير - Start letter must come before end letter', 'warning');
-                return;
-            }
-            
-            selectedLetters = allLetters.slice(startIndex, endIndex + 1);
-            
-            // Update display
-            document.getElementById('rangeDisplay').textContent = `${allLetters[startIndex]} - ${allLetters[endIndex]}`;
-            document.getElementById('rangeInfo').textContent = `${selectedLetters.length} حرف محدد - ${selectedLetters.length} letters selected`;
-            
-            refreshWords();
-        }
 
         function generateThreeLetterWords() {
             const words = [];
@@ -1237,21 +1191,42 @@
         }
 
         function toggleWord(key) {
+            // Find the specific word card instead of re-rendering everything
+            const wordCards = document.querySelectorAll('.word-card');
+            let targetCard = null;
+            
+            const wordObj = currentWords.find(w => w.key === key);
+            if (!wordObj) return;
+            
+            wordCards.forEach((card, index) => {
+                if (index < currentWords.length && currentWords[index].key === key) {
+                    targetCard = card;
+                }
+            });
+            
+            if (!targetCard) return;
+            
+            // Update state
             if (wordStatus[key] === 'unmarked') {
                 wordStatus[key] = 'correct';
                 correctCount++;
                 playSuccessSound();
+                targetCard.classList.remove('incorrect', 'unmarked');
+                targetCard.classList.add('correct');
             } else if (wordStatus[key] === 'correct') {
                 wordStatus[key] = 'incorrect';
                 correctCount--;
                 incorrectCount++;
                 playErrorSound();
+                targetCard.classList.remove('correct', 'unmarked');
+                targetCard.classList.add('incorrect');
             } else if (wordStatus[key] === 'incorrect') {
                 wordStatus[key] = 'unmarked';
                 incorrectCount--;
+                targetCard.classList.remove('correct', 'incorrect');
+                targetCard.classList.add('unmarked');
             }
             
-            renderWords();
             updateDisplay();
         }
 

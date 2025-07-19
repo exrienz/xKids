@@ -797,6 +797,30 @@
                         <div class="score-label">🎯 النتيجة - Score</div>
                         <div class="score-display" id="scoreDisplay">0/14</div>
                         
+                        <!-- Range Selection Controls -->
+                        <div class="range-selection mb-4" style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,0.2);">
+                            <div class="range-title" style="font-weight: 600; margin-bottom: 0.75rem; text-align: center; color: var(--text-primary);">
+                                📍 اختيار المدى - Select Range
+                            </div>
+                            <div class="row g-2 mb-3">
+                                <div class="col-6">
+                                    <select id="startLetter" class="form-select" style="border-radius: var(--radius-md); font-family: 'Amiri', serif; font-size: 1.1rem;">
+                                        <!-- Options will be populated by JavaScript -->
+                                    </select>
+                                    <small style="color: var(--text-muted); font-size: 0.8rem;">من - From</small>
+                                </div>
+                                <div class="col-6">
+                                    <select id="endLetter" class="form-select" style="border-radius: var(--radius-md); font-family: 'Amiri', serif; font-size: 1.1rem;">
+                                        <!-- Options will be populated by JavaScript -->
+                                    </select>
+                                    <small style="color: var(--text-muted); font-size: 0.8rem;">إلى - To</small>
+                                </div>
+                            </div>
+                            <button class="btn btn-neutral-enhanced btn-enhanced btn-sm" onclick="applyRange()" style="width: 100%; font-size: 0.9rem;">
+                                ✅ تطبيق المدى - Apply Range
+                            </button>
+                        </div>
+
                         <div class="d-grid gap-3 mb-4">
                             <button class="btn btn-primary-enhanced btn-enhanced" onclick="refreshLetters()">
                                 🔄 حروف جديدة - New Letters
@@ -855,10 +879,63 @@
         let currentMode = 'normal';
         let correctCount = 0;
         let incorrectCount = 0;
+        let selectedRange = { start: 0, end: allLetters.length - 1 };
 
         function initGame() {
+            populateRangeSelectors();
             refreshLetters();
             addFloatingShapes();
+        }
+
+        function populateRangeSelectors() {
+            const startSelect = document.getElementById('startLetter');
+            const endSelect = document.getElementById('endLetter');
+            
+            // Clear existing options
+            startSelect.innerHTML = '';
+            endSelect.innerHTML = '';
+            
+            // Populate with all letters
+            allLetters.forEach((letter, index) => {
+                const startOption = document.createElement('option');
+                startOption.value = index;
+                startOption.textContent = letter;
+                startSelect.appendChild(startOption);
+                
+                const endOption = document.createElement('option');
+                endOption.value = index;
+                endOption.textContent = letter;
+                endSelect.appendChild(endOption);
+            });
+            
+            // Set default values
+            startSelect.value = 0;
+            endSelect.value = allLetters.length - 1;
+        }
+
+        function getLettersInRange(startIndex, endIndex) {
+            // Ensure indices are valid
+            const start = Math.max(0, Math.min(startIndex, endIndex));
+            const end = Math.min(allLetters.length - 1, Math.max(startIndex, endIndex));
+            
+            return allLetters.slice(start, end + 1);
+        }
+
+        function applyRange() {
+            const startIndex = parseInt(document.getElementById('startLetter').value);
+            const endIndex = parseInt(document.getElementById('endLetter').value);
+            
+            if (startIndex > endIndex) {
+                showCustomAlert('⚠️ تحذير: يجب أن يكون الحرف الأول قبل الحرف الأخير! - Warning: Start letter must come before end letter!', 'warning');
+                return;
+            }
+            
+            selectedRange = { start: startIndex, end: endIndex };
+            refreshLetters();
+            
+            const startLetter = allLetters[startIndex];
+            const endLetter = allLetters[endIndex];
+            showCustomAlert(`✅ تم تطبيق المدى من ${startLetter} إلى ${endLetter} - Range applied from ${startLetter} to ${endLetter}`, 'success');
         }
 
         function addFloatingShapes() {
@@ -884,8 +961,15 @@
             currentMode = 'normal';
             updateModeIndicator();
             
-            const shuffled = [...allLetters].sort(() => 0.5 - Math.random());
-            currentLetters = shuffled.slice(0, 14);
+            // Get letters from selected range
+            const rangeLetters = getLettersInRange(selectedRange.start, selectedRange.end);
+            
+            // Shuffle the range letters
+            const shuffled = [...rangeLetters].sort(() => 0.5 - Math.random());
+            
+            // Take up to 14 letters, or all available if less than 14
+            const maxLetters = Math.min(14, rangeLetters.length);
+            currentLetters = shuffled.slice(0, maxLetters);
             
             letterStatus = {};
             currentLetters.forEach(letter => {
