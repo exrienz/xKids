@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📖 إقرأ ٣ - Iqra 3 - Three Letter Words with Harakat</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --secondary-gradient: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+            --success-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            --warning-gradient: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+            --error-gradient: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+            --neutral-gradient: linear-gradient(135deg, #64748b 0%, #94a3b8 100%);
+            
+            --primary-color: #6366f1;
+            --secondary-color: #ec4899;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #64748b;
+            --background: #f8fafc;
+            --surface: rgba(255, 255, 255, 0.95);
+            --surface-elevated: rgba(255, 255, 255, 0.98);
+            
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 25px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 40px rgba(0,0,0,0.12);
+            
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+            
+            --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 20%, #ec4899 40%, #f43f5e 60%, #10b981 80%, #34d399 100%);
+            background-size: 400% 400%;
+            animation: gradientFlow 30s ease infinite;
+            min-height: 100vh;
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        @keyframes gradientFlow {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Enhanced Header */
+        .app-header {
+            background: var(--surface-elevated);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .app-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        }
+        
+        .app-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0 0 0.5rem 0;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+        
+        .app-subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin: 0;
+            opacity: 0.9;
+        }
+        
+        /* Letter Selection Panel */
+        .letter-selection {
+            background: var(--surface);
+            backdrop-filter: blur(15px);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .selection-title {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+        
+        .letter-range-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        
+        .range-control {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .range-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        
+        .letter-select {
+            background: var(--surface);
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            border-radius: var(--radius-md);
+            padding: 0.75rem 1rem;
+            font-family: 'Amiri', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            transition: var(--transition-smooth);
+            backdrop-filter: blur(10px);
+        }
+        
+        .letter-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+        
+        .selected-range {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            text-align: center;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+        
+        .range-display {
+            font-family: 'Amiri', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .range-info {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        /* Enhanced Mode Indicator */
+        .mode-indicator {
+            background: var(--surface);
+            backdrop-filter: blur(15px);
+            color: var(--text-primary);
+            padding: 1.25rem 2.5rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            transition: var(--transition-smooth);
+        }
+        
+        .mode-indicator::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--primary-gradient);
+            opacity: 0.1;
+            border-radius: var(--radius-full);
+            z-index: -1;
+        }
+        
+        /* Home Button Styles */
+        .home-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            background: var(--surface);
+            backdrop-filter: blur(15px);
+            border-radius: var(--radius-full);
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: var(--transition-smooth);
+            z-index: 10;
+        }
+        
+        .home-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .home-icon {
+            font-size: 1.2rem;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+        }
+        
+        /* Enhanced Card Styles */
+        .card {
+            background: var(--surface);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition-smooth);
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-4px);
+        }
+        
+        /* Three Letter Word Cards */
+        .word-card {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            border-radius: var(--radius-lg);
+            transition: var(--transition-bounce);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            border: none;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform-origin: center;
+        }
+        
+        .word-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .word-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), transparent);
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+        
+        .word-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .word-card:hover::before {
+            left: 100%;
+        }
+        
+        .word-card:hover::after {
+            opacity: 1;
+        }
+        
+        .word-card:active {
+            transform: translateY(-3px) scale(1.01);
+            background: inherit !important;
+        }
+        
+        .three-letter-word {
+            font-family: 'Amiri', serif;
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: 3px;
+            line-height: 1.1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            direction: rtl;
+        }
+        
+        .letter-breakdown {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .letter-part {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--radius-sm);
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: var(--transition-fast);
+            font-family: 'Amiri', serif;
+        }
+        
+        .letter-part:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: scale(1.05);
+        }
+        
+        /* Enhanced Status Classes */
+        .correct {
+            background: var(--success-gradient) !important;
+            animation: successPulse 0.6s ease !important;
+        }
+        
+        .incorrect {
+            background: var(--error-gradient) !important;
+            animation: errorShake 0.6s ease !important;
+        }
+        
+        @keyframes successPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes errorShake {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(-4px) rotate(-1deg); }
+            75% { transform: translateX(4px) rotate(1deg); }
+        }
+        
+        /* Enhanced Score Display */
+        .score-card {
+            text-align: center;
+            padding: 2rem 1.5rem;
+        }
+        
+        .score-display {
+            font-size: clamp(2.5rem, 7vw, 3.5rem);
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 1rem 0;
+            letter-spacing: 2px;
+            line-height: 1;
+        }
+        
+        .score-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Enhanced Button Styles */
+        .btn-enhanced {
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            padding: 1rem 1.75rem;
+            font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+            border: none;
+            transition: var(--transition-bounce);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.3px;
+            width: 100%;
+            box-shadow: var(--shadow-md);
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-enhanced::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-enhanced:hover::before {
+            left: 100%;
+        }
+        
+        .btn-enhanced:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .btn-enhanced:active {
+            transform: translateY(-1px) scale(1.01);
+            background: inherit !important;
+            box-shadow: var(--shadow-sm) !important;
+        }
+        
+        .btn-primary-enhanced {
+            background: var(--primary-gradient);
+            color: white;
+        }
+        
+        .btn-secondary-enhanced {
+            background: var(--secondary-gradient);
+            color: white;
+        }
+        
+        .btn-success-enhanced {
+            background: var(--success-gradient);
+            color: white;
+        }
+        
+        .btn-warning-enhanced {
+            background: var(--warning-gradient);
+            color: white;
+        }
+        
+        .btn-neutral-enhanced {
+            background: var(--neutral-gradient);
+            color: white;
+        }
+        
+        /* Enhanced Status Badges */
+        .status-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        
+        .status-badge {
+            flex: 1;
+            padding: 1rem;
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            text-align: center;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-smooth);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .status-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .status-correct {
+            background: var(--success-gradient);
+            color: white;
+        }
+        
+        .status-incorrect {
+            background: var(--error-gradient);
+            color: white;
+        }
+        
+        /* Enhanced Instructions */
+        .instructions {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+            backdrop-filter: blur(15px);
+            padding: 1.75rem;
+            border-radius: var(--radius-lg);
+            margin-top: 1.5rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .instructions-title {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .instructions-content {
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: clamp(0.85rem, 2vw, 0.95rem);
+            line-height: 1.7;
+        }
+        
+        .instructions-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-number {
+            background: var(--primary-gradient);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+        }
+        
+        /* Floating Elements */
+        .floating-shape {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0.1;
+            z-index: 1;
+        }
+        
+        .shape-1 {
+            top: 10%;
+            left: 5%;
+            width: 60px;
+            height: 60px;
+            background: var(--success-gradient);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .shape-2 {
+            top: 20%;
+            right: 10%;
+            width: 40px;
+            height: 40px;
+            background: var(--secondary-gradient);
+            border-radius: var(--radius-sm);
+            animation: float 8s ease-in-out infinite reverse;
+        }
+        
+        .shape-3 {
+            bottom: 15%;
+            left: 8%;
+            width: 50px;
+            height: 50px;
+            background: var(--warning-gradient);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: float 7s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        /* Responsive Enhancements */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .app-header {
+                padding: 2rem 1.5rem;
+                margin: 1.5rem 0;
+            }
+            
+            .mode-indicator {
+                padding: 1rem 2rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .word-card {
+                min-height: 160px;
+                padding: 1.5rem 1rem;
+            }
+            
+            .score-card {
+                padding: 1.5rem 1rem;
+            }
+            
+            .btn-enhanced {
+                padding: 0.875rem 1.5rem;
+                margin-bottom: 0.75rem;
+            }
+            
+            .status-container {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            
+            .instructions {
+                padding: 1.5rem;
+            }
+            
+            .letter-range-controls {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .floating-shape {
+                display: none;
+            }
+            
+            .letter-breakdown {
+                gap: 0.25rem;
+            }
+            
+            .letter-part {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Accessibility Enhancements */
+        .word-card:focus,
+        .btn-enhanced:focus,
+        .letter-select:focus {
+            outline: 3px solid rgba(99, 102, 241, 0.5);
+            outline-offset: 3px;
+        }
+        
+        /* Prevent white flash on button clicks */
+        .btn-enhanced:focus:not(:focus-visible) {
+            outline: none;
+        }
+        
+        .btn-enhanced:active:focus {
+            outline: none;
+        }
+        
+        /* Prevent iOS safari button highlighting */
+        .btn-enhanced,
+        .word-card,
+        .letter-select {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        /* Chrome-specific fixes for white blinking */
+        .btn-enhanced,
+        .word-card,
+        .letter-select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border: none !important;
+            outline: none !important;
+        }
+        
+        .btn-enhanced:active,
+        .word-card:active,
+        .letter-select:active {
+            -webkit-transform: translateY(-1px) scale(1.01) !important;
+            transform: translateY(-1px) scale(1.01) !important;
+            -webkit-transition: none !important;
+            transition: none !important;
+        }
+        
+        .btn-enhanced:hover,
+        .btn-enhanced:focus,
+        .btn-enhanced:active {
+            color: inherit !important;
+            background-color: inherit !important;
+            border-color: transparent !important;
+        }
+        
+        .word-card:hover,
+        .word-card:focus,
+        .word-card:active {
+            color: inherit !important;
+            background-color: inherit !important;
+            border-color: transparent !important;
+        }
+        
+        .letter-select:hover,
+        .letter-select:focus,
+        .letter-select:active {
+            color: inherit !important;
+            background-color: inherit !important;
+            border-color: transparent !important;
+        }
+        
+        /* Footer Styles */
+        .app-footer {
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+            margin-top: 3rem;
+            padding: 2rem 0;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: none;
+        }
+        
+        .footer-content {
+            text-align: center;
+        }
+        
+        .footer-content p {
+            color: var(--text-muted);
+            margin: 0;
+            font-weight: 500;
+        }
+        
+        .attribution {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .attribution p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+        
+        .creator-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+        }
+        
+        .creator-link:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        /* Print Optimizations */
+        /* Smart TV Support */
+        @media (min-width: 1920px) {
+            .container { max-width: 1600px; padding: 0 3rem; }
+            .app-title { font-size: 5rem; }
+            .word-card { padding: 2.5rem; font-size: 2.2rem; min-height: 200px; }
+            .btn-enhanced { padding: 1rem 2rem; font-size: 1.2rem; }
+            .home-button { padding: 1rem 1.5rem; font-size: 1.1rem; }
+        }
+        
+        /* Comprehensive fixes for white blinking/flashing */
+        .btn-enhanced, .word-card, .help-word-card, .letter-button {
+            -webkit-appearance: none; -moz-appearance: none; appearance: none;
+            border: none !important; outline: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+            -webkit-touch-callout: none !important; -webkit-user-select: none !important;
+            user-select: none !important; backface-visibility: hidden !important;
+        }
+        
+        .btn-enhanced:active, .btn-enhanced:focus, .btn-enhanced:hover {
+            background: var(--success-gradient) !important; color: white !important;
+            border: none !important; outline: none !important; box-shadow: var(--shadow-lg) !important;
+        }
+        
+        .word-card:active, .word-card:focus, .word-card:hover {
+            background: var(--primary-gradient) !important; color: white !important;
+            border: none !important; outline: none !important;
+        }
+        
+        .letter-button:active, .letter-button:focus, .letter-button:hover {
+            background: var(--secondary-gradient) !important; color: white !important;
+            border: none !important; outline: none !important;
+        }
+        
+        .word-card.correct { background: var(--success-gradient) !important; }
+        .word-card.incorrect { background: var(--error-gradient) !important; }
+        .word-card.correct:active, .word-card.correct:focus, .word-card.correct:hover {
+            background: var(--success-gradient) !important;
+        }
+        .word-card.incorrect:active, .word-card.incorrect:focus, .word-card.incorrect:hover {
+            background: var(--error-gradient) !important;
+        }
+        
+        .word-card:focus, .btn-enhanced:focus, .home-button:focus {
+            outline: 4px solid var(--primary-color); outline-offset: 4px;
+            box-shadow: 0 0 0 8px rgba(99, 102, 241, 0.3); transform: scale(1.05);
+        }
+        
+        @media print {
+            .floating-shape, .btn-enhanced { display: none !important; }
+            body { background: white !important; }
+            .card { box-shadow: none !important; border: 1px solid #ddd !important; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Decorative Elements -->
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+    <div class="floating-shape shape-3"></div>
+
+    <div class="container">
+        <header class="app-header">
+            <div style="position: absolute; top: 1rem; right: 1rem;">
+                <a href="index.html" class="home-button" aria-label="Back to Home">
+                    <span class="home-icon">🏠</span>
+                    <span class="home-text">Home</span>
+                </a>
+            </div>
+            <h1 class="app-title">📖 إقرأ ٤ - Iqra 4</h1>
+            <p class="app-subtitle">تعلم الكلمات الثلاثية - Learn Three Letter Words with Harakat</p>
+        </header>
+
+        <!-- Letter Selection Panel -->
+        <div class="letter-selection">
+            <div class="selection-title">🎯 اختر نطاق الحروف - Choose Letter Range</div>
+            <div class="letter-range-controls">
+                <div class="range-control">
+                    <div class="range-label">من - From</div>
+                    <select id="startLetter" class="letter-select">
+                        <option value="0">ا</option>
+                        <option value="1">ب</option>
+                        <option value="2">ت</option>
+                        <option value="3">ث</option>
+                        <option value="4" selected>ج</option>
+                        <option value="5">ح</option>
+                        <option value="6">خ</option>
+                        <option value="7">د</option>
+                        <option value="8">ذ</option>
+                        <option value="9">ر</option>
+                        <option value="10">ز</option>
+                        <option value="11">س</option>
+                        <option value="12">ش</option>
+                        <option value="13">ص</option>
+                        <option value="14">ض</option>
+                        <option value="15">ط</option>
+                        <option value="16">ظ</option>
+                        <option value="17">ع</option>
+                        <option value="18">غ</option>
+                        <option value="19">ف</option>
+                        <option value="20">ق</option>
+                        <option value="21">ك</option>
+                        <option value="22">ل</option>
+                        <option value="23">م</option>
+                        <option value="24">ن</option>
+                        <option value="25">ه</option>
+                        <option value="26">و</option>
+                        <option value="27">ي</option>
+                    </select>
+                </div>
+                <div class="range-control">
+                    <div class="range-label">إلى - To</div>
+                    <select id="endLetter" class="letter-select">
+                        <option value="0">ا</option>
+                        <option value="1">ب</option>
+                        <option value="2">ت</option>
+                        <option value="3">ث</option>
+                        <option value="4">ج</option>
+                        <option value="5">ح</option>
+                        <option value="6">خ</option>
+                        <option value="7">د</option>
+                        <option value="8">ذ</option>
+                        <option value="9" selected>ر</option>
+                        <option value="10">ز</option>
+                        <option value="11">س</option>
+                        <option value="12">ش</option>
+                        <option value="13">ص</option>
+                        <option value="14">ض</option>
+                        <option value="15">ط</option>
+                        <option value="16">ظ</option>
+                        <option value="17">ع</option>
+                        <option value="18">غ</option>
+                        <option value="19">ف</option>
+                        <option value="20">ق</option>
+                        <option value="21">ك</option>
+                        <option value="22">ل</option>
+                        <option value="23">م</option>
+                        <option value="24">ن</option>
+                        <option value="25">ه</option>
+                        <option value="26">و</option>
+                        <option value="27">ي</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary-enhanced btn-enhanced" onclick="updateLetterRange()" style="width: auto; padding: 0.75rem 1.5rem;">
+                    🔄 تحديث - Update
+                </button>
+            </div>
+            <div class="selected-range">
+                <div class="range-display" id="rangeDisplay">ج - ر</div>
+                <div class="range-info" id="rangeInfo">من حرف الجيم إلى حرف الراء - From Jim to Raa</div>
+            </div>
+        </div>
+
+        <div class="mode-indicator" id="modeIndicator">
+            📚 Mode: تعلم الكلمات الثلاثية - Learning Three Letter Words
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row g-3" id="wordGrid">
+                            <!-- Word cards will be generated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body score-card">
+                        <div class="score-label">🎯 النتيجة - Score</div>
+                        <div class="score-display" id="scoreDisplay">0/20</div>
+                        
+                        <div class="d-grid gap-3 mb-4">
+                            <button class="btn btn-primary-enhanced btn-enhanced" onclick="refreshWords()">
+                                🔄 كلمات جديدة - New Words
+                            </button>
+                            <button class="btn btn-warning-enhanced btn-enhanced" onclick="showIncorrectOnly()" id="retryBtn" disabled>
+                                🔁 إعادة الخطأ - Retry Wrong
+                            </button>
+                            <button class="btn btn-success-enhanced btn-enhanced" onclick="resetGame()">
+                                🎮 البداية - Start Over
+                            </button>
+                        </div>
+                        
+                        <div class="status-container">
+                            <div class="status-badge status-correct">
+                                ✅ صحيح<br><span id="correctCount">0</span>
+                            </div>
+                            <div class="status-badge status-incorrect">
+                                ❌ خطأ<br><span id="incorrectCount">0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="instructions">
+                            <div class="instructions-title">🎯 طريقة اللعب - How to Play:</div>
+                            <div class="instructions-content">
+                                <div class="instructions-step">
+                                    <div class="step-number">1</div>
+                                    <div>اختر نطاق الحروف أولاً - Choose letter range first</div>
+                                </div>
+                                <div class="instructions-step">
+                                    <div class="step-number">2</div>
+                                    <div>اضغط على الكلمة لتعلم قراءتها - Click word to learn reading</div>
+                                </div>
+                                <div class="instructions-step">
+                                    <div class="step-number">3</div>
+                                    <div>تعلم تركيب الحروف الثلاثة - Learn three letter combinations</div>
+                                </div>
+                                <div class="instructions-step">
+                                    <div class="step-number">4</div>
+                                    <div>كرر الكلمات حتى الإتقان - Repeat until mastery</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // All Arabic letters
+        const allLetters = ["ا", "ب", "ت", "ث", "ج", "ح", "خ", "د", "ذ", "ر", "ز", "س", "ش", "ص", "ض", "ط", "ظ", "ع", "غ", "ف", "ق", "ك", "ل", "م", "ن", "ه", "و", "ي"];
+        const harakat = ["َ", "ِ", "ُ"];
+        
+        let selectedLetters = [];
+        let currentWords = [];
+        let wordStatus = {};
+        let currentMode = 'normal';
+        let correctCount = 0;
+        let incorrectCount = 0;
+
+        function initGame() {
+            updateLetterRange();
+            addFloatingShapes();
+        }
+
+        function addFloatingShapes() {
+            // Add more floating shapes dynamically
+            for (let i = 0; i < 3; i++) {
+                const shape = document.createElement('div');
+                shape.className = 'floating-shape';
+                shape.style.cssText = `
+                    top: ${Math.random() * 80 + 10}%;
+                    left: ${Math.random() * 80 + 10}%;
+                    width: ${Math.random() * 30 + 20}px;
+                    height: ${Math.random() * 30 + 20}px;
+                    background: var(--${['primary', 'secondary', 'success', 'warning'][Math.floor(Math.random() * 4)]}-gradient);
+                    border-radius: ${Math.random() > 0.5 ? '50%' : '8px'};
+                    animation: float ${Math.random() * 4 + 6}s ease-in-out infinite;
+                    animation-delay: ${Math.random() * 2}s;
+                `;
+                document.body.appendChild(shape);
+            }
+        }
+
+        function updateLetterRange() {
+            const startIndex = parseInt(document.getElementById('startLetter').value);
+            const endIndex = parseInt(document.getElementById('endLetter').value);
+            
+            if (startIndex > endIndex) {
+                showCustomAlert('⚠️ الحرف الأول يجب أن يكون قبل الحرف الأخير - Start letter must come before end letter', 'warning');
+                return;
+            }
+            
+            selectedLetters = allLetters.slice(startIndex, endIndex + 1);
+            
+            // Update display
+            document.getElementById('rangeDisplay').textContent = `${allLetters[startIndex]} - ${allLetters[endIndex]}`;
+            document.getElementById('rangeInfo').textContent = `${selectedLetters.length} حرف محدد - ${selectedLetters.length} letters selected`;
+            
+            refreshWords();
+        }
+
+        function generateThreeLetterWords() {
+            const words = [];
+            
+            // Generate combinations using selected letters
+            for (let i = 0; i < Math.min(selectedLetters.length, 15); i++) {
+                for (let j = 0; j < Math.min(selectedLetters.length, 10); j++) {
+                    for (let k = 0; k < Math.min(selectedLetters.length, 8); k++) {
+                        // Create word with random harakat
+                        const letter1 = selectedLetters[i];
+                        const letter2 = selectedLetters[j];
+                        const letter3 = selectedLetters[k];
+                        
+                        const harakat1 = harakat[Math.floor(Math.random() * harakat.length)];
+                        const harakat2 = harakat[Math.floor(Math.random() * harakat.length)];
+                        const harakat3 = harakat[Math.floor(Math.random() * harakat.length)];
+                        
+                        const word = letter1 + harakat1 + letter2 + harakat2 + letter3 + harakat3;
+                        const breakdown = [letter1 + harakat1, letter2 + harakat2, letter3 + harakat3];
+                        
+                        words.push({
+                            word: word,
+                            breakdown: breakdown,
+                            key: `${letter1}-${letter2}-${letter3}-${Date.now()}-${Math.random()}`
+                        });
+                        
+                        if (words.length >= 200) break;
+                    }
+                    if (words.length >= 200) break;
+                }
+                if (words.length >= 200) break;
+            }
+            
+            return words;
+        }
+
+        function refreshWords() {
+            currentMode = 'normal';
+            updateModeIndicator();
+            
+            const allWords = generateThreeLetterWords();
+            const shuffled = [...allWords].sort(() => 0.5 - Math.random());
+            currentWords = shuffled.slice(0, 20);
+            
+            wordStatus = {};
+            currentWords.forEach(wordObj => {
+                wordStatus[wordObj.key] = 'unmarked';
+            });
+            
+            correctCount = 0;
+            incorrectCount = 0;
+            
+            renderWords();
+            updateDisplay();
+        }
+
+        function showIncorrectOnly() {
+            currentMode = 'incorrect';
+            updateModeIndicator();
+            
+            // Check all words that have been marked as incorrect across all attempts
+            const incorrectWords = [];
+            for (const key in wordStatus) {
+                if (wordStatus[key] === 'incorrect') {
+                    // Find the word object from currentWords
+                    const wordObj = currentWords.find(w => w.key === key);
+                    if (wordObj) {
+                        incorrectWords.push(wordObj);
+                    }
+                }
+            }
+            
+            if (incorrectWords.length === 0) {
+                showCustomAlert('🎉 ممتاز! لا توجد كلمات خاطئة للإعادة! - Excellent! No wrong words to retry!', 'success');
+                return;
+            }
+            
+            incorrectWords.forEach(wordObj => {
+                wordStatus[wordObj.key] = 'unmarked';
+            });
+            
+            currentWords = incorrectWords;
+            correctCount = 0;
+            incorrectCount = 0;
+            
+            renderWords();
+            updateDisplay();
+        }
+
+        function resetGame() {
+            currentMode = 'normal';
+            updateModeIndicator();
+            correctCount = 0;
+            incorrectCount = 0;
+            wordStatus = {};
+            refreshWords();
+        }
+
+        function updateModeIndicator() {
+            const indicator = document.getElementById('modeIndicator');
+            if (currentMode === 'normal') {
+                indicator.textContent = '📚 Mode: تعلم الكلمات الثلاثية - Learning Three Letter Words';
+                indicator.style.setProperty('--indicator-color', 'var(--primary-color)');
+            } else {
+                indicator.textContent = '🔄 Mode: إعادة الكلمات الخاطئة - Retry Wrong Words';
+                indicator.style.setProperty('--indicator-color', 'var(--warning-color)');
+            }
+        }
+
+        function renderWords() {
+            const grid = document.getElementById('wordGrid');
+            grid.innerHTML = '';
+            
+            currentWords.forEach((wordObj, index) => {
+                const col = document.createElement('div');
+                col.className = 'col-6 col-md-4 col-xl-3 mb-3';
+                
+                const wordCard = document.createElement('div');
+                wordCard.className = 'word-card';
+                wordCard.setAttribute('tabindex', '0');
+                wordCard.setAttribute('role', 'button');
+                wordCard.setAttribute('aria-label', `Three letter Arabic word: ${wordObj.word}`);
+                
+                const breakdownHtml = wordObj.breakdown.map(part => 
+                    `<span class="letter-part">${part}</span>`
+                ).join('');
+                
+                wordCard.innerHTML = `
+                    <div class="three-letter-word">${wordObj.word}</div>
+                    <div class="letter-breakdown">${breakdownHtml}</div>
+                `;
+                
+                wordCard.onclick = () => toggleWord(wordObj.key);
+                wordCard.onkeydown = (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleWord(wordObj.key);
+                    }
+                };
+                
+                if (wordStatus[wordObj.key] === 'correct') {
+                    wordCard.classList.add('correct');
+                } else if (wordStatus[wordObj.key] === 'incorrect') {
+                    wordCard.classList.add('incorrect');
+                }
+                
+                col.appendChild(wordCard);
+                grid.appendChild(col);
+            });
+        }
+
+        function toggleWord(key) {
+            if (wordStatus[key] === 'unmarked') {
+                wordStatus[key] = 'correct';
+                correctCount++;
+                playSuccessSound();
+            } else if (wordStatus[key] === 'correct') {
+                wordStatus[key] = 'incorrect';
+                correctCount--;
+                incorrectCount++;
+                playErrorSound();
+            } else if (wordStatus[key] === 'incorrect') {
+                wordStatus[key] = 'unmarked';
+                incorrectCount--;
+            }
+            
+            renderWords();
+            updateDisplay();
+        }
+
+        function playSuccessSound() {
+            // Simple audio feedback using Web Audio API
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
+                oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1); // E5
+                oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.2); // G5
+                
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.3);
+            } catch (e) {
+                // Audio not supported, silently continue
+            }
+        }
+
+        function playErrorSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+                oscillator.frequency.setValueAtTime(150, audioContext.currentTime + 0.1);
+                
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.2);
+            } catch (e) {
+                // Audio not supported, silently continue
+            }
+        }
+
+        function updateDisplay() {
+            document.getElementById('scoreDisplay').textContent = `${correctCount}/${currentWords.length}`;
+            document.getElementById('correctCount').textContent = correctCount;
+            document.getElementById('incorrectCount').textContent = incorrectCount;
+            
+            const retryBtn = document.getElementById('retryBtn');
+            const hasIncorrectWords = currentWords.some(wordObj => wordStatus[wordObj.key] === 'incorrect');
+            retryBtn.disabled = !hasIncorrectWords || currentMode === 'incorrect';
+            
+            if (correctCount + incorrectCount === currentWords.length) {
+                setTimeout(() => {
+                    if (incorrectCount === 0) {
+                        showCustomAlert('🎉 ممتاز! جميع الكلمات صحيحة! - Excellent! All words correct!', 'success');
+                        playCompletionSound();
+                    } else if (currentMode === 'normal') {
+                        showCustomAlert(`🌟 أحسنت! حصلت على ${correctCount} من أصل ${currentWords.length} كلمة صحيحة! - Well done! You got ${correctCount} out of ${currentWords.length} words correct!`, 'info');
+                    } else if (currentMode === 'incorrect') {
+                        // Automatically continue with incorrect words only
+                        setTimeout(() => {
+                            showIncorrectOnly();
+                        }, 1000);
+                    }
+                }, 500);
+            }
+        }
+
+        function playCompletionSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+                let time = audioContext.currentTime;
+                
+                notes.forEach((note, index) => {
+                    oscillator.frequency.setValueAtTime(note, time + index * 0.15);
+                });
+                
+                gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.6);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.6);
+            } catch (e) {
+                // Audio not supported, silently continue
+            }
+        }
+
+        function showCustomAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            const alertClass = type === 'success' ? 'alert-success' : type === 'info' ? 'alert-info' : 'alert-warning';
+            alertDiv.className = `alert ${alertClass} alert-dismissible fade show position-fixed`;
+            alertDiv.style.cssText = `
+                top: 30px;
+                right: 30px;
+                z-index: 9999;
+                min-width: 350px;
+                max-width: 90vw;
+                border-radius: var(--radius-lg);
+                box-shadow: var(--shadow-xl);
+                font-weight: 600;
+                border: none;
+                backdrop-filter: blur(10px);
+                font-size: 1.1rem;
+                padding: 1.25rem 1.5rem;
+            `;
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            `;
+            document.body.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.classList.remove('show');
+                    setTimeout(() => {
+                        if (alertDiv.parentNode) {
+                            alertDiv.parentNode.removeChild(alertDiv);
+                        }
+                    }, 150);
+                }
+            }, 5000);
+        }
+
+        // Initialize game when page loads
+        document.addEventListener('DOMContentLoaded', initGame);
+        
+        // Enhanced keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            // Quick shortcuts
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case 'r':
+                        e.preventDefault();
+                        refreshWords();
+                        break;
+                }
+            }
+        });
+
+        // Add touch feedback for mobile
+        if ('ontouchstart' in window) {
+            document.addEventListener('touchstart', function() {}, {passive: true});
+        }
+
+        // Performance optimization: Intersection Observer for animations
+        const observeElements = () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.word-card, .card').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        };
+
+        // Initialize animations after a short delay
+        setTimeout(observeElements, 100);
+        
+        // TV Navigation
+        function initTVNavigation() {
+            const focusableElements = document.querySelectorAll('.word-card, .btn-enhanced, .home-button, .letter-button');
+            let currentFocusIndex = 0;
+            
+            if (focusableElements.length > 0) {
+                focusableElements.forEach((element, index) => {
+                    element.setAttribute('tabindex', index === 0 ? '0' : '-1');
+                });
+            }
+            
+            document.addEventListener('keydown', function(e) {
+                const visibleElements = Array.from(focusableElements).filter(el => 
+                    el.offsetParent !== null && !el.disabled
+                );
+                
+                switch(e.key) {
+                    case 'ArrowRight': case 'ArrowDown':
+                        e.preventDefault();
+                        currentFocusIndex = (currentFocusIndex + 1) % visibleElements.length;
+                        updateFocus(visibleElements);
+                        break;
+                    case 'ArrowLeft': case 'ArrowUp':
+                        e.preventDefault();
+                        currentFocusIndex = (currentFocusIndex - 1 + visibleElements.length) % visibleElements.length;
+                        updateFocus(visibleElements);
+                        break;
+                    case 'Enter': case ' ':
+                        e.preventDefault();
+                        if (visibleElements[currentFocusIndex]) visibleElements[currentFocusIndex].click();
+                        break;
+                    case 'Escape':
+                        window.location.href = 'index.html';
+                        break;
+                }
+            });
+            
+            function updateFocus(elements) {
+                focusableElements.forEach(element => element.setAttribute('tabindex', '-1'));
+                if (elements[currentFocusIndex]) {
+                    elements[currentFocusIndex].setAttribute('tabindex', '0');
+                    elements[currentFocusIndex].focus();
+                }
+            }
+        }
+        initTVNavigation();
+    </script>
+    
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>🌈 Making learning fun and accessible for every child</p>
+                <div class="attribution">
+                    <p>Made with ❤️ by <a href="https://www.linkedin.com/in/muzaffarmohamed/?originalSubdomain=my" target="_blank" rel="noopener noreferrer" class="creator-link">Exrienz</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
