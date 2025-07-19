@@ -3,29 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📖 إقرأ ٣ - Iqra 3 - Three Letter Words with Harakat</title>
+    <title>📖 إقرأ ١ - Iqra 1 - Arabic Reading Foundation</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
         
         :root {
-            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            --secondary-gradient: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
-            --success-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);
-            --warning-gradient: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
-            --error-gradient: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
-            --neutral-gradient: linear-gradient(135deg, #64748b 0%, #94a3b8 100%);
+            --primary-gradient: linear-gradient(135deg, #2E8B57 0%, #3CB371 100%);
+            --secondary-gradient: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+            --success-gradient: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+            --warning-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --error-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            --neutral-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
             
-            --primary-color: #6366f1;
-            --secondary-color: #ec4899;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --error-color: #ef4444;
+            --primary-color: #2E8B57;
+            --secondary-color: #FF6B6B;
+            --success-color: #56ab2f;
+            --warning-color: #f093fb;
+            --error-color: #ff9a9e;
             
-            --text-primary: #0f172a;
-            --text-secondary: #334155;
-            --text-muted: #64748b;
-            --background: #f8fafc;
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --text-muted: #718096;
+            --background: #f7fafc;
             --surface: rgba(255, 255, 255, 0.95);
             --surface-elevated: rgba(255, 255, 255, 0.98);
             
@@ -51,9 +51,9 @@
         
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 20%, #ec4899 40%, #f43f5e 60%, #10b981 80%, #34d399 100%);
+            background: linear-gradient(135deg, #2E8B57 0%, #3CB371 20%, #FF6B6B 40%, #FF8E53 60%, #56ab2f 80%, #a8e6cf 100%);
             background-size: 400% 400%;
-            animation: gradientFlow 30s ease infinite;
+            animation: gradientFlow 25s ease infinite;
             min-height: 100vh;
             color: var(--text-primary);
             line-height: 1.6;
@@ -136,87 +136,6 @@
             opacity: 0.9;
         }
         
-        /* Letter Selection Panel */
-        .letter-selection {
-            background: var(--surface);
-            backdrop-filter: blur(15px);
-            padding: 1.5rem;
-            border-radius: var(--radius-lg);
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow-md);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .selection-title {
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-            text-align: center;
-        }
-        
-        .letter-range-controls {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
-        }
-        
-        .range-control {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .range-label {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-        }
-        
-        .letter-select {
-            background: var(--surface);
-            border: 2px solid rgba(99, 102, 241, 0.3);
-            border-radius: var(--radius-md);
-            padding: 0.75rem 1rem;
-            font-family: 'Amiri', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            transition: var(--transition-smooth);
-            backdrop-filter: blur(10px);
-        }
-        
-        .letter-select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-        }
-        
-        .selected-range {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
-            padding: 1rem;
-            border-radius: var(--radius-md);
-            text-align: center;
-            border: 1px solid rgba(99, 102, 241, 0.2);
-        }
-        
-        .range-display {
-            font-family: 'Amiri', serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-        
-        .range-info {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-        
         /* Enhanced Mode Indicator */
         .mode-indicator {
             background: var(--surface);
@@ -294,8 +213,8 @@
             transform: translateY(-4px);
         }
         
-        /* Three Letter Word Cards */
-        .word-card {
+        /* Arabic Letter Cards */
+        .letter-card {
             background: var(--primary-gradient);
             color: white;
             padding: 2rem 1.5rem;
@@ -315,7 +234,7 @@
             transform-origin: center;
         }
         
-        .word-card::before {
+        .letter-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -326,7 +245,7 @@
             transition: left 0.6s ease;
         }
         
-        .word-card::after {
+        .letter-card::after {
             content: '';
             position: absolute;
             inset: 0;
@@ -335,51 +254,34 @@
             transition: var(--transition-smooth);
         }
         
-        .word-card:hover {
+        .letter-card:hover {
             transform: translateY(-6px) scale(1.03);
             box-shadow: var(--shadow-xl);
         }
         
-        .word-card:hover::before {
+        .letter-card:hover::before {
             left: 100%;
         }
         
-        .word-card:hover::after {
+        .letter-card:hover::after {
             opacity: 1;
         }
         
-        .word-card:active {
+        .letter-card:active {
             transform: translateY(-3px) scale(1.01);
-            background: inherit !important;
         }
         
-        .three-letter-display {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            direction: ltr;
-        }
-        
-        .letter-part {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(10px);
-            padding: 1rem 1.2rem;
-            border-radius: var(--radius-md);
-            font-size: clamp(2rem, 5vw, 2.8rem);
-            font-weight: 700;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: var(--transition-fast);
+        .arabic-letter {
             font-family: 'Amiri', serif;
+            font-size: clamp(3rem, 8vw, 4.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            line-height: 1;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            min-width: 3rem;
-            text-align: center;
         }
         
-        .letter-part:hover {
-            background: rgba(255, 255, 255, 0.35);
-            transform: scale(1.05);
-        }
+        
         
         /* Enhanced Status Classes */
         .correct {
@@ -493,7 +395,7 @@
         
         .btn-neutral-enhanced {
             background: var(--neutral-gradient);
-            color: white;
+            color: var(--text-primary);
         }
         
         /* Enhanced Status Badges */
@@ -637,7 +539,7 @@
                 margin-bottom: 1.5rem;
             }
             
-            .word-card {
+            .letter-card {
                 min-height: 160px;
                 padding: 1.5rem 1rem;
             }
@@ -659,34 +561,18 @@
             .instructions {
                 padding: 1.5rem;
             }
-            
-            .letter-range-controls {
-                flex-direction: column;
-                gap: 1rem;
-            }
         }
         
         @media (max-width: 576px) {
             .floating-shape {
                 display: none;
             }
-            
-            .three-letter-display {
-                gap: 0.5rem;
-            }
-            
-            .letter-part {
-                padding: 0.8rem 1rem;
-                font-size: 1.5rem;
-                min-width: 2.5rem;
-            }
         }
         
         /* Accessibility Enhancements */
-        .word-card:focus,
-        .btn-enhanced:focus,
-        .letter-select:focus {
-            outline: 3px solid rgba(99, 102, 241, 0.5);
+        .letter-card:focus,
+        .btn-enhanced:focus {
+            outline: 3px solid rgba(46, 139, 87, 0.5);
             outline-offset: 3px;
         }
         
@@ -701,8 +587,7 @@
         
         /* Prevent iOS safari button highlighting */
         .btn-enhanced,
-        .word-card,
-        .letter-select {
+        .letter-card {
             -webkit-tap-highlight-color: transparent;
             -webkit-touch-callout: none;
             -webkit-user-select: none;
@@ -714,8 +599,7 @@
         
         /* Chrome-specific fixes for white blinking */
         .btn-enhanced,
-        .word-card,
-        .letter-select {
+        .letter-card {
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
@@ -724,8 +608,7 @@
         }
         
         .btn-enhanced:active,
-        .word-card:active,
-        .letter-select:active {
+        .letter-card:active {
             -webkit-transform: translateY(-1px) scale(1.01) !important;
             transform: translateY(-1px) scale(1.01) !important;
             -webkit-transition: none !important;
@@ -740,17 +623,9 @@
             border-color: transparent !important;
         }
         
-        .word-card:hover,
-        .word-card:focus,
-        .word-card:active {
-            color: inherit !important;
-            background-color: inherit !important;
-            border-color: transparent !important;
-        }
-        
-        .letter-select:hover,
-        .letter-select:focus,
-        .letter-select:active {
+        .letter-card:hover,
+        .letter-card:focus,
+        .letter-card:active {
             color: inherit !important;
             background-color: inherit !important;
             border-color: transparent !important;
@@ -813,17 +688,31 @@
         }
         
         /* Print Optimizations */
-        /* Smart TV Support */
+        /* Smart TV Support (1920px+) */
         @media (min-width: 1920px) {
             .container { max-width: 1600px; padding: 0 3rem; }
+            .app-header { padding: 3rem 2.5rem; margin: 3rem 0; }
             .app-title { font-size: 5rem; }
-            .word-card { padding: 2.5rem; font-size: 2.2rem; min-height: 200px; }
-            .btn-enhanced { padding: 1rem 2rem; font-size: 1.2rem; }
+            .app-subtitle { font-size: 1.6rem; }
+            .mode-indicator { padding: 1.5rem 3rem; font-size: 1.4rem; margin-bottom: 3rem; }
+            .letter-card { padding: 2.5rem 2rem; min-height: 200px; font-size: 3rem; }
+            .letter-pronunciation { font-size: 1.2rem; }
+            .btn-enhanced { padding: 1rem 2rem; font-size: 1.2rem; margin: 0.75rem; }
+            .status-badge { padding: 1.5rem; font-size: 1.2rem; min-width: 140px; }
+            .score-display { font-size: 2.5rem; padding: 2rem; }
             .home-button { padding: 1rem 1.5rem; font-size: 1.1rem; }
+            .app-footer { padding: 3rem 0; font-size: 1.1rem; }
+        }
+        
+        @media (min-width: 2560px) {
+            .container { max-width: 2000px; }
+            .app-title { font-size: 6rem; }
+            .letter-card { padding: 3rem 2.5rem; min-height: 240px; font-size: 4rem; }
+            .btn-enhanced { padding: 1.5rem 2.5rem; font-size: 1.4rem; }
         }
         
         /* Comprehensive fixes for white blinking/flashing */
-        .btn-enhanced, .word-card, .help-word-card, .letter-button {
+        .btn-enhanced, .letter-card, .help-word-card {
             -webkit-appearance: none; -moz-appearance: none; appearance: none;
             border: none !important; outline: none !important;
             -webkit-tap-highlight-color: transparent !important;
@@ -836,28 +725,30 @@
             border: none !important; outline: none !important; box-shadow: var(--shadow-lg) !important;
         }
         
-        .word-card:active, .word-card:focus, .word-card:hover {
+        .letter-card:active, .letter-card:focus, .letter-card:hover {
             background: var(--primary-gradient) !important; color: white !important;
             border: none !important; outline: none !important;
         }
         
-        .letter-button:active, .letter-button:focus, .letter-button:hover {
-            background: var(--secondary-gradient) !important; color: white !important;
-            border: none !important; outline: none !important;
+        .letter-card.unmarked { background: var(--primary-gradient) !important; color: white !important; transition: none !important; }
+        .letter-card.correct { background: var(--success-gradient) !important; color: white !important; transition: none !important; }
+        .letter-card.incorrect { background: var(--error-gradient) !important; color: white !important; transition: none !important; }
+        /* Remove flickering pseudo-elements */
+        .letter-card::before, .letter-card::after { display: none !important; }
+        .letter-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease !important;
         }
         
-        .word-card.correct { background: var(--success-gradient) !important; }
-        .word-card.incorrect { background: var(--error-gradient) !important; }
-        .word-card.correct:active, .word-card.correct:focus, .word-card.correct:hover {
+        .letter-card.correct:active, .letter-card.correct:focus, .letter-card.correct:hover {
             background: var(--success-gradient) !important;
         }
-        .word-card.incorrect:active, .word-card.incorrect:focus, .word-card.incorrect:hover {
+        .letter-card.incorrect:active, .letter-card.incorrect:focus, .letter-card.incorrect:hover {
             background: var(--error-gradient) !important;
         }
         
-        .word-card:focus, .btn-enhanced:focus, .home-button:focus {
+        .letter-card:focus, .btn-enhanced:focus, .home-button:focus {
             outline: 4px solid var(--primary-color); outline-offset: 4px;
-            box-shadow: 0 0 0 8px rgba(99, 102, 241, 0.3); transform: scale(1.05);
+            box-shadow: 0 0 0 8px rgba(46, 139, 87, 0.3); transform: scale(1.05);
         }
         
         @media print {
@@ -876,105 +767,25 @@
     <div class="container">
         <header class="app-header">
             <div style="position: absolute; top: 1rem; right: 1rem;">
-                <a href="index.html" class="home-button" aria-label="Back to Home">
+                <a href="../../index.html" class="home-button" aria-label="Back to Home">
                     <span class="home-icon">🏠</span>
                     <span class="home-text">Home</span>
                 </a>
             </div>
-            <h1 class="app-title">📖 إقرأ ٣ - Iqra 3</h1>
-            <p class="app-subtitle">تعلم الكلمات الثلاثية - Learn Three Letter Words with Harakat</p>
+            <h1 class="app-title">📖 إقرأ ١ - Iqra 1</h1>
+            <p class="app-subtitle">تعلم الحروف العربية - Learn Arabic Letters</p>
         </header>
 
-        <!-- Letter Selection Panel -->
-        <div class="letter-selection">
-            <div class="selection-title">🎯 اختر نطاق الحروف - Choose Letter Range</div>
-            <div class="letter-range-controls">
-                <div class="range-control">
-                    <div class="range-label">من - From</div>
-                    <select id="startLetter" class="letter-select">
-                        <option value="0">ا</option>
-                        <option value="1">ب</option>
-                        <option value="2">ت</option>
-                        <option value="3">ث</option>
-                        <option value="4" selected>ج</option>
-                        <option value="5">ح</option>
-                        <option value="6">خ</option>
-                        <option value="7">د</option>
-                        <option value="8">ذ</option>
-                        <option value="9">ر</option>
-                        <option value="10">ز</option>
-                        <option value="11">س</option>
-                        <option value="12">ش</option>
-                        <option value="13">ص</option>
-                        <option value="14">ض</option>
-                        <option value="15">ط</option>
-                        <option value="16">ظ</option>
-                        <option value="17">ع</option>
-                        <option value="18">غ</option>
-                        <option value="19">ف</option>
-                        <option value="20">ق</option>
-                        <option value="21">ك</option>
-                        <option value="22">ل</option>
-                        <option value="23">م</option>
-                        <option value="24">ن</option>
-                        <option value="25">ه</option>
-                        <option value="26">و</option>
-                        <option value="27">ي</option>
-                    </select>
-                </div>
-                <div class="range-control">
-                    <div class="range-label">إلى - To</div>
-                    <select id="endLetter" class="letter-select">
-                        <option value="0">ا</option>
-                        <option value="1">ب</option>
-                        <option value="2">ت</option>
-                        <option value="3">ث</option>
-                        <option value="4">ج</option>
-                        <option value="5">ح</option>
-                        <option value="6">خ</option>
-                        <option value="7">د</option>
-                        <option value="8">ذ</option>
-                        <option value="9" selected>ر</option>
-                        <option value="10">ز</option>
-                        <option value="11">س</option>
-                        <option value="12">ش</option>
-                        <option value="13">ص</option>
-                        <option value="14">ض</option>
-                        <option value="15">ط</option>
-                        <option value="16">ظ</option>
-                        <option value="17">ع</option>
-                        <option value="18">غ</option>
-                        <option value="19">ف</option>
-                        <option value="20">ق</option>
-                        <option value="21">ك</option>
-                        <option value="22">ل</option>
-                        <option value="23">م</option>
-                        <option value="24">ن</option>
-                        <option value="25">ه</option>
-                        <option value="26">و</option>
-                        <option value="27">ي</option>
-                    </select>
-                </div>
-                <button class="btn btn-primary-enhanced btn-enhanced" onclick="updateLetterRange()" style="width: auto; padding: 0.75rem 1.5rem;">
-                    🔄 تحديث - Update
-                </button>
-            </div>
-            <div class="selected-range">
-                <div class="range-display" id="rangeDisplay">ج - ر</div>
-                <div class="range-info" id="rangeInfo">من حرف الجيم إلى حرف الراء - From Jim to Raa</div>
-            </div>
-        </div>
-
         <div class="mode-indicator" id="modeIndicator">
-            📚 Mode: تعلم الكلمات الثلاثية - Learning Three Letter Words
+            🔤 Mode: تعلم الحروف الأساسية - Basic Letter Learning
         </div>
 
         <div class="row g-4">
             <div class="col-lg-8">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row g-3" id="wordGrid">
-                            <!-- Word cards will be generated here -->
+                        <div class="row g-3" id="letterGrid">
+                            <!-- Letter cards will be generated here -->
                         </div>
                     </div>
                 </div>
@@ -984,11 +795,11 @@
                 <div class="card">
                     <div class="card-body score-card">
                         <div class="score-label">🎯 النتيجة - Score</div>
-                        <div class="score-display" id="scoreDisplay">0/20</div>
+                        <div class="score-display" id="scoreDisplay">0/14</div>
                         
                         <div class="d-grid gap-3 mb-4">
-                            <button class="btn btn-primary-enhanced btn-enhanced" onclick="refreshWords()">
-                                🔄 كلمات جديدة - New Words
+                            <button class="btn btn-primary-enhanced btn-enhanced" onclick="refreshLetters()">
+                                🔄 حروف جديدة - New Letters
                             </button>
                             <button class="btn btn-warning-enhanced btn-enhanced" onclick="showIncorrectOnly()" id="retryBtn" disabled>
                                 🔁 إعادة الخطأ - Retry Wrong
@@ -1012,19 +823,19 @@
                             <div class="instructions-content">
                                 <div class="instructions-step">
                                     <div class="step-number">1</div>
-                                    <div>اختر نطاق الحروف أولاً - Choose letter range first</div>
+                                    <div>اضغط على الحرف لتسمع صوته - Click letter to hear sound</div>
                                 </div>
                                 <div class="instructions-step">
                                     <div class="step-number">2</div>
-                                    <div>اضغط على الكلمة لتعلم قراءتها - Click word to learn reading</div>
+                                    <div>أخضر = صحيح 💚، أحمر = خطأ ❤️ - Green = Correct, Red = Wrong</div>
                                 </div>
                                 <div class="instructions-step">
                                     <div class="step-number">3</div>
-                                    <div>تعلم تركيب الحروف الثلاثة - Learn three letter combinations</div>
+                                    <div>تعلم النطق الصحيح - Learn correct pronunciation</div>
                                 </div>
                                 <div class="instructions-step">
                                     <div class="step-number">4</div>
-                                    <div>كرر الكلمات حتى الإتقان - Repeat until mastery</div>
+                                    <div>كرر الحروف الخاطئة - Repeat wrong letters</div>
                                 </div>
                             </div>
                         </div>
@@ -1036,19 +847,17 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
-        // All Arabic letters
-        const allLetters = ["ا", "ب", "ت", "ث", "ج", "ح", "خ", "د", "ذ", "ر", "ز", "س", "ش", "ص", "ض", "ط", "ظ", "ع", "غ", "ف", "ق", "ك", "ل", "م", "ن", "ه", "و", "ي"];
-        const harakat = ["َ", "ِ", "ُ"];
-        
-        let selectedLetters = [];
-        let currentWords = [];
-        let wordStatus = {};
+        // Basic Arabic letters for Iqra 1 (All Arabic letters)
+        const allLetters = ["ا", "ب", "ت", "ث", "ج", "ح", "خ", "د", "ذ", "ر", "ز", "س", "ش", "ص", "ض", "ط", "ظ", "ع", "غ", "ف", "ق", "ك", "ل", "م", "ن", "ه", "و", "ي"]
+
+        let currentLetters = [];
+        let letterStatus = {};
         let currentMode = 'normal';
         let correctCount = 0;
         let incorrectCount = 0;
 
         function initGame() {
-            updateLetterRange();
+            refreshLetters();
             addFloatingShapes();
         }
 
@@ -1071,74 +880,22 @@
             }
         }
 
-        function updateLetterRange() {
-            const startIndex = parseInt(document.getElementById('startLetter').value);
-            const endIndex = parseInt(document.getElementById('endLetter').value);
-            
-            if (startIndex > endIndex) {
-                showCustomAlert('⚠️ الحرف الأول يجب أن يكون قبل الحرف الأخير - Start letter must come before end letter', 'warning');
-                return;
-            }
-            
-            selectedLetters = allLetters.slice(startIndex, endIndex + 1);
-            
-            // Update display
-            document.getElementById('rangeDisplay').textContent = `${allLetters[startIndex]} - ${allLetters[endIndex]}`;
-            document.getElementById('rangeInfo').textContent = `${selectedLetters.length} حرف محدد - ${selectedLetters.length} letters selected`;
-            
-            refreshWords();
-        }
-
-        function generateThreeLetterWords() {
-            const words = [];
-            
-            // Generate combinations using selected letters
-            for (let i = 0; i < Math.min(selectedLetters.length, 15); i++) {
-                for (let j = 0; j < Math.min(selectedLetters.length, 10); j++) {
-                    for (let k = 0; k < Math.min(selectedLetters.length, 8); k++) {
-                        // Create three separate letters with random harakat
-                        const letter1 = selectedLetters[i];
-                        const letter2 = selectedLetters[j];
-                        const letter3 = selectedLetters[k];
-                        
-                        const harakat1 = harakat[Math.floor(Math.random() * harakat.length)];
-                        const harakat2 = harakat[Math.floor(Math.random() * harakat.length)];
-                        const harakat3 = harakat[Math.floor(Math.random() * harakat.length)];
-                        
-                        const letters = [letter1 + harakat1, letter2 + harakat2, letter3 + harakat3];
-                        
-                        words.push({
-                            letters: letters,
-                            key: `${letter1}-${letter2}-${letter3}-${Date.now()}-${Math.random()}`
-                        });
-                        
-                        if (words.length >= 200) break;
-                    }
-                    if (words.length >= 200) break;
-                }
-                if (words.length >= 200) break;
-            }
-            
-            return words;
-        }
-
-        function refreshWords() {
+        function refreshLetters() {
             currentMode = 'normal';
             updateModeIndicator();
             
-            const allWords = generateThreeLetterWords();
-            const shuffled = [...allWords].sort(() => 0.5 - Math.random());
-            currentWords = shuffled.slice(0, 20);
+            const shuffled = [...allLetters].sort(() => 0.5 - Math.random());
+            currentLetters = shuffled.slice(0, 14);
             
-            wordStatus = {};
-            currentWords.forEach(wordObj => {
-                wordStatus[wordObj.key] = 'unmarked';
+            letterStatus = {};
+            currentLetters.forEach(letter => {
+                letterStatus[letter] = 'unmarked';
             });
             
             correctCount = 0;
             incorrectCount = 0;
             
-            renderWords();
+            renderLetters();
             updateDisplay();
         }
 
@@ -1146,32 +903,31 @@
             currentMode = 'incorrect';
             updateModeIndicator();
             
-            // Check all words that have been marked as incorrect across all attempts
-            const incorrectWords = [];
-            for (const key in wordStatus) {
-                if (wordStatus[key] === 'incorrect') {
-                    // Find the word object from currentWords
-                    const wordObj = currentWords.find(w => w.key === key);
-                    if (wordObj) {
-                        incorrectWords.push(wordObj);
+            // Check all letters that have been marked as incorrect across all attempts
+            const incorrectLetters = [];
+            for (const letter in letterStatus) {
+                if (letterStatus[letter] === 'incorrect') {
+                    // Find the letter from allLetters
+                    if (allLetters.includes(letter)) {
+                        incorrectLetters.push(letter);
                     }
                 }
             }
             
-            if (incorrectWords.length === 0) {
-                showCustomAlert('🎉 ممتاز! لا توجد كلمات خاطئة للإعادة! - Excellent! No wrong words to retry!', 'success');
+            if (incorrectLetters.length === 0) {
+                showCustomAlert('🎉 ممتاز! لا توجد حروف خاطئة للإعادة! - Excellent! No wrong letters to retry!', 'success');
                 return;
             }
             
-            incorrectWords.forEach(wordObj => {
-                wordStatus[wordObj.key] = 'unmarked';
+            incorrectLetters.forEach(letter => {
+                letterStatus[letter] = 'unmarked';
             });
             
-            currentWords = incorrectWords;
+            currentLetters = incorrectLetters;
             correctCount = 0;
             incorrectCount = 0;
             
-            renderWords();
+            renderLetters();
             updateDisplay();
         }
 
@@ -1180,78 +936,95 @@
             updateModeIndicator();
             correctCount = 0;
             incorrectCount = 0;
-            wordStatus = {};
-            refreshWords();
+            letterStatus = {};
+            refreshLetters();
         }
 
         function updateModeIndicator() {
             const indicator = document.getElementById('modeIndicator');
             if (currentMode === 'normal') {
-                indicator.textContent = '📚 Mode: تعلم الكلمات الثلاثية - Learning Three Letter Words';
+                indicator.textContent = '🔤 Mode: تعلم الحروف الأساسية - Basic Letter Learning';
                 indicator.style.setProperty('--indicator-color', 'var(--primary-color)');
             } else {
-                indicator.textContent = '🔄 Mode: إعادة الكلمات الخاطئة - Retry Wrong Words';
+                indicator.textContent = '🔄 Mode: إعادة الحروف الخاطئة - Retry Wrong Letters';
                 indicator.style.setProperty('--indicator-color', 'var(--warning-color)');
             }
         }
 
-        function renderWords() {
-            const grid = document.getElementById('wordGrid');
+        function renderLetters() {
+            const grid = document.getElementById('letterGrid');
             grid.innerHTML = '';
             
-            currentWords.forEach((wordObj, index) => {
+            currentLetters.forEach((letter, index) => {
                 const col = document.createElement('div');
                 col.className = 'col-6 col-md-4 col-xl-3 mb-3';
                 
-                const wordCard = document.createElement('div');
-                wordCard.className = 'word-card';
-                wordCard.setAttribute('tabindex', '0');
-                wordCard.setAttribute('role', 'button');
-                wordCard.setAttribute('aria-label', `Three Arabic letters: ${wordObj.letters.join(', ')}`);
+                const letterCard = document.createElement('div');
+                letterCard.className = 'letter-card';
+                letterCard.setAttribute('tabindex', '0');
+                letterCard.setAttribute('role', 'button');
+                letterCard.setAttribute('aria-label', `Arabic letter: ${letter}`);
                 
-                const lettersHtml = wordObj.letters.map(letter => 
-                    `<span class="letter-part">${letter}</span>`
-                ).join('');
-                
-                wordCard.innerHTML = `
-                    <div class="three-letter-display">${lettersHtml}</div>
+                letterCard.innerHTML = `
+                    <div class="arabic-letter">${letter}</div>
                 `;
                 
-                wordCard.onclick = () => toggleWord(wordObj.key);
-                wordCard.onkeydown = (e) => {
+                letterCard.onclick = () => toggleLetter(letter);
+                letterCard.onkeydown = (e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                         e.preventDefault();
-                        toggleWord(wordObj.key);
+                        toggleLetter(letter);
                     }
                 };
                 
-                if (wordStatus[wordObj.key] === 'correct') {
-                    wordCard.classList.add('correct');
-                } else if (wordStatus[wordObj.key] === 'incorrect') {
-                    wordCard.classList.add('incorrect');
+                if (letterStatus[letter] === 'correct') {
+                    letterCard.classList.add('correct');
+                } else if (letterStatus[letter] === 'incorrect') {
+                    letterCard.classList.add('incorrect');
+                } else {
+                    letterCard.classList.add('unmarked');
                 }
                 
-                col.appendChild(wordCard);
+                col.appendChild(letterCard);
                 grid.appendChild(col);
             });
         }
 
-        function toggleWord(key) {
-            if (wordStatus[key] === 'unmarked') {
-                wordStatus[key] = 'correct';
+        function toggleLetter(letter) {
+            // Find the specific letter card instead of re-rendering everything
+            const letterCards = document.querySelectorAll('.letter-card');
+            let targetCard = null;
+            
+            letterCards.forEach(card => {
+                const letterText = card.querySelector('.arabic-letter').textContent;
+                if (letterText === letter) {
+                    targetCard = card;
+                }
+            });
+            
+            if (!targetCard) return;
+            
+            // Update state
+            if (letterStatus[letter] === 'unmarked') {
+                letterStatus[letter] = 'correct';
                 correctCount++;
                 playSuccessSound();
-            } else if (wordStatus[key] === 'correct') {
-                wordStatus[key] = 'incorrect';
+                targetCard.classList.remove('incorrect', 'unmarked');
+                targetCard.classList.add('correct');
+            } else if (letterStatus[letter] === 'correct') {
+                letterStatus[letter] = 'incorrect';
                 correctCount--;
                 incorrectCount++;
                 playErrorSound();
-            } else if (wordStatus[key] === 'incorrect') {
-                wordStatus[key] = 'unmarked';
+                targetCard.classList.remove('correct', 'unmarked');
+                targetCard.classList.add('incorrect');
+            } else if (letterStatus[letter] === 'incorrect') {
+                letterStatus[letter] = 'unmarked';
                 incorrectCount--;
+                targetCard.classList.remove('correct', 'incorrect');
+                targetCard.classList.add('unmarked');
             }
             
-            renderWords();
             updateDisplay();
         }
 
@@ -1302,23 +1075,23 @@
         }
 
         function updateDisplay() {
-            document.getElementById('scoreDisplay').textContent = `${correctCount}/${currentWords.length}`;
+            document.getElementById('scoreDisplay').textContent = `${correctCount}/${currentLetters.length}`;
             document.getElementById('correctCount').textContent = correctCount;
             document.getElementById('incorrectCount').textContent = incorrectCount;
             
             const retryBtn = document.getElementById('retryBtn');
-            const hasIncorrectWords = currentWords.some(wordObj => wordStatus[wordObj.key] === 'incorrect');
-            retryBtn.disabled = !hasIncorrectWords || currentMode === 'incorrect';
+            const hasIncorrectLetters = currentLetters.some(letter => letterStatus[letter] === 'incorrect');
+            retryBtn.disabled = !hasIncorrectLetters || currentMode === 'incorrect';
             
-            if (correctCount + incorrectCount === currentWords.length) {
+            if (correctCount + incorrectCount === currentLetters.length) {
                 setTimeout(() => {
                     if (incorrectCount === 0) {
-                        showCustomAlert('🎉 ممتاز! جميع الكلمات صحيحة! - Excellent! All words correct!', 'success');
+                        showCustomAlert('🎉 ممتاز! جميع الحروف صحيحة! - Excellent! All letters correct!', 'success');
                         playCompletionSound();
                     } else if (currentMode === 'normal') {
-                        showCustomAlert(`🌟 أحسنت! حصلت على ${correctCount} من أصل ${currentWords.length} كلمة صحيحة! - Well done! You got ${correctCount} out of ${currentWords.length} words correct!`, 'info');
+                        showCustomAlert(`🌟 أحسنت! حصلت على ${correctCount} من أصل ${currentLetters.length} حرف صحيح! - Well done! You got ${correctCount} out of ${currentLetters.length} letters correct!`, 'info');
                     } else if (currentMode === 'incorrect') {
-                        // Automatically continue with incorrect words only
+                        // Automatically continue with incorrect letters only
                         setTimeout(() => {
                             showIncorrectOnly();
                         }, 1000);
@@ -1399,7 +1172,7 @@
                 switch(e.key) {
                     case 'r':
                         e.preventDefault();
-                        refreshWords();
+                        refreshLetters();
                         break;
                 }
             }
@@ -1421,7 +1194,7 @@
                 });
             }, { threshold: 0.1 });
 
-            document.querySelectorAll('.word-card, .card').forEach(el => {
+            document.querySelectorAll('.letter-card, .card').forEach(el => {
                 el.style.opacity = '0';
                 el.style.transform = 'translateY(20px)';
                 el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -1432,9 +1205,9 @@
         // Initialize animations after a short delay
         setTimeout(observeElements, 100);
         
-        // TV Navigation
+        // TV Navigation Support
         function initTVNavigation() {
-            const focusableElements = document.querySelectorAll('.word-card, .btn-enhanced, .home-button, .letter-button');
+            const focusableElements = document.querySelectorAll('.letter-card, .btn-enhanced, .home-button');
             let currentFocusIndex = 0;
             
             if (focusableElements.length > 0) {
@@ -1464,7 +1237,7 @@
                         if (visibleElements[currentFocusIndex]) visibleElements[currentFocusIndex].click();
                         break;
                     case 'Escape':
-                        window.location.href = 'index.html';
+                        window.location.href = '../../index.html';
                         break;
                 }
             });

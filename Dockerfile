@@ -9,8 +9,8 @@ LABEL version="1.0.0"
 # Remove default nginx website
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copy all HTML files to nginx html directory
-COPY *.html /usr/share/nginx/html/
+# Copy src folder contents to nginx html directory
+COPY src/ /usr/share/nginx/html/
 
 # Create simple nginx configuration
 RUN echo 'server {' > /etc/nginx/conf.d/default.conf && \

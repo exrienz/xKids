@@ -68,7 +68,6 @@ docker build --platform linux/arm64 -t xkids-learning-center .
 - `index.html` - Main landing page
 - `malay1.html`, `malay2.html` - Malaysian reading lessons
 - `iqra1.html` to `iqra4.html` - Arabic reading lessons
-- `CLAUDE.md` - Development documentation
 
 ## 👨‍💻 Created by
 

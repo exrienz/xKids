@@ -1,0 +1,223 @@
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: var(--surface);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+    text-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.header p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+    font-weight: 500;
+}
+
+.learning-modules {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.module-card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+.module-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--primary-gradient);
+    transform: scaleX(0);
+    transition: var(--transition-smooth);
+}
+
+.module-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+}
+
+.module-card:hover::before {
+    transform: scaleX(1);
+}
+
+.module-card.islamic {
+    border-left: 4px solid var(--islamic-color);
+}
+
+.module-card.islamic::before {
+    background: var(--islamic-gradient);
+}
+
+.module-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.module-icon {
+    font-size: 3rem;
+    margin-right: 1rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.module-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.module-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 0.25rem 0 0 0;
+    font-weight: 500;
+}
+
+.module-description {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.level-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.level-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: var(--radius-md);
+    transition: var(--transition-bounce);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.level-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--primary-gradient);
+    opacity: 0;
+    transition: var(--transition-smooth);
+    z-index: -1;
+}
+
+.level-button:hover,
+.level-button:focus {
+    transform: scale(1.05);
+    border-color: var(--primary-color);
+    text-decoration: none;
+    color: white;
+    outline: 3px solid var(--primary-color);
+    outline-offset: 4px;
+}
+
+.level-button:hover::before,
+.level-button:focus::before {
+    opacity: 1;
+}
+
+.level-button:focus {
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.3);
+}
+
+.level-button.islamic:hover::before {
+    background: var(--islamic-gradient);
+}
+
+.level-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.level-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.footer {
+    text-align: center;
+    padding: 2rem;
+    background: var(--surface);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 2rem;
+}
+
+.footer p {
+    color: var(--text-muted);
+    margin: 0;
+    font-weight: 500;
+}
+
+.attribution {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.attribution p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.creator-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+}
+
+.creator-link:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+.module-card:nth-child(1) { animation-delay: 0.1s; }
+.module-card:nth-child(2) { animation-delay: 0.2s; }
+.module-card:nth-child(3) { animation-delay: 0.3s; }
+.module-card:nth-child(4) { animation-delay: 0.4s; }

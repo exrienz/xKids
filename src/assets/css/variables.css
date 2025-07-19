@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    --error-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    --neutral-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    --islamic-gradient: linear-gradient(135deg, #2E8B57 0%, #3CB371 100%);
+    
+    --primary-color: #667eea;
+    --secondary-color: #f093fb;
+    --success-color: #4facfe;
+    --warning-color: #43e97b;
+    --error-color: #fa709a;
+    --islamic-color: #2E8B57;
+    
+    --text-primary: #2d3748;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+    --background: #f7fafc;
+    --surface: rgba(255, 255, 255, 0.95);
+    --surface-elevated: rgba(255, 255, 255, 0.98);
+    
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 25px rgba(0,0,0,0.1);
+    --shadow-xl: 0 20px 40px rgba(0,0,0,0.12);
+    
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 9999px;
+    
+    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}

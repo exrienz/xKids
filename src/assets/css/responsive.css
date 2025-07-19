@@ -1,0 +1,114 @@
+/* Smart TV Support (1920px+) */
+@media (min-width: 1920px) {
+    .container {
+        max-width: 1600px;
+        padding: 0 3rem;
+    }
+    
+    .header h1 {
+        font-size: 4.5rem;
+    }
+    
+    .header p {
+        font-size: 1.5rem;
+    }
+    
+    .learning-modules {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+    
+    .module-card {
+        padding: 3rem;
+        min-height: 400px;
+    }
+    
+    .module-title {
+        font-size: 2rem;
+    }
+    
+    .module-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .module-description {
+        font-size: 1.1rem;
+        line-height: 1.8;
+    }
+    
+    .level-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .level-button {
+        padding: 1.5rem;
+        min-height: 120px;
+    }
+    
+    .level-number {
+        font-size: 2rem;
+    }
+    
+    .level-label {
+        font-size: 1rem;
+    }
+    
+    .home-button {
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
+    }
+    
+    .footer {
+        padding: 3rem;
+        font-size: 1.1rem;
+    }
+}
+
+/* Ultra Wide TV Support (2560px+) */
+@media (min-width: 2560px) {
+    .container {
+        max-width: 2000px;
+    }
+    
+    .header h1 {
+        font-size: 5.5rem;
+    }
+    
+    .learning-modules {
+        max-width: 1800px;
+        gap: 4rem;
+    }
+    
+    .module-card {
+        padding: 4rem;
+        min-height: 500px;
+    }
+    
+    .level-button {
+        min-height: 150px;
+        padding: 2rem;
+    }
+}
+
+/* Tablet styles */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .learning-modules {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .module-card {
+        padding: 1.5rem;
+    }
+    
+    .level-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
