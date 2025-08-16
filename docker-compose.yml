@@ -1,0 +1,49 @@
+services:
+  xkids-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: xkids-learning-center
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    labels:
+      - "app.name=XKids Learning Center"
+      - "app.description=Educational apps for children to learn Malaysian and Arabic reading skills"
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Development profile for live reloading
+  xkids-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: xkids-learning-center-dev
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src:/usr/share/nginx/html:ro
+    restart: unless-stopped
+    profiles:
+      - development
+    labels:
+      - "app.name=XKids Learning Center (Dev)"
+      - "app.description=Development version with live reloading"
+
+  # Monitoring service
+  xkids-logs:
+    image: qoomon/docker-host
+    container_name: xkids-logs
+    environment:
+      - HOST=127.0.0.1
+    ports:
+      - "8081:80"
+    profiles:
+      - development
+    labels:
+      - "app.name=XKids Logs"
+      - "app.description=Log monitoring for XKids application"

@@ -234,24 +234,10 @@
             transform-origin: center;
         }
         
-        .word-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.6s ease;
-        }
-        
+        /* Remove problematic pseudo-elements that cause flickering */
+        .word-card::before,
         .word-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(45deg, rgba(255,255,255,0.1), transparent);
-            opacity: 0;
-            transition: var(--transition-smooth);
+            display: none !important;
         }
         
         .word-card:hover {
@@ -259,17 +245,32 @@
             box-shadow: var(--shadow-xl);
         }
         
-        .word-card:hover::before {
-            left: 100%;
-        }
-        
-        .word-card:hover::after {
-            opacity: 1;
-        }
-        
         .word-card:active {
             transform: translateY(-3px) scale(1.01);
-            background: inherit !important;
+        }
+        
+        /* Ensure state classes have higher specificity and immediate application */
+        .word-card.unmarked {
+            background: var(--primary-gradient) !important;
+            color: white !important;
+            transition: none !important;
+        }
+        
+        .word-card.correct {
+            background: var(--success-gradient) !important;
+            color: white !important;
+            transition: none !important;
+        }
+        
+        .word-card.incorrect {
+            background: var(--error-gradient) !important;
+            color: white !important;
+            transition: none !important;
+        }
+        
+        /* Re-enable smooth transitions only for transform and box-shadow */
+        .word-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease !important;
         }
         
         .word-main {
@@ -666,40 +667,87 @@
             user-select: none;
         }
         
-        /* Chrome-specific fixes for white blinking */
+        /* Comprehensive fixes for white blinking/flashing */
         .btn-enhanced,
         .word-card,
-        .help-word-card {
+        .help-word-card,
+        .letter-card,
+        .harakat-card {
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
             border: none !important;
             outline: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+            -webkit-touch-callout: none !important;
+            -webkit-user-select: none !important;
+            -khtml-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            user-select: none !important;
+            backface-visibility: hidden !important;
+            -webkit-backface-visibility: hidden !important;
         }
         
+        /* Prevent default browser button effects */
         .btn-enhanced:active,
+        .btn-enhanced:focus,
+        .btn-enhanced:hover {
+            background: var(--success-gradient) !important;
+            color: white !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: var(--shadow-lg) !important;
+        }
+        
         .word-card:active,
-        .help-word-card:active {
-            -webkit-transform: translateY(-1px) scale(1.01) !important;
+        .word-card:focus,
+        .word-card:hover {
+            background: var(--primary-gradient) !important;
+            color: white !important;
+            border: none !important;
+            outline: none !important;
+        }
+        
+        .help-word-card:active,
+        .help-word-card:focus,
+        .help-word-card:hover {
+            background: var(--neutral-gradient) !important;
+            color: var(--text-primary) !important;
+            border: none !important;
+            outline: none !important;
+        }
+        
+        /* Override any system/browser defaults */
+        .btn-enhanced:active {
             transform: translateY(-1px) scale(1.01) !important;
-            -webkit-transition: none !important;
             transition: none !important;
         }
         
-        .btn-enhanced:hover,
-        .btn-enhanced:focus,
-        .btn-enhanced:active {
-            color: inherit !important;
-            background-color: inherit !important;
-            border-color: transparent !important;
+        .word-card:active {
+            transform: translateY(-3px) scale(1.01) !important;
+            transition: none !important;
         }
         
-        .word-card:hover,
-        .word-card:focus,
-        .word-card:active {
-            color: inherit !important;
-            background-color: inherit !important;
-            border-color: transparent !important;
+        /* Ensure gradient backgrounds are maintained */
+        .word-card.correct {
+            background: var(--success-gradient) !important;
+        }
+        
+        .word-card.incorrect {
+            background: var(--error-gradient) !important;
+        }
+        
+        .word-card.correct:active,
+        .word-card.correct:focus,
+        .word-card.correct:hover {
+            background: var(--success-gradient) !important;
+        }
+        
+        .word-card.incorrect:active,
+        .word-card.incorrect:focus,
+        .word-card.incorrect:hover {
+            background: var(--error-gradient) !important;
         }
         
         /* Footer Styles */
@@ -760,83 +808,131 @@
         
         /* Smart TV Support (1920px+) */
         @media (min-width: 1920px) {
-            .container { max-width: 1600px; padding: 0 3rem; }
-            .app-header { padding: 3rem 2.5rem; margin: 3rem 0; }
-            .app-title { font-size: 5rem; }
-            .app-subtitle { font-size: 1.6rem; }
-            .mode-indicator { padding: 1.5rem 3rem; font-size: 1.4rem; margin-bottom: 3rem; }
-            .word-card { padding: 2.5rem 2rem; min-height: 180px; font-size: 1.8rem; }
-            .word-main { font-size: 2.2rem; margin-bottom: 1rem; }
-            .syllable-part { font-size: 1.4rem; padding: 0.4rem 0.8rem; margin: 0.3rem; }
-            .btn-enhanced { padding: 1rem 2rem; font-size: 1.2rem; margin: 0.75rem; }
-            .status-badge { padding: 1.5rem; font-size: 1.2rem; min-width: 140px; }
-            .score-display { font-size: 2.5rem; padding: 2rem; }
-            .home-button { padding: 1rem 1.5rem; font-size: 1.1rem; }
-            .app-footer { padding: 3rem 0; font-size: 1.1rem; }
+            .container {
+                max-width: 1600px;
+                padding: 0 3rem;
+            }
+            
+            .app-header {
+                padding: 3rem 2.5rem;
+                margin: 3rem 0;
+            }
+            
+            .app-title {
+                font-size: 5rem;
+            }
+            
+            .app-subtitle {
+                font-size: 1.6rem;
+            }
+            
+            .mode-indicator {
+                padding: 1.5rem 3rem;
+                font-size: 1.4rem;
+                margin-bottom: 3rem;
+            }
+            
+            .word-card {
+                padding: 2.5rem 2rem;
+                min-height: 180px;
+                font-size: 1.8rem;
+            }
+            
+            .word-main {
+                font-size: 2.2rem;
+                margin-bottom: 1rem;
+            }
+            
+            .syllable-part {
+                font-size: 1.4rem;
+                padding: 0.4rem 0.8rem;
+                margin: 0.3rem;
+            }
+            
+            .btn-enhanced {
+                padding: 1rem 2rem;
+                font-size: 1.2rem;
+                margin: 0.75rem;
+            }
+            
+            .status-badge {
+                padding: 1.5rem;
+                font-size: 1.2rem;
+                min-width: 140px;
+            }
+            
+            .score-display {
+                font-size: 2.5rem;
+                padding: 2rem;
+            }
+            
+            .home-button {
+                padding: 1rem 1.5rem;
+                font-size: 1.1rem;
+            }
+            
+            .app-footer {
+                padding: 3rem 0;
+                font-size: 1.1rem;
+            }
         }
         
+        /* Ultra Wide TV Support (2560px+) */
         @media (min-width: 2560px) {
-            .container { max-width: 2000px; }
-            .app-title { font-size: 6rem; }
-            .word-card { padding: 3rem 2.5rem; min-height: 220px; }
-            .word-main { font-size: 2.8rem; }
-            .btn-enhanced { padding: 1.5rem 2.5rem; font-size: 1.4rem; }
+            .container {
+                max-width: 2000px;
+            }
+            
+            .app-title {
+                font-size: 6rem;
+            }
+            
+            .word-card {
+                padding: 3rem 2.5rem;
+                min-height: 220px;
+            }
+            
+            .word-main {
+                font-size: 2.8rem;
+            }
+            
+            .btn-enhanced {
+                padding: 1.5rem 2.5rem;
+                font-size: 1.4rem;
+            }
         }
         
-        /* Comprehensive fixes for white blinking/flashing */
-        .btn-enhanced, .word-card, .help-word-card {
-            -webkit-appearance: none; -moz-appearance: none; appearance: none;
-            border: none !important; outline: none !important;
-            -webkit-tap-highlight-color: transparent !important;
-            -webkit-touch-callout: none !important; -webkit-user-select: none !important;
-            user-select: none !important; backface-visibility: hidden !important;
+        /* Enhanced Focus Styles for TV Navigation */
+        .word-card:focus,
+        .btn-enhanced:focus,
+        .home-button:focus {
+            outline: 4px solid var(--primary-color);
+            outline-offset: 4px;
+            box-shadow: 0 0 0 8px rgba(102, 126, 234, 0.3);
+            transform: scale(1.05);
         }
         
-        .btn-enhanced:active, .btn-enhanced:focus, .btn-enhanced:hover {
-            background: var(--success-gradient) !important; color: white !important;
-            border: none !important; outline: none !important; box-shadow: var(--shadow-lg) !important;
-        }
-        
-        .word-card:active, .word-card:focus, .word-card:hover {
-            background: var(--primary-gradient) !important; color: white !important;
-            border: none !important; outline: none !important;
-        }
-        
-        .word-card.correct { background: var(--success-gradient) !important; }
-        .word-card.incorrect { background: var(--error-gradient) !important; }
-        /* Remove flickering pseudo-elements */
-        .word-card::before, .word-card::after { display: none !important; }
-        
-        /* Fix state classes with immediate application */
-        .word-card.unmarked {
-            background: var(--primary-gradient) !important;
-            color: white !important;
-            transition: none !important;
-        }
-        .word-card.correct {
-            background: var(--success-gradient) !important;
-            color: white !important;
-            transition: none !important;
-        }
-        .word-card.incorrect {
-            background: var(--error-gradient) !important;
-            color: white !important;
-            transition: none !important;
-        }
-        .word-card {
-            transition: transform 0.2s ease, box-shadow 0.2s ease !important;
-        }
-        
-        .word-card:focus, .btn-enhanced:focus, .home-button:focus {
-            outline: 4px solid var(--primary-color); outline-offset: 4px;
-            box-shadow: 0 0 0 8px rgba(102, 126, 234, 0.3); transform: scale(1.05);
+        .word-card:focus {
+            z-index: 10;
+            position: relative;
         }
         
         /* Print Optimizations */
         @media print {
-            .floating-shape, .btn-enhanced, .modal { display: none !important; }
-            body { background: white !important; }
-            .card { box-shadow: none !important; border: 1px solid #ddd !important; }
+            .floating-shape,
+            .btn-enhanced,
+            .modal {
+                display: none !important;
+            }
+            
+            body {
+                background: white !important;
+            }
+            
+            .card {
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+            }
         }
     </style>
 </head>
@@ -935,7 +1031,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title fw-bold" id="helpModalLabel">✨ Bantuan Eja - Belajar Suku Kata</h5>
+                    <h5 class="modal-title fw-bold" id="helpModalLabel">✨ Bantuan Eja - Belajar 2 Suku Kata</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -957,137 +1053,113 @@
     <script>
         // 50 Easy Malaysian words with syllable breakdown
         const allWords = [
-                          { "word": "aku", "syllables": ["a", "ku"] },
-                          { "word": "apa", "syllables": ["a", "pa"] },
-                          { "word": "ada", "syllables": ["a", "da"] },
-                          { "word": "ini", "syllables": ["i", "ni"] },
-                          { "word": "itu", "syllables": ["i", "tu"] },
-                          { "word": "baju", "syllables": ["ba", "ju"] },
-                          { "word": "buku", "syllables": ["bu", "ku"] },
-                          { "word": "bola", "syllables": ["bo", "la"] },
-                          { "word": "dulu", "syllables": ["du", "lu"] },
-                          { "word": "dada", "syllables": ["da", "da"] },
-                          { "word": "hati", "syllables": ["ha", "ti"] },
-                          { "word": "jari", "syllables": ["ja", "ri"] },
-                          { "word": "kaki", "syllables": ["ka", "ki"] },
-                          { "word": "kuku", "syllables": ["ku", "ku"] },
-                          { "word": "lama", "syllables": ["la", "ma"] },
-                          { "word": "mari", "syllables": ["ma", "ri"] },
-                          { "word": "meja", "syllables": ["me", "ja"] },
-                          { "word": "naga", "syllables": ["na", "ga"] },
-                          { "word": "nama", "syllables": ["na", "ma"] },
-                          { "word": "nasi", "syllables": ["na", "si"] },
-                          { "word": "padi", "syllables": ["pa", "di"] },
-                          { "word": "paha", "syllables": ["pa", "ha"] },
-                          { "word": "paku", "syllables": ["pa", "ku"] },
-                          { "word": "pipi", "syllables": ["pi", "pi"] },
-                          { "word": "pula", "syllables": ["pu", "la"] },
-                          { "word": "roti", "syllables": ["ro", "ti"] },
-                          { "word": "susu", "syllables": ["su", "su"] },
-                          { "word": "tali", "syllables": ["ta", "li"] },
-                          { "word": "geli", "syllables": ["ge", "li"] },
-                          { "word": "beli", "syllables": ["be", "li"] },
-                          { "word": "suka", "syllables": ["su", "ka"] },
-                          { "word": "rusa", "syllables": ["ru", "sa"] },
-                          { "word": "data", "syllables": ["da", "ta"] },
-                          { "word": "duta", "syllables": ["du", "ta"] },
-                          { "word": "jeda", "syllables": ["je", "da"] },
-                          { "word": "bini", "syllables": ["bi", "ni"] },
-                          { "word": "sini", "syllables": ["si", "ni"] },
-                          { "word": "gini", "syllables": ["gi", "ni"] },
-                          { "word": "kaki", "syllables": ["ka", "ki"] },
-                          { "word": "suri", "syllables": ["su", "ri"] },
-                          { "word": "hati", "syllables": ["ha", "ti"] },
-                          { "word": "diri", "syllables": ["di", "ri"] },
-                          { "word": "luka", "syllables": ["lu", "ka"] },
-                          { "word": "pipi", "syllables": ["pi", "pi"] },
-                          { "word": "titi", "syllables": ["ti", "ti"] },
-                          { "word": "kera", "syllables": ["ke", "ra"] },
-                          { "word": "peta", "syllables": ["pe", "ta"] },
-                          { "word": "tera", "syllables": ["te", "ra"] },
-                          { "word": "lama", "syllables": ["la", "ma"] },
-                          { "word": "paha", "syllables": ["pa", "ha"] },
-                          { "word": "saga", "syllables": ["sa", "ga"] },
-                          { "word": "dada", "syllables": ["da", "da"] },
-                          { "word": "tamu", "syllables": ["ta", "mu"] },
-                          { "word": "baca", "syllables": ["ba", "ca"] },
-                          { "word": "geli", "syllables": ["ge", "li"] },
-                          { "word": "beri", "syllables": ["be", "ri"] },
-                          { "word": "tiga", "syllables": ["ti", "ga"] },
-                          { "word": "tisu", "syllables": ["ti", "su"] },
-                          { "word": "ulat", "syllables": ["u", "lat"] },
-                          { "word": "yoga", "syllables": ["yo", "ga"] },
-                          { "word": "suka", "syllables": ["su", "ka"] },
-                          { "word": "baru", "syllables": ["ba", "ru"] },
-                          { "word": "cari", "syllables": ["ca", "ri"] },
-                          { "word": "dari", "syllables": ["da", "ri"] },
-                          { "word": "guni", "syllables": ["gu", "ni"] },
-                          { "word": "jaga", "syllables": ["ja", "ga"] },
-                          { "word": "kota", "syllables": ["ko", "ta"] },
-                          { "word": "laga", "syllables": ["la", "ga"] },
-                          { "word": "lima", "syllables": ["li", "ma"] },
-                          { "word": "muka", "syllables": ["mu", "ka"] },
-                          { "word": "raya", "syllables": ["ra", "ya"] },
-                          { "word": "sana", "syllables": ["sa", "na"] },
-                          { "word": "sini", "syllables": ["si", "ni"] },
-                          { "word": "tepi", "syllables": ["te", "pi"] },
-                          { "word": "ubat", "syllables": ["u", "bat"] },
-                          { "word": "ikan", "syllables": ["i", "kan"] },
-                          { "word": "bawa", "syllables": ["ba", "wa"] },
-                          { "word": "bagi", "syllables": ["ba", "gi"] },
-                          { "word": "bau", "syllables": ["bau"] },
-                          { "word": "rasa", "syllables": ["ra", "sa"] },
-                          { "word": "atas", "syllables": ["a", "tas"] },
-                          { "word": "luar", "syllables": ["lu", "ar"] },
-                          { "word": "buka", "syllables": ["bu", "ka"] },
-                          { "word": "maaf", "syllables": ["ma", "af"] },
-                          { "word": "ya", "syllables": ["ya"] },
-                          { "word": "mana", "syllables": ["ma", "na"] },
-                          { "word": "bila", "syllables": ["bi", "la"] },
-                          { "word": "satu", "syllables": ["sa", "tu"] },
-                          { "word": "dua", "syllables": ["du", "a"] },
-                          { "word": "enam", "syllables": ["e", "nam"] },
-                          { "word": "adik", "syllables": ["a", "dik"] },
-                          { "word": "ibu", "syllables": ["i", "bu"] },
-                          { "word": "ayah", "syllables": ["a", "yah"] },
-                          { "word": "bas", "syllables": ["bas"] },
-                          { "word": "lori", "syllables": ["lo", "ri"] },
-                          { "word": "bola", "syllables": ["bo", "la"] },
-                          { "word": "biru", "syllables": ["bi", "ru"] },
-                          { "word": "awan", "syllables": ["a", "wan"] },
-                          { "word": "daun", "syllables": ["da", "un"] },
-                          { "word": "buah", "syllables": ["bu", "ah"] },
-                          { "word": "ayam", "syllables": ["a", "yam"] },
-                          { "word": "kura", "syllables": ["ku", "ra"] },
-                          { "word": "laut", "syllables": ["la", "ut"] },
-                          { "word": "batu", "syllables": ["ba", "tu"] },
-                          { "word": "atap", "syllables": ["a", "tap"] },
-                          { "word": "sudu", "syllables": ["su", "du"] },
-                          { "word": "topi", "syllables": ["to", "pi"] },
-                          { "word": "beg", "syllables": ["beg"] },
-                          { "word": "jam", "syllables": ["jam"] },
-                          { "word": "gigi", "syllables": ["gi", "gi"] },
-                          { "word": "suis", "syllables": ["su", "is"] },
-                          { "word": "peti", "syllables": ["pe", "ti"] },
-                          { "word": "ais", "syllables": ["ais"] },
-                          { "word": "gas", "syllables": ["gas"] },
-                          { "word": "jag", "syllables": ["jag"] },
-                          { "word": "teko", "syllables": ["te", "ko"] },
-                          { "word": "fail", "syllables": ["fail"] },
-                          { "word": "pos", "syllables": ["pos"] },
-                          { "word": "baca", "syllables": ["ba", "ca"] },
-                          { "word": "kira", "syllables": ["ki", "ra"] },
-                          { "word": "main", "syllables": ["ma", "in"] },
-                          { "word": "malu", "syllables": ["ma", "lu"] },
-                          { "word": "rajin", "syllables": ["ra", "jin"] },
-                          { "word": "malas", "syllables": ["ma", "las"] },
-                          { "word": "kuat", "syllables": ["ku","at"] },
-                          { "word": "baru", "syllables": ["ba", "ru"] },
-                          { "word": "lama", "syllables": ["la", "ma"] },
-                          { "word": "jauh", "syllables": ["ja", "uh"] },
-                          { "word": "kiri", "syllables": ["ki", "ri"] },
-                          { "word": "segi", "syllables": ["se", "gi"] },
-                          { "word": "tiga", "syllables": ["ti", "ga"] },
+                    { "word": "api", "syllables": ["a", "pi"] },
+                    { "word": "ubi", "syllables": ["u", "bi"] },
+                    { "word": "opi", "syllables": ["o", "pi"] },
+                    { "word": "ibu", "syllables": ["i", "bu"] },
+                    { "word": "ada", "syllables": ["a", "da"] },
+                    { "word": "eka", "syllables": ["e", "ka"] },
+                    { "word": "isi", "syllables": ["i", "si"] },
+                    { "word": "uji", "syllables": ["u", "ji"] },
+                    { "word": "ala", "syllables": ["a", "la"] },
+                    { "word": "ayu", "syllables": ["a", "yu"] },
+                    { "word": "ubi", "syllables": ["u", "bi"] },
+                    { "word": "abu", "syllables": ["a", "bu"] },
+                    { "word": "acu", "syllables": ["a", "cu"] },
+                    { "word": "adu", "syllables": ["a", "du"] },
+                    { "word": "aku", "syllables": ["a", "ku"] },
+                    { "word": "ala", "syllables": ["a", "la"] },
+                    { "word": "apa", "syllables": ["a", "pa"] },
+                    { "word": "asa", "syllables": ["a", "sa"] },
+                    { "word": "asu", "syllables": ["a", "su"] },
+                    { "word": "ata", "syllables": ["a", "ta"] },
+                    { "word": "ayu", "syllables": ["a", "yu"] },
+                    { "word": "ba", "syllables": ["ba"] },
+                    { "word": "bi", "syllables": ["bi"] },
+                    { "word": "bu", "syllables": ["bu"] },
+                    { "word": "bo", "syllables": ["bo"] },
+                    { "word": "be", "syllables": ["be"] },
+                    { "word": "ca", "syllables": ["ca"] },
+                    { "word": "ci", "syllables": ["ci"] },
+                    { "word": "cu", "syllables": ["cu"] },
+                    { "word": "ce", "syllables": ["ce"] },
+                    { "word": "co", "syllables": ["co"] },
+                    { "word": "da", "syllables": ["da"] },
+                    { "word": "di", "syllables": ["di"] },
+                    { "word": "du", "syllables": ["du"] },
+                    { "word": "do", "syllables": ["do"] },
+                    { "word": "de", "syllables": ["de"] },
+                    { "word": "ga", "syllables": ["ga"] },
+                    { "word": "gi", "syllables": ["gi"] },
+                    { "word": "gu", "syllables": ["gu"] },
+                    { "word": "ge", "syllables": ["ge"] },
+                    { "word": "go", "syllables": ["go"] },
+                    { "word": "ha", "syllables": ["ha"] },
+                    { "word": "hi", "syllables": ["hi"] },
+                    { "word": "hu", "syllables": ["hu"] },
+                    { "word": "he", "syllables": ["he"] },
+                    { "word": "ho", "syllables": ["ho"] },
+                    { "word": "ja", "syllables": ["ja"] },
+                    { "word": "ji", "syllables": ["ji"] },
+                    { "word": "ju", "syllables": ["ju"] },
+                    { "word": "je", "syllables": ["je"] },
+                    { "word": "jo", "syllables": ["jo"] },
+                    { "word": "ka", "syllables": ["ka"] },
+                    { "word": "ke", "syllables": ["ke"] },
+                    { "word": "ki", "syllables": ["ki"] },
+                    { "word": "ko", "syllables": ["ko"] },
+                    { "word": "ku", "syllables": ["ku"] },
+                    { "word": "la", "syllables": ["la"] },
+                    { "word": "le", "syllables": ["le"] },
+                    { "word": "li", "syllables": ["li"] },
+                    { "word": "lo", "syllables": ["lo"] },
+                    { "word": "lu", "syllables": ["lu"] },
+                    { "word": "ma", "syllables": ["ma"] },
+                    { "word": "me", "syllables": ["me"] },
+                    { "word": "mi", "syllables": ["mi"] },
+                    { "word": "mo", "syllables": ["mo"] },
+                    { "word": "mu", "syllables": ["mu"] },
+                    { "word": "na", "syllables": ["na"] },
+                    { "word": "ne", "syllables": ["ne"] },
+                    { "word": "ni", "syllables": ["ni"] },
+                    { "word": "no", "syllables": ["no"] },
+                    { "word": "nu", "syllables": ["nu"] },
+                    { "word": "pa", "syllables": ["pa"] },
+                    { "word": "pe", "syllables": ["pe"] },
+                    { "word": "pi", "syllables": ["pi"] },
+                    { "word": "po", "syllables": ["po"] },
+                    { "word": "pu", "syllables": ["pu"] },
+                    { "word": "ra", "syllables": ["ra"] },
+                    { "word": "re", "syllables": ["re"] },
+                    { "word": "ri", "syllables": ["ri"] },
+                    { "word": "ro", "syllables": ["ro"] },
+                    { "word": "ru", "syllables": ["ru"] },
+                    { "word": "sa", "syllables": ["sa"] },
+                    { "word": "se", "syllables": ["se"] },
+                    { "word": "si", "syllables": ["si"] },
+                    { "word": "so", "syllables": ["so"] },
+                    { "word": "su", "syllables": ["su"] },
+                    { "word": "ta", "syllables": ["ta"] },
+                    { "word": "te", "syllables": ["te"] },
+                    { "word": "ti", "syllables": ["ti"] },
+                    { "word": "to", "syllables": ["to"] },
+                    { "word": "tu", "syllables": ["tu"] },
+                    { "word": "wa", "syllables": ["wa"] },
+                    { "word": "we", "syllables": ["we"] },
+                    { "word": "wi", "syllables": ["wi"] },
+                    { "word": "wo", "syllables": ["wo"] },
+                    { "word": "wu", "syllables": ["wu"] },
+                    { "word": "ya", "syllables": ["ya"] },
+                    { "word": "ye", "syllables": ["ye"] },
+                    { "word": "yi", "syllables": ["yi"] },
+                    { "word": "yo", "syllables": ["yo"] },
+                    { "word": "yu", "syllables": ["yu"] },
+                    { "word": "za", "syllables": ["za"] },
+                    { "word": "ze", "syllables": ["ze"] },
+                    { "word": "zi", "syllables": ["zi"] },
+                    { "word": "zo", "syllables": ["zo"] },
+                    { "word": "zu", "syllables": ["zu"] },
+                    { "word": "ela", "syllables": ["e", "la"] }
                         ]
 
         let currentWords = [];
@@ -1184,7 +1256,7 @@
         function updateModeIndicator() {
             const indicator = document.getElementById('modeIndicator');
             if (currentMode === 'normal') {
-                indicator.textContent = '📚 Mode: Mari Mengeja Ayat Ringkas';
+                indicator.textContent = '📚 Mode: Mari Mengeja Suku Kata';
                 indicator.style.setProperty('--indicator-color', 'var(--primary-color)');
             } else {
                 indicator.textContent = '🔄 Mode: Ulang Kata Salah';
@@ -1223,6 +1295,7 @@
                     }
                 };
                 
+                // Set initial state class immediately
                 if (wordStatus[wordObj.word] === 'correct') {
                     wordCard.classList.add('correct');
                 } else if (wordStatus[wordObj.word] === 'incorrect') {
@@ -1255,6 +1328,7 @@
                 wordStatus[word] = 'correct';
                 correctCount++;
                 playSuccessSound();
+                // Remove existing classes and add correct class
                 targetCard.classList.remove('incorrect', 'unmarked');
                 targetCard.classList.add('correct');
             } else if (wordStatus[word] === 'correct') {
@@ -1262,15 +1336,18 @@
                 correctCount--;
                 incorrectCount++;
                 playErrorSound();
+                // Remove existing classes and add incorrect class
                 targetCard.classList.remove('correct', 'unmarked');
                 targetCard.classList.add('incorrect');
             } else if (wordStatus[word] === 'incorrect') {
                 wordStatus[word] = 'unmarked';
                 incorrectCount--;
+                // Remove all state classes
                 targetCard.classList.remove('correct', 'incorrect');
                 targetCard.classList.add('unmarked');
             }
             
+            // Only update display, don't re-render
             updateDisplay();
         }
 
@@ -1511,51 +1588,64 @@
         // Initialize animations after a short delay
         setTimeout(observeElements, 100);
         
-        // TV Navigation Support
+        // Add keyboard navigation support for TV remotes
         function initTVNavigation() {
             const focusableElements = document.querySelectorAll('.word-card, .btn-enhanced, .home-button');
             let currentFocusIndex = 0;
             
+            // Set initial focus
             if (focusableElements.length > 0) {
                 focusableElements.forEach((element, index) => {
                     element.setAttribute('tabindex', index === 0 ? '0' : '-1');
                 });
             }
             
+            // Keyboard navigation
             document.addEventListener('keydown', function(e) {
                 const visibleElements = Array.from(focusableElements).filter(el => 
                     el.offsetParent !== null && !el.disabled
                 );
                 
                 switch(e.key) {
-                    case 'ArrowRight': case 'ArrowDown':
+                    case 'ArrowRight':
+                    case 'ArrowDown':
                         e.preventDefault();
                         currentFocusIndex = (currentFocusIndex + 1) % visibleElements.length;
                         updateFocus(visibleElements);
                         break;
-                    case 'ArrowLeft': case 'ArrowUp':
+                    case 'ArrowLeft':
+                    case 'ArrowUp':
                         e.preventDefault();
                         currentFocusIndex = (currentFocusIndex - 1 + visibleElements.length) % visibleElements.length;
                         updateFocus(visibleElements);
                         break;
-                    case 'Enter': case ' ':
+                    case 'Enter':
+                    case ' ':
                         e.preventDefault();
-                        if (visibleElements[currentFocusIndex]) visibleElements[currentFocusIndex].click();
+                        if (visibleElements[currentFocusIndex]) {
+                            visibleElements[currentFocusIndex].click();
+                        }
                         break;
                     case 'Escape':
+                        // Return to home
                         window.location.href = '../../index.html';
                         break;
                 }
             });
             
             function updateFocus(elements) {
-                focusableElements.forEach(element => element.setAttribute('tabindex', '-1'));
+                focusableElements.forEach(element => {
+                    element.setAttribute('tabindex', '-1');
+                });
+                
                 if (elements[currentFocusIndex]) {
                     elements[currentFocusIndex].setAttribute('tabindex', '0');
                     elements[currentFocusIndex].focus();
                 }
             }
         }
+        
+        // Initialize TV navigation
         initTVNavigation();
     </script>
     

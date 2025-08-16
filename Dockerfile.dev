@@ -1,16 +1,15 @@
-# Production Dockerfile for XKids Learning Center
+# Development Dockerfile for XKids Learning Center
+# Uses the same base as production but with live reloading capabilities
+
 FROM nginx:alpine
 
 # Set maintainer information
 LABEL maintainer="Exrienz <muzaffar.mohamed@example.com>"
-LABEL description="XKids Learning Center - Educational apps for children"
+LABEL description="XKids Learning Center - Educational apps for children (Development Mode)"
 LABEL version="1.0.0"
 
 # Remove default nginx website
 RUN rm -rf /usr/share/nginx/html/*
-
-# Copy src folder contents to nginx html directory
-COPY src/ /usr/share/nginx/html/
 
 # Copy custom nginx configuration
 COPY docker/nginx/nginx.conf /etc/nginx/nginx.conf
