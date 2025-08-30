@@ -1041,8 +1041,13 @@
             currentMode = 'normal';
             updateModeIndicator();
             
-            const shuffled = [...allWords].sort(() => 0.5 - Math.random());
-            currentWords = shuffled.slice(0, 20);
+            // Fisher-Yates shuffle to prevent duplicates
+            const shuffled = [...allWords];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            currentWords = shuffled.slice(0, Math.min(20, shuffled.length));
             
             wordStatus = {};
             currentWords.forEach(wordObj => {
