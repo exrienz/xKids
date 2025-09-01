@@ -850,7 +850,7 @@
                                 </div>
                                 <div class="instructions-step">
                                     <div class="step-number">4</div>
-                                    <div>5 ayat setiap halaman, 10 halaman</div>
+                                    <div>Klik "Ayat Baru" untuk ayat rawak</div>
                                 </div>
                             </div>
                         </div>
@@ -862,88 +862,58 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
-        // 50 Simple Malaysian phrases split into 10 pages (5 phrases per page)
+        // 50 Simple Malaysian phrases in a flat array for random selection
         const allPhrases = [
-            // Page 1
-            [
-                { "phrase": "Pak Abu naik bas", "words": ["Pak", "Abu", "naik", "bas"] },
-                { "phrase": "Ibu beli roti", "words": ["Ibu", "beli", "roti"] },
-                { "phrase": "Adik main bola", "words": ["Adik", "main", "bola"] },
-                { "phrase": "Ayah baca surat", "words": ["Ayah", "baca", "surat"] },
-                { "phrase": "Nenek masak nasi", "words": ["Nenek", "masak", "nasi"] }
-            ],
-            // Page 2
-            [
-                { "phrase": "Kucing minum susu", "words": ["Kucing", "minum", "susu"] },
-                { "phrase": "Burung terbang tinggi", "words": ["Burung", "terbang", "tinggi"] },
-                { "phrase": "Ikan berenang cepat", "words": ["Ikan", "berenang", "cepat"] },
-                { "phrase": "Anjing berlari kuat", "words": ["Anjing", "berlari", "kuat"] },
-                { "phrase": "Gajah besar sekali", "words": ["Gajah", "besar", "sekali"] }
-            ],
-            // Page 3
-            [
-                { "phrase": "Matahari naik pagi", "words": ["Matahari", "naik", "pagi"] },
-                { "phrase": "Bulan terang malam", "words": ["Bulan", "terang", "malam"] },
-                { "phrase": "Hujan turun lebat", "words": ["Hujan", "turun", "lebat"] },
-                { "phrase": "Angin bertiup sepoi", "words": ["Angin", "bertiup", "sepoi"] },
-                { "phrase": "Awan putih indah", "words": ["Awan", "putih", "indah"] }
-            ],
-            // Page 4
-            [
-                { "phrase": "Saya suka makan", "words": ["Saya", "suka", "makan"] },
-                { "phrase": "Kamu pandai membaca", "words": ["Kamu", "pandai", "membaca"] },
-                { "phrase": "Dia tinggi sangat", "words": ["Dia", "tinggi", "sangat"] },
-                { "phrase": "Kami pergi sekolah", "words": ["Kami", "pergi", "sekolah"] },
-                { "phrase": "Mereka bermain gembira", "words": ["Mereka", "bermain", "gembira"] }
-            ],
-            // Page 5
-            [
-                { "phrase": "Rumah saya besar", "words": ["Rumah", "saya", "besar"] },
-                { "phrase": "Kereta papa merah", "words": ["Kereta", "papa", "merah"] },
-                { "phrase": "Buku ini bagus", "words": ["Buku", "ini", "bagus"] },
-                { "phrase": "Baju baru cantik", "words": ["Baju", "baru", "cantik"] },
-                { "phrase": "Kasut hitam bersih", "words": ["Kasut", "hitam", "bersih"] }
-            ],
-            // Page 6
-            [
-                { "phrase": "Pokok mangga berbuah", "words": ["Pokok", "mangga", "berbuah"] },
-                { "phrase": "Bunga ros harum", "words": ["Bunga", "ros", "harum"] },
-                { "phrase": "Rumput hijau subur", "words": ["Rumput", "hijau", "subur"] },
-                { "phrase": "Daun gugur musim", "words": ["Daun", "gugur", "musim"] },
-                { "phrase": "Akar dalam tanah", "words": ["Akar", "dalam", "tanah"] }
-            ],
-            // Page 7
-            [
-                { "phrase": "Sekolah tutup hari", "words": ["Sekolah", "tutup", "hari"] },
-                { "phrase": "Guru mengajar rajin", "words": ["Guru", "mengajar", "rajin"] },
-                { "phrase": "Murid belajar tekun", "words": ["Murid", "belajar", "tekun"] },
-                { "phrase": "Kelas bersih teratur", "words": ["Kelas", "bersih", "teratur"] },
-                { "phrase": "Papan tulis hitam", "words": ["Papan", "tulis", "hitam"] }
-            ],
-            // Page 8
-            [
-                { "phrase": "Makanan sedap sekali", "words": ["Makanan", "sedap", "sekali"] },
-                { "phrase": "Air sejuk segar", "words": ["Air", "sejuk", "segar"] },
-                { "phrase": "Kek manis lembut", "words": ["Kek", "manis", "lembut"] },
-                { "phrase": "Buah masak ranum", "words": ["Buah", "masak", "ranum"] },
-                { "phrase": "Sayur hijau sihat", "words": ["Sayur", "hijau", "sihat"] }
-            ],
-            // Page 9
-            [
-                { "phrase": "Pagi cerah indah", "words": ["Pagi", "cerah", "indah"] },
-                { "phrase": "Tengah hari panas", "words": ["Tengah", "hari", "panas"] },
-                { "phrase": "Petang sejuk nyaman", "words": ["Petang", "sejuk", "nyaman"] },
-                { "phrase": "Malam gelap sunyi", "words": ["Malam", "gelap", "sunyi"] },
-                { "phrase": "Dini hari dingin", "words": ["Dini", "hari", "dingin"] }
-            ],
-            // Page 10
-            [
-                { "phrase": "Tempat bermain luas", "words": ["Tempat", "bermain", "luas"] },
-                { "phrase": "Jalan raya sibuk", "words": ["Jalan", "raya", "sibuk"] },
-                { "phrase": "Pasar ramai orang", "words": ["Pasar", "ramai", "orang"] },
-                { "phrase": "Kedai jual barang", "words": ["Kedai", "jual", "barang"] },
-                { "phrase": "Masjid tempat solat", "words": ["Masjid", "tempat", "solat"] }
-            ]
+            { "phrase": "Pak Abu naik bas", "words": ["Pak", "Abu", "naik", "bas"] },
+            { "phrase": "Ibu beli roti", "words": ["Ibu", "beli", "roti"] },
+            { "phrase": "Adik main bola", "words": ["Adik", "main", "bola"] },
+            { "phrase": "Ayah baca surat", "words": ["Ayah", "baca", "surat"] },
+            { "phrase": "Nenek masak nasi", "words": ["Nenek", "masak", "nasi"] },
+            { "phrase": "Kucing minum susu", "words": ["Kucing", "minum", "susu"] },
+            { "phrase": "Burung terbang tinggi", "words": ["Burung", "terbang", "tinggi"] },
+            { "phrase": "Ikan berenang cepat", "words": ["Ikan", "berenang", "cepat"] },
+            { "phrase": "Anjing berlari kuat", "words": ["Anjing", "berlari", "kuat"] },
+            { "phrase": "Gajah besar sekali", "words": ["Gajah", "besar", "sekali"] },
+            { "phrase": "Matahari naik pagi", "words": ["Matahari", "naik", "pagi"] },
+            { "phrase": "Bulan terang malam", "words": ["Bulan", "terang", "malam"] },
+            { "phrase": "Hujan turun lebat", "words": ["Hujan", "turun", "lebat"] },
+            { "phrase": "Angin bertiup sepoi", "words": ["Angin", "bertiup", "sepoi"] },
+            { "phrase": "Awan putih indah", "words": ["Awan", "putih", "indah"] },
+            { "phrase": "Saya suka makan", "words": ["Saya", "suka", "makan"] },
+            { "phrase": "Kamu pandai membaca", "words": ["Kamu", "pandai", "membaca"] },
+            { "phrase": "Dia tinggi sangat", "words": ["Dia", "tinggi", "sangat"] },
+            { "phrase": "Kami pergi sekolah", "words": ["Kami", "pergi", "sekolah"] },
+            { "phrase": "Mereka bermain gembira", "words": ["Mereka", "bermain", "gembira"] },
+            { "phrase": "Rumah saya besar", "words": ["Rumah", "saya", "besar"] },
+            { "phrase": "Kereta papa merah", "words": ["Kereta", "papa", "merah"] },
+            { "phrase": "Buku ini bagus", "words": ["Buku", "ini", "bagus"] },
+            { "phrase": "Baju baru cantik", "words": ["Baju", "baru", "cantik"] },
+            { "phrase": "Kasut hitam bersih", "words": ["Kasut", "hitam", "bersih"] },
+            { "phrase": "Pokok mangga berbuah", "words": ["Pokok", "mangga", "berbuah"] },
+            { "phrase": "Bunga ros harum", "words": ["Bunga", "ros", "harum"] },
+            { "phrase": "Rumput hijau subur", "words": ["Rumput", "hijau", "subur"] },
+            { "phrase": "Daun gugur musim", "words": ["Daun", "gugur", "musim"] },
+            { "phrase": "Akar dalam tanah", "words": ["Akar", "dalam", "tanah"] },
+            { "phrase": "Sekolah tutup hari", "words": ["Sekolah", "tutup", "hari"] },
+            { "phrase": "Guru mengajar rajin", "words": ["Guru", "mengajar", "rajin"] },
+            { "phrase": "Murid belajar tekun", "words": ["Murid", "belajar", "tekun"] },
+            { "phrase": "Kelas bersih teratur", "words": ["Kelas", "bersih", "teratur"] },
+            { "phrase": "Papan tulis hitam", "words": ["Papan", "tulis", "hitam"] },
+            { "phrase": "Makanan sedap sekali", "words": ["Makanan", "sedap", "sekali"] },
+            { "phrase": "Air sejuk segar", "words": ["Air", "sejuk", "segar"] },
+            { "phrase": "Kek manis lembut", "words": ["Kek", "manis", "lembut"] },
+            { "phrase": "Buah masak ranum", "words": ["Buah", "masak", "ranum"] },
+            { "phrase": "Sayur hijau sihat", "words": ["Sayur", "hijau", "sihat"] },
+            { "phrase": "Pagi cerah indah", "words": ["Pagi", "cerah", "indah"] },
+            { "phrase": "Tengah hari panas", "words": ["Tengah", "hari", "panas"] },
+            { "phrase": "Petang sejuk nyaman", "words": ["Petang", "sejuk", "nyaman"] },
+            { "phrase": "Malam gelap sunyi", "words": ["Malam", "gelap", "sunyi"] },
+            { "phrase": "Dini hari dingin", "words": ["Dini", "hari", "dingin"] },
+            { "phrase": "Tempat bermain luas", "words": ["Tempat", "bermain", "luas"] },
+            { "phrase": "Jalan raya sibuk", "words": ["Jalan", "raya", "sibuk"] },
+            { "phrase": "Pasar ramai orang", "words": ["Pasar", "ramai", "orang"] },
+            { "phrase": "Kedai jual barang", "words": ["Kedai", "jual", "barang"] },
+            { "phrase": "Masjid tempat solat", "words": ["Masjid", "tempat", "solat"] }
         ];
 
         let currentPhrases = [];
@@ -951,9 +921,6 @@
         let currentMode = 'normal';
         let correctCount = 0;
         let incorrectCount = 0;
-
-        // Flatten all phrases into a single array for randomization
-        const flatPhrases = allPhrases.flat();
 
         function initGame() {
             loadRandomPhrases();
@@ -980,7 +947,7 @@
 
         function loadRandomPhrases() {
             // Fisher-Yates shuffle to get random phrases
-            const shuffled = [...flatPhrases];
+            const shuffled = [...allPhrases];
             for (let i = shuffled.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
