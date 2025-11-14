@@ -305,6 +305,15 @@
             transform: scale(1.05);
         }
         
+        /* Syllable color styles */
+        .syllable-white {
+            color: white;
+        }
+        
+        .syllable-red {
+            color: #ff4444;
+        }
+        
         /* Enhanced Status Classes */
         .correct {
             background: linear-gradient(135deg, #8B5CF6 0%, #A855F7 50%, #9333EA 100%) !important;
@@ -864,56 +873,90 @@
     <script>
         // 50 Simple Malaysian phrases in a flat array for random selection
         const allPhrases = [
-            { "phrase": "Pak Abu naik bas", "words": ["Pak", "Abu", "naik", "bas"] },
-            { "phrase": "Ibu beli roti", "words": ["Ibu", "beli", "roti"] },
-            { "phrase": "Adik main bola", "words": ["Adik", "main", "bola"] },
-            { "phrase": "Ayah baca surat", "words": ["Ayah", "baca", "surat"] },
-            { "phrase": "Nenek masak nasi", "words": ["Nenek", "masak", "nasi"] },
-            { "phrase": "Kucing minum susu", "words": ["Kucing", "minum", "susu"] },
-            { "phrase": "Burung terbang tinggi", "words": ["Burung", "terbang", "tinggi"] },
-            { "phrase": "Ikan berenang cepat", "words": ["Ikan", "berenang", "cepat"] },
-            { "phrase": "Anjing berlari kuat", "words": ["Anjing", "berlari", "kuat"] },
-            { "phrase": "Gajah besar sekali", "words": ["Gajah", "besar", "sekali"] },
-            { "phrase": "Matahari naik pagi", "words": ["Matahari", "naik", "pagi"] },
-            { "phrase": "Bulan terang malam", "words": ["Bulan", "terang", "malam"] },
-            { "phrase": "Hujan turun lebat", "words": ["Hujan", "turun", "lebat"] },
-            { "phrase": "Angin bertiup sepoi", "words": ["Angin", "bertiup", "sepoi"] },
-            { "phrase": "Awan putih indah", "words": ["Awan", "putih", "indah"] },
-            { "phrase": "Saya suka makan", "words": ["Saya", "suka", "makan"] },
-            { "phrase": "Kamu pandai membaca", "words": ["Kamu", "pandai", "membaca"] },
-            { "phrase": "Dia tinggi sangat", "words": ["Dia", "tinggi", "sangat"] },
-            { "phrase": "Kami pergi sekolah", "words": ["Kami", "pergi", "sekolah"] },
-            { "phrase": "Mereka bermain gembira", "words": ["Mereka", "bermain", "gembira"] },
-            { "phrase": "Rumah saya besar", "words": ["Rumah", "saya", "besar"] },
-            { "phrase": "Kereta papa merah", "words": ["Kereta", "papa", "merah"] },
-            { "phrase": "Buku ini bagus", "words": ["Buku", "ini", "bagus"] },
-            { "phrase": "Baju baru cantik", "words": ["Baju", "baru", "cantik"] },
-            { "phrase": "Kasut hitam bersih", "words": ["Kasut", "hitam", "bersih"] },
-            { "phrase": "Pokok mangga berbuah", "words": ["Pokok", "mangga", "berbuah"] },
-            { "phrase": "Bunga ros harum", "words": ["Bunga", "ros", "harum"] },
-            { "phrase": "Rumput hijau subur", "words": ["Rumput", "hijau", "subur"] },
-            { "phrase": "Daun gugur musim", "words": ["Daun", "gugur", "musim"] },
-            { "phrase": "Akar dalam tanah", "words": ["Akar", "dalam", "tanah"] },
-            { "phrase": "Sekolah tutup hari", "words": ["Sekolah", "tutup", "hari"] },
-            { "phrase": "Guru mengajar rajin", "words": ["Guru", "mengajar", "rajin"] },
-            { "phrase": "Murid belajar tekun", "words": ["Murid", "belajar", "tekun"] },
-            { "phrase": "Kelas bersih teratur", "words": ["Kelas", "bersih", "teratur"] },
-            { "phrase": "Papan tulis hitam", "words": ["Papan", "tulis", "hitam"] },
-            { "phrase": "Makanan sedap sekali", "words": ["Makanan", "sedap", "sekali"] },
-            { "phrase": "Air sejuk segar", "words": ["Air", "sejuk", "segar"] },
-            { "phrase": "Kek manis lembut", "words": ["Kek", "manis", "lembut"] },
-            { "phrase": "Buah masak ranum", "words": ["Buah", "masak", "ranum"] },
-            { "phrase": "Sayur hijau sihat", "words": ["Sayur", "hijau", "sihat"] },
-            { "phrase": "Pagi cerah indah", "words": ["Pagi", "cerah", "indah"] },
-            { "phrase": "Tengah hari panas", "words": ["Tengah", "hari", "panas"] },
-            { "phrase": "Petang sejuk nyaman", "words": ["Petang", "sejuk", "nyaman"] },
-            { "phrase": "Malam gelap sunyi", "words": ["Malam", "gelap", "sunyi"] },
-            { "phrase": "Dini hari dingin", "words": ["Dini", "hari", "dingin"] },
-            { "phrase": "Tempat bermain luas", "words": ["Tempat", "bermain", "luas"] },
-            { "phrase": "Jalan raya sibuk", "words": ["Jalan", "raya", "sibuk"] },
-            { "phrase": "Pasar ramai orang", "words": ["Pasar", "ramai", "orang"] },
-            { "phrase": "Kedai jual barang", "words": ["Kedai", "jual", "barang"] },
-            { "phrase": "Masjid tempat solat", "words": ["Masjid", "tempat", "solat"] }
+            { "phrase": "Pak Abu naik bas", "words": ["Pak", "A+bu", "na+ik", "bas"] },
+            { "phrase": "Ibu beli roti", "words": ["I+bu", "be+li", "ro+ti"] },
+            { "phrase": "Adik main bola", "words": ["A+dik", "ma+in", "bo+la"] },
+            { "phrase": "Ayah baca surat", "words": ["A+yah", "ba+ca", "su+rat"] },
+            { "phrase": "Nenek masak nasi", "words": ["Ne+nek", "ma+sak", "na+si"] },
+            { "phrase": "Kucing makan ikan", "words": ["Ku+cing", "ma+kan", "i+kan"] },
+            { "phrase": "Ibu tanam bunga", "words": ["I+bu", "ta+nam", "bu+nga"] },
+            { "phrase": "Ayah potong rumput", "words": ["A+yah", "po+tong", "rum+put"] },
+            { "phrase": "Adik mandi pagi", "words": ["A+dik", "man+di", "pa+gi"] },
+            { "phrase": "Kakak lipat baju", "words": ["Ka+kak", "li+pat", "ba+ju"] },
+            { "phrase": "Abang tolak troli", "words": ["A+bang", "to+lak", "tro+li"] },
+            { "phrase": "Atuk betulkan radio", "words": ["A+tuk", "be+tul+kan", "ra+di+o"] },
+            { "phrase": "Nenek jahit kain", "words": ["Ne+nek", "ja+hit", "ka+in"] },
+            { "phrase": "Saya cuci pinggan", "words": ["Sa+ya", "cu+ci", "ping+gan"] },
+            { "phrase": "Dia tarik pintu", "words": ["Di+a", "ta+rik", "pin+tu"] },
+            { "phrase": "Kami basuh baju", "words": ["Ka+mi", "ba+suh", "ba+ju"] },
+            { "phrase": "Anak makan pisang", "words": ["A+nak", "ma+kan", "pi+sang"] },
+            { "phrase": "Budak tarik beg", "words": ["Bu+dak", "ta+rik", "beg"] },
+            { "phrase": "Cikgu panggil nama", "words": ["Cik+gu", "pang+gil", "na+ma"] },
+            { "phrase": "Pelajar kira nombor", "words": ["Pe+la+jar", "ki+ra", "nom+bor"] },
+            { "phrase": "Kucing kejar tikus", "words": ["Ku+cing", "ke+jar", "ti+kus"] },
+            { "phrase": "Lembu tarik pedati", "words": ["Lem+bu", "ta+rik", "pe+da+ti"] },
+            { "phrase": "Ayam makan dedak", "words": ["A+yam", "ma+kan", "de+dak"] },
+            { "phrase": "Kuda tarik kereta", "words": ["Ku+da", "ta+rik", "ke+re+ta"] },
+            { "phrase": "Burung hinggap dahan", "words": ["Bu+rung", "hing+gap", "da+han"] },
+            { "phrase": "Ikan berenang cepat", "words": ["I+kan", "be+re+nang", "ce+pat"] },
+            { "phrase": "Saya ambil buku", "words": ["Sa+ya", "am+bil", "bu+ku"] },
+            { "phrase": "Dia simpan duit", "words": ["Di+a", "sim+pan", "du+it"] },
+            { "phrase": "Kami cari kasut", "words": ["Ka+mi", "ca+ri", "ka+sut"] },
+            { "phrase": "Adik gosok gigi", "words": ["A+dik", "go+sok", "gi+gi"] },
+            { "phrase": "Abang tarik tali", "words": ["A+bang", "ta+rik", "ta+li"] },
+            { "phrase": "Nenek tanam serai", "words": ["Ne+nek", "ta+nam", "se+rai"] },
+            { "phrase": "Atuk makan ubat", "words": ["A+tuk", "ma+kan", "u+bat"] },
+            { "phrase": "Kakak sapu sampah", "words": ["Ka+kak", "sa+pu", "sam+pah"] },
+            { "phrase": "Ibu kupas bawang", "words": ["I+bu", "ku+pas", "ba+wang"] },
+            { "phrase": "Ayah beli sayur", "words": ["A+yah", "be+li", "sa+yur"] },
+            { "phrase": "Budak tarik kotak", "words": ["Bu+dak", "ta+rik", "ko+tak"] },
+            { "phrase": "Kucing minum air", "words": ["Ku+cing", "mi+num", "a+ir"] },
+            { "phrase": "Anjing jaga rumah", "words": ["An+jing", "ja+ga", "ru+mah"] },
+            { "phrase": "Burung cari makan", "words": ["Bu+rung", "ca+ri", "ma+kan"] },
+            { "phrase": "Lembu mandi lumpur", "words": ["Lem+bu", "man+di", "lum+pur"] },
+            { "phrase": "Kerbau tarik bajak", "words": ["Ker+b+au", "ta+rik", "ba+jak"] },
+            { "phrase": "Gajah tarik kayu", "words": ["Ga+jah", "ta+rik", "ka+yu"] },
+            { "phrase": "Harimau mengaum kuat", "words": ["Ha+ri+mau", "meng+a+um", "ku+at"] },
+            { "phrase": "Kuda minum air", "words": ["Ku+da", "mi+num", "a+ir"] },
+            { "phrase": "Adik minum susu", "words": ["A+dik", "mi+num", "su+su"] },
+            { "phrase": "Abang baca buku", "words": ["A+bang", "ba+ca", "bu+ku"] },
+            { "phrase": "Ayah basuh kereta", "words": ["A+yah", "ba+suh", "ke+re+ta"] },
+            { "phrase": "Ibu potong sayur", "words": ["I+bu", "po+tong", "sa+yur"] },
+            { "phrase": "Kakak sapu lantai", "words": ["Ka+kak", "sa+pu", "lan+tai"] },
+            { "phrase": "Burung terbang tinggi", "words": ["Bu+rung", "ter+bang", "ting+gi"] },
+            { "phrase": "Lembu makan rumput", "words": ["Lem+bu", "ma+kan", "rum+put"] },
+            { "phrase": "Ayam keluar reban", "words": ["A+yam", "ke+lu+ar", "re+ban"] },
+            { "phrase": "Dia lukis gambar", "words": ["Di+a", "lu+kis", "gam+bar"] },
+            { "phrase": "Pak cik tebang pokok", "words": ["Pak+cik", "te+bang", "po+kok"] },
+            { "phrase": "Mak cik jual kuih", "words": ["Mak+cik", "ju+al", "ku+ih"] },
+            { "phrase": "Kereta rosak jalan", "words": ["Ke+re+ta", "ro+sak", "ja+lan"] },
+            { "phrase": "Bas berhenti sekejap", "words": ["Bas", "ber+hen+ti", "se+ke+jap"] },
+            { "phrase": "Budak main bola", "words": ["Bu+dak", "ma+in", "bo+la"] },
+            { "phrase": "Cikgu tulis nota", "words": ["Cik+gu", "tu+lis", "no+ta"] },
+            { "phrase": "Pelajar baca teks", "words": ["Pe+la+jar", "ba+ca", "teks"] },
+            { "phrase": "Lori angkut pasir", "words": ["Lo+ri", "ang+kut", "pa+sir"] },
+            { "phrase": "Emak goreng ikan", "words": ["E+mak", "go+reng", "i+kan"] },
+            { "phrase": "Bapa beli roti", "words": ["Ba+pa", "be+li", "ro+ti"] },
+            { "phrase": "Gajah mandi sungai", "words": ["Ga+jah", "man+di", "sun+gai"] },
+            { "phrase": "Harimau tidur lena", "words": ["Ha+ri+mau", "ti+dur", "le+na"] },
+            { "phrase": "Kuda lari laju", "words": ["Ku+da", "la+ri", "la+ju"] },
+            { "phrase": "Anak makan bubur", "words": ["A+nak", "ma+kan", "bu+bur"] },
+            { "phrase": "Saya cuci tangan", "words": ["Sa+ya", "cu+ci", "tan+gan"] },
+            { "phrase": "Dia buka lampu", "words": ["Di+a", "bu+ka", "lam+pu"] },
+            { "phrase": "Saya tutup pintu", "words": ["Sa+ya", "tu+tup", "pin+tu"] },
+            { "phrase": "Kami naik bas", "words": ["Ka+mi", "na+ik", "bas"] },
+            { "phrase": "Mereka turun tangga", "words": ["Me+re+ka", "tu+run", "tang+ga"] },
+            { "phrase": "Pakcik tangkap ikan", "words": ["Pak+cik", "tang+kap", "i+kan"] },
+            { "phrase": "Nenek baca doa", "words": ["Ne+nek", "ba+ca", "do+a"] },
+            { "phrase": "Atuk siram pokok", "words": ["A+tuk", "si+ram", "po+kok"] },
+            { "phrase": "Kanak-kanak lompat tinggi", "words": ["Ka+nak-ka+nak", "lom+pat", "ting+gi"] },
+            { "phrase": "Anjing kejar bola", "words": ["An+jing", "ke+jar", "bo+la"] },
+            { "phrase": "Kucing tidur lena", "words": ["Ku+cing", "ti+dur", "le+na"] },
+            { "phrase": "Burung makan biji", "words": ["Bu+rung", "ma+kan", "bi+ji"] },
+            { "phrase": "Baju sudah kering", "words": ["Ba+ju", "su+dah", "ke+ring"] },
+            { "phrase": "Dia basuh muka", "words": ["Di+a", "ba+suh", "mu+ka"] },
+            { "phrase": "Saya bayar tambang", "words": ["Sa+ya", "ba+yar", "tam+bang"] },
+            { "phrase": "Kucing minum susu", "words": ["Ku+cing", "mi+num", "su+su"] }
         ];
 
         let currentPhrases = [];
@@ -1039,9 +1082,19 @@
                 phraseCard.setAttribute('aria-label', `Phrase: ${phraseObj.phrase}, words: ${phraseObj.words.join(', ')}`);
                 
                 
-                const wordHtml = phraseObj.words.map((word, wordIndex) => 
-                    `<span class="word-part">${word}</span>`
-                ).join('');
+                const wordHtml = phraseObj.words.map((word, wordIndex) => {
+                    // Split syllables by "+" and apply alternating colors
+                    if (word.includes('+')) {
+                        const syllables = word.split('+');
+                        const syllableHtml = syllables.map((syllable, syllableIndex) => {
+                            const colorClass = syllableIndex % 2 === 0 ? 'syllable-white' : 'syllable-red';
+                            return `<span class="${colorClass}">${syllable}</span>`;
+                        }).join('');
+                        return `<span class="word-part">${syllableHtml}</span>`;
+                    } else {
+                        return `<span class="word-part">${word}</span>`;
+                    }
+                }).join('');
                 
                 phraseCard.innerHTML = `
                     <div class="phrase-main">${phraseObj.phrase}</div>
