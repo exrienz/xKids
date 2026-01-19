@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>➕ Fun Math - Addition with Carrying</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --error-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --math-gradient: linear-gradient(135deg, #ff6b6b 0%, #feca57 50%, #48dbfb 100%);
+
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --surface: rgba(255, 255, 255, 0.95);
+
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 25px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 40px rgba(0,0,0,0.12);
+
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 20%, #f093fb 40%, #f5576c 60%, #4facfe 80%, #00f2fe 100%);
+            background-size: 400% 400%;
+            animation: gradientFlow 20s ease infinite;
+            min-height: 100vh;
+            color: var(--text-primary);
+        }
+
+        @keyframes gradientFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .app-header {
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            position: relative;
+        }
+
+        .app-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--math-gradient);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        }
+
+        .app-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            background: var(--math-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0 0 0.5rem 0;
+        }
+
+        .app-subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .home-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            background: var(--surface);
+            border-radius: var(--radius-full);
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-smooth);
+        }
+
+        .home-button:hover {
+            transform: translateY(-2px);
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .mode-indicator {
+            background: var(--surface);
+            backdrop-filter: blur(15px);
+            padding: 1.25rem 2.5rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card {
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .problem-card {
+            background: var(--math-gradient);
+            color: white;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            border-radius: var(--radius-lg);
+            transition: var(--transition-bounce);
+            box-shadow: var(--shadow-md);
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .problem-card.correct {
+            background: var(--success-gradient) !important;
+            animation: successPulse 0.6s ease;
+        }
+
+        .problem-card.incorrect {
+            background: var(--error-gradient) !important;
+            animation: errorShake 0.6s ease;
+        }
+
+        @keyframes successPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes errorShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
+        .problem-text {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .answer-text {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-lg);
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+
+        .score-display {
+            font-size: clamp(2.5rem, 7vw, 3.5rem);
+            font-weight: 800;
+            background: var(--math-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 1rem 0;
+        }
+
+        .btn-enhanced {
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            padding: 1rem 1.75rem;
+            font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+            border: none;
+            transition: var(--transition-bounce);
+            font-family: 'Poppins', sans-serif;
+            width: 100%;
+            box-shadow: var(--shadow-md);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn-enhanced:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-primary-enhanced { background: var(--primary-gradient); color: white; }
+        .btn-success-enhanced { background: var(--success-gradient); color: white; }
+        .btn-warning-enhanced { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; }
+
+        .status-badge {
+            flex: 1;
+            padding: 1rem;
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .status-correct { background: var(--success-gradient); color: white; }
+        .status-incorrect { background: var(--error-gradient); color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <div style="position: absolute; top: 1rem; left: 1rem;">
+                <a href="../../index.html" class="home-button">
+                    <span>🏠</span>
+                    <span>Home</span>
+                </a>
+            </div>
+            <h1 class="app-title">➕ Fun Math Level 8</h1>
+            <p class="app-subtitle">Addition with Carrying (Advanced)</p>
+        </header>
+
+        <div class="mode-indicator">
+            📚 Learn: Master Advanced Two-digit Addition!
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row g-3" id="problemGrid">
+                            <!-- Problem cards will be generated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body text-center p-4">
+                        <div style="font-weight: 600; color: var(--text-secondary); margin-bottom: 0.5rem;">🎯 Your Score</div>
+                        <div class="score-display" id="scoreDisplay">0/20</div>
+
+                        <div class="d-grid gap-3 mb-4">
+                            <button class="btn btn-primary-enhanced btn-enhanced" onclick="refreshProblems()">
+                                🔄 New Problems
+                            </button>
+                            <button class="btn btn-warning-enhanced btn-enhanced" onclick="retryIncorrect()" id="retryBtn" disabled>
+                                🔁 Try Again
+                            </button>
+                            <button class="btn btn-success-enhanced btn-enhanced" onclick="resetGame()">
+                                🎮 Reset Game
+                            </button>
+                        </div>
+
+                        <div class="d-flex gap-2 mb-4">
+                            <div class="status-badge status-correct">
+                                ✅ Correct<br><span id="correctCount">0</span>
+                            </div>
+                            <div class="status-badge status-incorrect">
+                                ❌ Wrong<br><span id="incorrectCount">0</span>
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(255,255,255,0.5); padding: 1.5rem; border-radius: var(--radius-lg);">
+                            <div style="font-weight: 700; margin-bottom: 1rem;">🎯 How to Play:</div>
+                            <div style="text-align: left; font-size: 0.9rem; line-height: 1.8;">
+                                1️⃣ Read the problem<br>
+                                2️⃣ Add the two numbers (remember to carry!)<br>
+                                3️⃣ Click to mark if you got it right<br>
+                                4️⃣ Green = Correct! 💚
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const allProblems = [
+            { a: 18, b: 15, answer: 33 },
+            { a: 27, b: 36, answer: 63 },
+            { a: 49, b: 28, answer: 77 },
+            { a: 37, b: 45, answer: 82 },
+            { a: 28, b: 54, answer: 82 },
+            { a: 46, b: 37, answer: 83 },
+            { a: 39, b: 48, answer: 87 },
+            { a: 57, b: 26, answer: 83 },
+            { a: 68, b: 25, answer: 93 },
+            { a: 47, b: 38, answer: 85 },
+            { a: 29, b: 56, answer: 85 },
+            { a: 58, b: 34, answer: 92 },
+            { a: 67, b: 28, answer: 95 },
+            { a: 48, b: 45, answer: 93 },
+            { a: 76, b: 18, answer: 94 },
+            { a: 59, b: 37, answer: 96 },
+            { a: 85, b: 18, answer: 103 },
+            { a: 38, b: 46, answer: 84 },
+            { a: 69, b: 27, answer: 96 },
+            { a: 77, b: 16, answer: 93 }
+        ];
+
+        let currentProblems = [];
+        let problemStatus = {};
+        let correctCount = 0;
+        let incorrectCount = 0;
+
+        function initGame() {
+            refreshProblems();
+        }
+
+        function refreshProblems() {
+            const shuffled = [...allProblems].sort(() => Math.random() - 0.5);
+            currentProblems = shuffled.slice(0, 20);
+            problemStatus = {};
+            currentProblems.forEach((_, i) => problemStatus[i] = 'unmarked');
+            correctCount = 0;
+            incorrectCount = 0;
+            renderProblems();
+            updateDisplay();
+        }
+
+        function renderProblems() {
+            const grid = document.getElementById('problemGrid');
+            grid.innerHTML = '';
+
+            currentProblems.forEach((problem, index) => {
+                const col = document.createElement('div');
+                col.className = 'col-6 col-md-4 col-xl-3 mb-3';
+
+                const card = document.createElement('div');
+                card.className = 'problem-card';
+                if (problemStatus[index] === 'correct') card.classList.add('correct');
+                if (problemStatus[index] === 'incorrect') card.classList.add('incorrect');
+
+                card.innerHTML = `
+                    <div class="problem-text">${problem.a} + ${problem.b}</div>
+                    <div class="answer-text">= ${problem.answer}</div>
+                `;
+
+                card.onclick = () => toggleProblem(index);
+                col.appendChild(card);
+                grid.appendChild(col);
+            });
+        }
+
+        function toggleProblem(index) {
+            if (problemStatus[index] === 'unmarked') {
+                problemStatus[index] = 'correct';
+                correctCount++;
+                playSuccessSound();
+            } else if (problemStatus[index] === 'correct') {
+                problemStatus[index] = 'incorrect';
+                correctCount--;
+                incorrectCount++;
+                playErrorSound();
+            } else {
+                problemStatus[index] = 'unmarked';
+                incorrectCount--;
+            }
+
+            renderProblems();
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            document.getElementById('scoreDisplay').textContent = `${correctCount}/20`;
+            document.getElementById('correctCount').textContent = correctCount;
+            document.getElementById('incorrectCount').textContent = incorrectCount;
+            document.getElementById('retryBtn').disabled = incorrectCount === 0;
+
+            if (correctCount === 20) {
+                setTimeout(() => {
+                    alert('🎉 Perfect! You mastered addition with carrying!');
+                    playCompletionSound();
+                }, 500);
+            }
+        }
+
+        function retryIncorrect() {
+            const incorrect = currentProblems.filter((_, i) => problemStatus[i] === 'incorrect');
+            currentProblems = incorrect;
+            problemStatus = {};
+            currentProblems.forEach((_, i) => problemStatus[i] = 'unmarked');
+            correctCount = 0;
+            incorrectCount = 0;
+            renderProblems();
+            updateDisplay();
+        }
+
+        function resetGame() {
+            refreshProblems();
+        }
+
+        function playSuccessSound() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.frequency.value = 523.25;
+                gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.3);
+            } catch(e) {}
+        }
+
+        function playErrorSound() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.frequency.value = 200;
+                gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.2);
+            } catch(e) {}
+        }
+
+        function playCompletionSound() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                const notes = [523.25, 659.25, 783.99, 1046.50];
+                notes.forEach((note, i) => osc.frequency.setValueAtTime(note, ctx.currentTime + i * 0.15));
+                gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.6);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.6);
+            } catch(e) {}
+        }
+
+        document.addEventListener('DOMContentLoaded', initGame);
+    </script>
+</body>
+</html>
