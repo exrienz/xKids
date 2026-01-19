@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔢 Fun Math - Number Recognition</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --error-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --math-gradient: linear-gradient(135deg, #ff6b6b 0%, #feca57 50%, #48dbfb 100%);
+
+            --primary-color: #667eea;
+            --success-color: #4facfe;
+            --error-color: #fa709a;
+            --math-color: #ff6b6b;
+
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --background: #f7fafc;
+            --surface: rgba(255, 255, 255, 0.95);
+
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 25px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 40px rgba(0,0,0,0.12);
+
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 20%, #f093fb 40%, #f5576c 60%, #4facfe 80%, #00f2fe 100%);
+            background-size: 400% 400%;
+            animation: gradientFlow 20s ease infinite;
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientFlow {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .app-header {
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+
+        .app-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--math-gradient);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        }
+
+        .app-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            background: var(--math-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0 0 0.5rem 0;
+            letter-spacing: -0.02em;
+        }
+
+        .app-subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .home-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            background: var(--surface);
+            backdrop-filter: blur(15px);
+            border-radius: var(--radius-full);
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-smooth);
+        }
+
+        .home-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .mode-indicator {
+            background: var(--surface);
+            backdrop-filter: blur(15px);
+            padding: 1.25rem 2.5rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card {
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition-smooth);
+        }
+
+        .number-card {
+            background: var(--math-gradient);
+            color: white;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            border-radius: var(--radius-lg);
+            transition: var(--transition-bounce);
+            box-shadow: var(--shadow-md);
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .number-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .number-card.correct {
+            background: var(--success-gradient) !important;
+            animation: successPulse 0.6s ease;
+        }
+
+        .number-card.incorrect {
+            background: var(--error-gradient) !important;
+            animation: errorShake 0.6s ease;
+        }
+
+        @keyframes successPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes errorShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
+        .number-main {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+
+        .dots-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .dot {
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .score-display {
+            font-size: clamp(2.5rem, 7vw, 3.5rem);
+            font-weight: 800;
+            background: var(--math-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 1rem 0;
+        }
+
+        .btn-enhanced {
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            padding: 1rem 1.75rem;
+            font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+            border: none;
+            transition: var(--transition-bounce);
+            font-family: 'Poppins', sans-serif;
+            width: 100%;
+            box-shadow: var(--shadow-md);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn-enhanced:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-primary-enhanced { background: var(--primary-gradient); color: white; }
+        .btn-secondary-enhanced { background: var(--secondary-gradient); color: white; }
+        .btn-success-enhanced { background: var(--success-gradient); color: white; }
+        .btn-warning-enhanced { background: var(--warning-gradient); color: white; }
+
+        .status-badge {
+            flex: 1;
+            padding: 1rem;
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            backdrop-filter: blur(10px);
+        }
+
+        .status-correct { background: var(--success-gradient); color: white; }
+        .status-incorrect { background: var(--error-gradient); color: white; }
+
+        @media (max-width: 768px) {
+            .number-card { min-height: 150px; padding: 1.5rem 1rem; }
+            .dot { width: 15px; height: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <div style="position: absolute; top: 1rem; left: 1rem;">
+                <a href="../../index.html" class="home-button">
+                    <span>🏠</span>
+                    <span>Home</span>
+                </a>
+            </div>
+            <h1 class="app-title">🔢 Fun Math Level 1</h1>
+            <p class="app-subtitle">Number Recognition & Counting 1-10</p>
+        </header>
+
+        <div class="mode-indicator">
+            📚 Learn: Count the Dots & Match the Number!
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row g-3" id="numberGrid">
+                            <!-- Number cards will be generated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body text-center p-4">
+                        <div style="font-weight: 600; color: var(--text-secondary); margin-bottom: 0.5rem;">🎯 Your Score</div>
+                        <div class="score-display" id="scoreDisplay">0/10</div>
+
+                        <div class="d-grid gap-3 mb-4">
+                            <button class="btn btn-primary-enhanced btn-enhanced" onclick="refreshNumbers()">
+                                🔄 New Numbers
+                            </button>
+                            <button class="btn btn-warning-enhanced btn-enhanced" onclick="retryIncorrect()" id="retryBtn" disabled>
+                                🔁 Try Again
+                            </button>
+                            <button class="btn btn-success-enhanced btn-enhanced" onclick="resetGame()">
+                                🎮 Reset Game
+                            </button>
+                        </div>
+
+                        <div class="d-flex gap-2 mb-4">
+                            <div class="status-badge status-correct">
+                                ✅ Correct<br><span id="correctCount">0</span>
+                            </div>
+                            <div class="status-badge status-incorrect">
+                                ❌ Wrong<br><span id="incorrectCount">0</span>
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(255,255,255,0.5); padding: 1.5rem; border-radius: var(--radius-lg);">
+                            <div style="font-weight: 700; margin-bottom: 1rem;">🎯 How to Play:</div>
+                            <div style="text-align: left; font-size: 0.9rem; line-height: 1.8;">
+                                1️⃣ Count the dots carefully<br>
+                                2️⃣ Click the card to mark correct/wrong<br>
+                                3️⃣ Green = Correct 💚<br>
+                                4️⃣ Red = Try again ❤️
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const allNumbers = [
+            { number: 1, dots: 1 },
+            { number: 2, dots: 2 },
+            { number: 3, dots: 3 },
+            { number: 4, dots: 4 },
+            { number: 5, dots: 5 },
+            { number: 6, dots: 6 },
+            { number: 7, dots: 7 },
+            { number: 8, dots: 8 },
+            { number: 9, dots: 9 },
+            { number: 10, dots: 10 }
+        ];
+
+        let currentNumbers = [];
+        let numberStatus = {};
+        let correctCount = 0;
+        let incorrectCount = 0;
+
+        function initGame() {
+            refreshNumbers();
+        }
+
+        function refreshNumbers() {
+            currentNumbers = [...allNumbers];
+            numberStatus = {};
+            currentNumbers.forEach(num => numberStatus[num.number] = 'unmarked');
+            correctCount = 0;
+            incorrectCount = 0;
+            renderNumbers();
+            updateDisplay();
+        }
+
+        function renderNumbers() {
+            const grid = document.getElementById('numberGrid');
+            grid.innerHTML = '';
+
+            currentNumbers.forEach(numObj => {
+                const col = document.createElement('div');
+                col.className = 'col-6 col-md-4 col-xl-3 mb-3';
+
+                const card = document.createElement('div');
+                card.className = 'number-card';
+                if (numberStatus[numObj.number] === 'correct') card.classList.add('correct');
+                if (numberStatus[numObj.number] === 'incorrect') card.classList.add('incorrect');
+
+                const dotsHtml = '<div class="dots-container">' +
+                    Array(numObj.dots).fill('<div class="dot"></div>').join('') +
+                    '</div>';
+
+                card.innerHTML = `
+                    <div class="number-main">${numObj.number}</div>
+                    ${dotsHtml}
+                `;
+
+                card.onclick = () => toggleNumber(numObj.number);
+                col.appendChild(card);
+                grid.appendChild(col);
+            });
+        }
+
+        function toggleNumber(number) {
+            if (numberStatus[number] === 'unmarked') {
+                numberStatus[number] = 'correct';
+                correctCount++;
+                playSuccessSound();
+            } else if (numberStatus[number] === 'correct') {
+                numberStatus[number] = 'incorrect';
+                correctCount--;
+                incorrectCount++;
+                playErrorSound();
+            } else {
+                numberStatus[number] = 'unmarked';
+                incorrectCount--;
+            }
+
+            renderNumbers();
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            document.getElementById('scoreDisplay').textContent = `${correctCount}/10`;
+            document.getElementById('correctCount').textContent = correctCount;
+            document.getElementById('incorrectCount').textContent = incorrectCount;
+
+            document.getElementById('retryBtn').disabled = incorrectCount === 0;
+
+            if (correctCount === 10) {
+                setTimeout(() => {
+                    showAlert('🎉 Amazing! You know all your numbers! Perfect score!', 'success');
+                    playCompletionSound();
+                }, 500);
+            }
+        }
+
+        function retryIncorrect() {
+            currentNumbers = allNumbers.filter(num => numberStatus[num.number] === 'incorrect');
+            currentNumbers.forEach(num => numberStatus[num.number] = 'unmarked');
+            correctCount = 0;
+            incorrectCount = 0;
+            renderNumbers();
+            updateDisplay();
+        }
+
+        function resetGame() {
+            refreshNumbers();
+        }
+
+        function playSuccessSound() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.frequency.value = 523.25;
+                gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.3);
+            } catch(e) {}
+        }
+
+        function playErrorSound() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.frequency.value = 200;
+                gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.2);
+            } catch(e) {}
+        }
+
+        function playCompletionSound() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                const notes = [523.25, 659.25, 783.99, 1046.50];
+                notes.forEach((note, i) => osc.frequency.setValueAtTime(note, ctx.currentTime + i * 0.15));
+                gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.6);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.6);
+            } catch(e) {}
+        }
+
+        function showAlert(message, type) {
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type} position-fixed`;
+            alert.style.cssText = 'top: 30px; right: 30px; z-index: 9999; min-width: 350px; border-radius: var(--radius-lg); box-shadow: var(--shadow-xl); font-weight: 600;';
+            alert.textContent = message;
+            document.body.appendChild(alert);
+            setTimeout(() => alert.remove(), 5000);
+        }
+
+        document.addEventListener('DOMContentLoaded', initGame);
+    </script>
+</body>
+</html>
