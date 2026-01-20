@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📖 إقرأ ٥ - Iqra 5 - Letter Forms & Positions</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --secondary-gradient: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+            --success-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            --warning-gradient: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+            --surface: rgba(255, 255, 255, 0.95);
+            --surface-elevated: rgba(255, 255, 255, 0.98);
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --text-muted: #6b7280;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.12);
+            --transition-smooth: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 25%, #ec4899 50%, #10b981 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        .app-header {
+            background: var(--surface-elevated);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            text-align: center;
+        }
+
+        .app-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .app-subtitle {
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .home-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            background: var(--surface);
+            border-radius: 999px;
+            text-decoration: none;
+            color: var(--text-primary);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-smooth);
+        }
+
+        .home-button:hover {
+            transform: translateY(-2px);
+            color: #4338ca;
+        }
+
+        .lesson-section {
+            background: var(--surface-elevated);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .letter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+
+        .letter-card {
+            border-radius: var(--radius-md);
+            padding: 1.5rem 1rem;
+            text-align: center;
+            font-family: 'Amiri', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-smooth);
+        }
+
+        .letter-card span {
+            display: block;
+            font-size: 0.9rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .letter-card--standalone {
+            background: var(--primary-gradient);
+            color: #fff;
+        }
+
+        .letter-card--connected {
+            background: var(--secondary-gradient);
+            color: #fff;
+        }
+
+        .form-table {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem;
+        }
+
+        .form-card {
+            background: #f9fafb;
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .form-card h4 {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .form-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .form-pill {
+            background: var(--success-gradient);
+            color: #fff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 999px;
+            font-family: 'Amiri', serif;
+            font-size: 1.5rem;
+        }
+
+        .form-pill--standalone {
+            background: var(--warning-gradient);
+        }
+
+        .practice-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .practice-item {
+            background: #f3f4f6;
+            border-radius: var(--radius-md);
+            padding: 0.75rem 1rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .home-button {
+                position: static;
+                margin-bottom: 1rem;
+            }
+
+            .app-header {
+                text-align: right;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <a href="../../index.html" class="home-button" aria-label="Back to Home">
+                <span>🏠</span>
+                <span>Home</span>
+            </a>
+            <h1 class="app-title">📖 إقرأ ٥ - Iqra 5</h1>
+            <p class="app-subtitle">أشكال الحروف في أول ووسط وآخر الكلمة - Letter Forms by Position</p>
+        </header>
+
+        <main>
+            <section class="lesson-section">
+                <h2 class="section-title">🎯 أهداف الدرس - Lesson Goals</h2>
+                <p class="section-subtitle">
+                    نميّز بين الحروف منفردة والحروف المتصلة، ونتدرّب على شكل الحرف في الكلمة.
+                </p>
+                <ul class="practice-list">
+                    <li class="practice-item">التعرّف على الحروف منفردة (Standalone)</li>
+                    <li class="practice-item">مشاهدة شكل الحرف في أول، وسط، وآخر الكلمة</li>
+                    <li class="practice-item">ربط الحروف المتصلة بصوتها الصحيح</li>
+                </ul>
+            </section>
+
+            <section class="lesson-section">
+                <h2 class="section-title">🔤 الحروف منفردة ومتّصلة - Standalone vs Connected</h2>
+                <p class="section-subtitle">
+                    البطاقات الزرقاء للحروف منفردة، والوردية للحروف المتصلة داخل الكلمة.
+                </p>
+                <div class="letter-grid">
+                    <div class="letter-card letter-card--standalone">ب<span>منفرد</span></div>
+                    <div class="letter-card letter-card--connected">بـ<span>متصل</span></div>
+                    <div class="letter-card letter-card--standalone">ت<span>منفرد</span></div>
+                    <div class="letter-card letter-card--connected">تـ<span>متصل</span></div>
+                    <div class="letter-card letter-card--standalone">س<span>منفرد</span></div>
+                    <div class="letter-card letter-card--connected">سـ<span>متصل</span></div>
+                    <div class="letter-card letter-card--standalone">م<span>منفرد</span></div>
+                    <div class="letter-card letter-card--connected">مـ<span>متصل</span></div>
+                    <div class="letter-card letter-card--standalone">ع<span>منفرد</span></div>
+                    <div class="letter-card letter-card--connected">ـعـ<span>متصل</span></div>
+                    <div class="letter-card letter-card--standalone">ي<span>منفرد</span></div>
+                    <div class="letter-card letter-card--connected">ـي<span>متصل</span></div>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2 class="section-title">📚 أشكال الحروف في الكلمة</h2>
+                <p class="section-subtitle">
+                    كل بطاقة تُظهر الحرف منفردًا ثم في أول، وسط، وآخر الكلمة.
+                </p>
+                <div class="form-table">
+                    <div class="form-card">
+                        <h4>حرف باء</h4>
+                        <div class="form-row">
+                            <span class="form-label">منفرد</span>
+                            <span class="form-pill form-pill--standalone">ب</span>
+                        </div>
+                        <div class="form-row">
+                            <span class="form-label">أول</span>
+                            <span class="form-pill">بـ</span>
+                        </div>
+                        <div class="form-row">
+                            <span class="form-label">وسط</span>
+                            <span class="form-pill">ـبـ</span>
+                        </div>
+                        <div class="form-row">
+                            <span class="form-label">آخر</span>
+                            <span class="form-pill">ـب</span>
+                        </div>
+                    </div>
+                    <div class="form-card">
+                        <h4>حرف جيم</h4>
+                        <div class="form-row">
+                            <span class="form-label">منفرد</span>
+                            <span class="form-pill form-pill--standalone">ج</span>
+                        </div>
+                        <div class="form-row">
+                            <span class="form-label">أول</span>
+                            <span class="form-pill">جـ</span>
+                        </div>
+                        <div class="form-row">
+                            <span class="form-label">وسط</span>
+                            <span class="form-pill">ـجـ</span>
+                        </div>
+                        <div class="form-row">
+                            <span class="form-label">آخر</span>
+                            <span class="form-pill">ـج</span>
+                        </div>
+                    </div>
+                    <div class="form-card">
+                        <h4>حرف عين</h4>
+                        <div class="form-row">
+                            <span class="form-label">منفرد</span>
+                            <span class="form-pill form-pill--standalone">ع</span>
+                        </div>
+                        <div class="form-row">
+                            <span class="form-label">أول</span>
+                            <span class="form-pill">عـ</span>
+                        </div>
+                        <div class="form-row">
+                            <span class="form-label">وسط</span>
+                            <span class="form-pill">ـعـ</span>
+                        </div>
+                        <div class="form-row">
+                            <span class="form-label">آخر</span>
+                            <span class="form-pill">ـع</span>
+                        </div>
+                    </div>
+                    <div class="form-card">
+                        <h4>حرف كاف</h4>
+                        <div class="form-row">
+                            <span class="form-label">منفرد</span>
+                            <span class="form-pill form-pill--standalone">ك</span>
+                        </div>
+                        <div class="form-row">
+                            <span class="form-label">أول</span>
+                            <span class="form-pill">كـ</span>
+                        </div>
+                        <div class="form-row">
+                            <span class="form-label">وسط</span>
+                            <span class="form-pill">ـكـ</span>
+                        </div>
+                        <div class="form-row">
+                            <span class="form-label">آخر</span>
+                            <span class="form-pill">ـك</span>
+                        </div>
+                    </div>
+                    <div class="form-card">
+                        <h4>حرف ميم</h4>
+                        <div class="form-row">
+                            <span class="form-label">منفرد</span>
+                            <span class="form-pill form-pill--standalone">م</span>
+                        </div>
+                        <div class="form-row">
+                            <span class="form-label">أول</span>
+                            <span class="form-pill">مـ</span>
+                        </div>
+                        <div class="form-row">
+                            <span class="form-label">وسط</span>
+                            <span class="form-pill">ـمـ</span>
+                        </div>
+                        <div class="form-row">
+                            <span class="form-label">آخر</span>
+                            <span class="form-pill">ـم</span>
+                        </div>
+                    </div>
+                    <div class="form-card">
+                        <h4>حرف ياء</h4>
+                        <div class="form-row">
+                            <span class="form-label">منفرد</span>
+                            <span class="form-pill form-pill--standalone">ي</span>
+                        </div>
+                        <div class="form-row">
+                            <span class="form-label">أول</span>
+                            <span class="form-pill">يـ</span>
+                        </div>
+                        <div class="form-row">
+                            <span class="form-label">وسط</span>
+                            <span class="form-pill">ـيـ</span>
+                        </div>
+                        <div class="form-row">
+                            <span class="form-label">آخر</span>
+                            <span class="form-pill">ـي</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2 class="section-title">🧠 تدرّب الآن - Quick Practice</h2>
+                <p class="section-subtitle">لاحظ الفرق بين شكل الحرف منفردًا ومتصلًا.</p>
+                <div class="letter-grid">
+                    <div class="letter-card letter-card--standalone">ف</div>
+                    <div class="letter-card letter-card--connected">فـ</div>
+                    <div class="letter-card letter-card--standalone">ل</div>
+                    <div class="letter-card letter-card--connected">ـلـ</div>
+                    <div class="letter-card letter-card--standalone">ه</div>
+                    <div class="letter-card letter-card--connected">ـهـ</div>
+                    <div class="letter-card letter-card--standalone">ق</div>
+                    <div class="letter-card letter-card--connected">ـق</div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

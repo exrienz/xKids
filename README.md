@@ -11,11 +11,13 @@ Educational web applications for children to learn Malaysian and Arabic reading 
   - Level 4: Asas 3 Suku-Kata (Basic 3 Syllables)
   - Level 5: Ayat Ringkas (Simple Sentences)
 
-- **Arabic Reading (Iqra 1-4)** - Traditional Islamic reading curriculum
+- **Arabic Reading (Iqra 1-6)** - Traditional Islamic reading curriculum
   - Iqra 1: Basic Arabic letters
-  - Iqra 2: Letter combinations
+  - Iqra 2: Vowel marks (harakat) with letters
   - Iqra 3: Word formation
-  - Iqra 4: Simple sentence reading
+  - Iqra 4: Three-letter word reading
+  - Iqra 5: Letter forms (beginning, middle, end)
+  - Iqra 6: Letter blending and short words
 
 - **Math Module (Levels 1-10)** - Interactive math learning for ages 3-6
   - Level 1: Number Recognition (1-10) ✅
@@ -99,6 +101,10 @@ docker build --platform linux/arm64 -t xkids-learning-center .
 - **Security Hardened** - CSP, rate limiting, and security headers
 - **Performance Optimized** - Gzip compression and asset caching
 
+## 📘 Documentation
+
+- [Iqra Lesson Expansion Guide](IQRA_LESSON_GUIDE.md) - Lesson structure and scope
+
 ## 🏗️ Development
 
 ### Project Structure
@@ -125,9 +131,11 @@ src/
     │   └── malay5.html    # Level 5: Simple sentences
     ├── iqra/              # Arabic reading lessons
     │   ├── iqra1.html     # Iqra 1: Basic letters
-    │   ├── iqra2.html     # Iqra 2: Letter combinations
+    │   ├── iqra2.html     # Iqra 2: Harakat with letters
     │   ├── iqra3.html     # Iqra 3: Word formation
-    │   └── iqra4.html     # Iqra 4: Sentence reading
+    │   ├── iqra4.html     # Iqra 4: Three-letter words
+    │   ├── iqra5.html     # Iqra 5: Letter forms by position
+    │   └── iqra6.html     # Iqra 6: Blending and short words
     └── math/              # Math learning module (NEW!)
         ├── math1.html     # Level 1: Number Recognition
         ├── math2.html     # Level 2: Addition within 5

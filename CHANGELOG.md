@@ -15,6 +15,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Lesson 9: Fun with Multiplication (conceptual groups)
   - Lesson 10: Basic Division - Sharing concept
 
+## [0.3.0] - 2026-02-10
+
+### Added
+- Expanded Iqra curriculum with new lessons:
+  - Iqra 5: Letter forms by position (beginning, middle, end)
+  - Iqra 6: Blending practice with short words
+- Home page navigation for Iqra 5 and Iqra 6
+
+### Documentation
+- Added Iqra lesson expansion guide
+- Updated README with new lesson coverage
+
 ## [0.2.0] - 2026-01-19
 
 ### Added
