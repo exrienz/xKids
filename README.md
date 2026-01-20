@@ -11,11 +11,13 @@ Educational web applications for children to learn Malaysian and Arabic reading 
   - Level 4: Asas 3 Suku-Kata (Basic 3 Syllables)
   - Level 5: Ayat Ringkas (Simple Sentences)
 
-- **Arabic Reading (Iqra 1-4)** - Traditional Islamic reading curriculum
+- **Arabic Reading (Iqra 1-6)** - Traditional Islamic reading curriculum
   - Iqra 1: Basic Arabic letters
-  - Iqra 2: Letter combinations
-  - Iqra 3: Word formation
+  - Iqra 2: Arabic vowel marks (harakat)
+  - Iqra 3: Word formation with harakat
   - Iqra 4: Simple sentence reading
+  - Iqra 5: Letter forms by position (isolated vs connected)
+  - Iqra 6: Letter blending and short words
 
 - **Math Module (Levels 1-10)** - Interactive math learning for ages 3-6
   - Level 1: Number Recognition (1-10) ✅
@@ -125,9 +127,11 @@ src/
     │   └── malay5.html    # Level 5: Simple sentences
     ├── iqra/              # Arabic reading lessons
     │   ├── iqra1.html     # Iqra 1: Basic letters
-    │   ├── iqra2.html     # Iqra 2: Letter combinations
+    │   ├── iqra2.html     # Iqra 2: Vowel marks (harakat)
     │   ├── iqra3.html     # Iqra 3: Word formation
-    │   └── iqra4.html     # Iqra 4: Sentence reading
+    │   ├── iqra4.html     # Iqra 4: Sentence reading
+    │   ├── iqra5.html     # Iqra 5: Letter forms by position
+    │   └── iqra6.html     # Iqra 6: Letter blending & short words
     └── math/              # Math learning module (NEW!)
         ├── math1.html     # Level 1: Number Recognition
         ├── math2.html     # Level 2: Addition within 5

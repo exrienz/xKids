@@ -15,6 +15,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Lesson 9: Fun with Multiplication (conceptual groups)
   - Lesson 10: Basic Division - Sharing concept
 
+## [0.2.1] - 2026-01-20
+
+### Added
+- **Iqra Lessons 5-6** expanding Arabic letter forms and blending practice
+  - Lesson 5: Isolated letters vs connected forms in beginning, middle, and end positions
+  - Lesson 6: Two-letter blends, short words, and blending ladder for fluency
+
+### Documentation
+- Updated README with expanded Iqra lesson details
+
 ## [0.2.0] - 2026-01-19
 
 ### Added
