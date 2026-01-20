@@ -17,6 +17,18 @@ Educational web applications for children to learn Malaysian and Arabic reading 
   - Iqra 3: Word formation
   - Iqra 4: Simple sentence reading
 
+- **Math Module (Levels 1-10)** - Interactive math learning for ages 3-6
+  - Level 1: Number Recognition (1-10) ✅
+  - Level 2: Addition within 5 ✅
+  - Level 3: Subtraction within 5 ✅
+  - Level 4: Bigger vs Smaller Comparison ✅
+  - Level 5: Addition within 10 ✅
+  - Level 6: Subtraction within 10 (In Progress)
+  - Level 7: Two-digit Number Recognition (In Progress)
+  - Level 8: Simple Two-digit Addition (In Progress)
+  - Level 9: Fun with Multiplication (In Progress)
+  - Level 10: Basic Division - Sharing (In Progress)
+
 ## 🐳 Docker Deployment
 
 ### Quick Start
@@ -78,7 +90,10 @@ docker build --platform linux/arm64 -t xkids-learning-center .
 
 - **Responsive Design** - Works on mobile, tablet, desktop, and smart TVs
 - **Keyboard Navigation** - TV remote and keyboard support
-- **Interactive Learning** - Click-based syllable recognition
+- **Interactive Learning** - Click-based syllable recognition and answer submission
+- **Hidden Answer Logic** - Math answers revealed only after correct submission (NEW!)
+- **Visual Feedback** - Animations and sounds for engagement
+- **Age-Appropriate Content** - Tailored for children ages 3-7
 - **Multi-language** - Supports English, Malay, and Arabic
 - **Offline Ready** - No external dependencies required
 - **Security Hardened** - CSP, rate limiting, and security headers
@@ -108,11 +123,22 @@ src/
     │   ├── malay3.html    # Level 3: 2 syllables
     │   ├── malay4.html    # Level 4: 3 syllables
     │   └── malay5.html    # Level 5: Simple sentences
-    └── iqra/              # Arabic reading lessons
-        ├── iqra1.html     # Iqra 1: Basic letters
-        ├── iqra2.html     # Iqra 2: Letter combinations
-        ├── iqra3.html     # Iqra 3: Word formation
-        └── iqra4.html     # Iqra 4: Sentence reading
+    ├── iqra/              # Arabic reading lessons
+    │   ├── iqra1.html     # Iqra 1: Basic letters
+    │   ├── iqra2.html     # Iqra 2: Letter combinations
+    │   ├── iqra3.html     # Iqra 3: Word formation
+    │   └── iqra4.html     # Iqra 4: Sentence reading
+    └── math/              # Math learning module (NEW!)
+        ├── math1.html     # Level 1: Number Recognition
+        ├── math2.html     # Level 2: Addition within 5
+        ├── math3.html     # Level 3: Subtraction within 5
+        ├── math4.html     # Level 4: Bigger vs Smaller
+        ├── math5.html     # Level 5: Addition within 10
+        ├── math6.html     # Level 6: Subtraction within 10
+        ├── math7.html     # Level 7: Two-digit Numbers
+        ├── math8.html     # Level 8: Two-digit Addition
+        ├── math9.html     # Level 9: Multiplication
+        └── math10.html    # Level 10: Division (Sharing)
 ```
 
 ### Development Mode
