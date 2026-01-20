@@ -842,7 +842,7 @@
         </div>
 
         <div class="mode-indicator" id="modeIndicator">
-            🔤 Mode: تعلم الحركات مع الحروف - Learning Vowels with Letters
+            🔤 Mode: Learning Vowels with Letters - تعلم الحركات مع الحروف
         </div>
 
         <div class="row g-4">
@@ -859,72 +859,72 @@
             <div class="col-lg-4">
                 <div class="card">
                     <div class="card-body score-card">
-                        <div class="score-label">🎯 النتيجة - Score</div>
+                        <div class="score-label">🎯 Score - النتيجة</div>
                         <div class="score-display" id="scoreDisplay">0/24</div>
                         
                         <!-- Range Selection Controls -->
                         <div class="range-selection mb-4" style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,0.2);">
                             <div class="range-title" style="font-weight: 600; margin-bottom: 0.75rem; text-align: center; color: var(--text-primary);">
-                                📍 اختيار المدى - Select Range
+                                📍 Select Range - اختيار المدى
                             </div>
                             <div class="row g-2 mb-3">
                                 <div class="col-6">
                                     <select id="startLetter" class="form-select" style="border-radius: var(--radius-md); font-family: 'Amiri', serif; font-size: 1.1rem;">
                                         <!-- Options will be populated by JavaScript -->
                                     </select>
-                                    <small style="color: var(--text-muted); font-size: 0.8rem;">من - From</small>
+                                    <small style="color: var(--text-muted); font-size: 0.8rem;">From - من</small>
                                 </div>
                                 <div class="col-6">
                                     <select id="endLetter" class="form-select" style="border-radius: var(--radius-md); font-family: 'Amiri', serif; font-size: 1.1rem;">
                                         <!-- Options will be populated by JavaScript -->
                                     </select>
-                                    <small style="color: var(--text-muted); font-size: 0.8rem;">إلى - To</small>
+                                    <small style="color: var(--text-muted); font-size: 0.8rem;">To - إلى</small>
                                 </div>
                             </div>
                             <button class="btn btn-neutral-enhanced btn-enhanced btn-sm" onclick="applyRange()" style="width: 100%; font-size: 0.9rem;">
-                                ✅ تطبيق المدى - Apply Range
+                                ✅ Apply Range - تطبيق المدى
                             </button>
                         </div>
 
                         <div class="d-grid gap-3 mb-4">
                             <button class="btn btn-primary-enhanced btn-enhanced" onclick="refreshHarakat()">
-                                🔄 حركات جديدة - New Vowels
+                                🔄 New Vowels - حركات جديدة
                             </button>
                             <button class="btn btn-warning-enhanced btn-enhanced" onclick="showIncorrectOnly()" id="retryBtn" disabled>
-                                🔁 إعادة الخطأ - Retry Wrong
+                                🔁 Retry Wrong - إعادة الخطأ
                             </button>
                             <button class="btn btn-success-enhanced btn-enhanced" onclick="resetGame()">
-                                🎮 البداية - Start Over
+                                🎮 Start Over - البداية
                             </button>
                         </div>
                         
                         <div class="status-container">
                             <div class="status-badge status-correct">
-                                ✅ صحيح<br><span id="correctCount">0</span>
+                                ✅ Correct<br>صحيح<br><span id="correctCount">0</span>
                             </div>
                             <div class="status-badge status-incorrect">
-                                ❌ خطأ<br><span id="incorrectCount">0</span>
+                                ❌ Wrong<br>خطأ<br><span id="incorrectCount">0</span>
                             </div>
                         </div>
                         
                         <div class="instructions">
-                            <div class="instructions-title">🎯 طريقة اللعب - How to Play:</div>
+                            <div class="instructions-title">🎯 How to Play:</div>
                             <div class="instructions-content">
                                 <div class="instructions-step">
                                     <div class="step-number">1</div>
-                                    <div>اضغط على الحرف لتسمع النطق - Click letter to hear pronunciation</div>
+                                    <div>Click letter to hear pronunciation</div>
                                 </div>
                                 <div class="instructions-step">
                                     <div class="step-number">2</div>
-                                    <div>تعلم الفتحة والكسرة والضمة - Learn Fathah, Kasrah, Dhommah</div>
+                                    <div>Learn Fathah, Kasrah, Dhommah</div>
                                 </div>
                                 <div class="instructions-step">
                                     <div class="step-number">3</div>
-                                    <div>أحمر = فتحة، أخضر = كسرة، برتقالي = ضمة</div>
+                                    <div>Practice vowel marks with letters</div>
                                 </div>
                                 <div class="instructions-step">
                                     <div class="step-number">4</div>
-                                    <div>كرر الحروف حتى تتقن النطق - Repeat until perfect</div>
+                                    <div>Repeat until perfect</div>
                                 </div>
                             </div>
                         </div>
@@ -1022,7 +1022,7 @@
             const endIndex = parseInt(document.getElementById('endLetter').value);
             
             if (startIndex > endIndex) {
-                showCustomAlert('⚠️ تحذير: يجب أن يكون الحرف الأول قبل الحرف الأخير! - Warning: Start letter must come before end letter!', 'warning');
+                showCustomAlert('⚠️ Warning: Start letter must come before end letter! - تحذير: يجب أن يكون الحرف الأول قبل الحرف الأخير!', 'warning');
                 return;
             }
             
@@ -1031,7 +1031,7 @@
             
             const startLetter = baseLetters[startIndex];
             const endLetter = baseLetters[endIndex];
-            showCustomAlert(`✅ تم تطبيق المدى من ${startLetter} إلى ${endLetter} - Range applied from ${startLetter} to ${endLetter}`, 'success');
+            showCustomAlert(`✅ Range applied from ${startLetter} to ${endLetter} - تم تطبيق المدى من ${startLetter} إلى ${endLetter}`, 'success');
         }
 
         function initGame() {
@@ -1103,7 +1103,7 @@
             }
             
             if (incorrectCombinations.length === 0) {
-                showCustomAlert('🎉 ممتاز! لا توجد حركات خاطئة للإعادة! - Excellent! No wrong vowels to retry!', 'success');
+                showCustomAlert('🎉 Excellent! No wrong vowels to retry! - ممتاز! لا توجد حركات خاطئة للإعادة!', 'success');
                 return;
             }
             
@@ -1131,10 +1131,10 @@
         function updateModeIndicator() {
             const indicator = document.getElementById('modeIndicator');
             if (currentMode === 'normal') {
-                indicator.textContent = '🔤 Mode: تعلم الحركات مع الحروف - Learning Vowels with Letters';
+                indicator.textContent = '🔤 Mode: Learning Vowels with Letters - تعلم الحركات مع الحروف';
                 indicator.style.setProperty('--indicator-color', 'var(--primary-color)');
             } else {
-                indicator.textContent = '🔄 Mode: إعادة الحركات الخاطئة - Retry Wrong Vowels';
+                indicator.textContent = '🔄 Mode: Retry Wrong Vowels - إعادة الحركات الخاطئة';
                 indicator.style.setProperty('--indicator-color', 'var(--warning-color)');
             }
         }
@@ -1255,10 +1255,10 @@
             if (correctCount + incorrectCount === currentCombinations.length) {
                 setTimeout(() => {
                     if (incorrectCount === 0) {
-                        showCustomAlert('🎉 ممتاز! جميع الحركات صحيحة! - Excellent! All vowels correct!', 'success');
+                        showCustomAlert('🎉 Excellent! All vowels correct! - ممتاز! جميع الحركات صحيحة!', 'success');
                         playCompletionSound();
                     } else if (currentMode === 'normal') {
-                        showCustomAlert(`🌟 أحسنت! حصلت على ${correctCount} من أصل ${currentCombinations.length} حركة صحيحة! - Well done! You got ${correctCount} out of ${currentCombinations.length} vowels correct!`, 'info');
+                        showCustomAlert(`🌟 Well done! You got ${correctCount} out of ${currentCombinations.length} vowels correct! - أحسنت! حصلت على ${correctCount} من أصل ${currentCombinations.length} حركة صحيحة!`, 'info');
                     } else if (currentMode === 'incorrect') {
                         // Automatically continue with incorrect combinations only
                         setTimeout(() => {

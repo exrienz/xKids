@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="rtl">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,200 +13,590 @@
             --secondary-gradient: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
             --success-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);
             --warning-gradient: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+            --error-gradient: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+            --neutral-gradient: linear-gradient(135deg, #64748b 0%, #94a3b8 100%);
+
+            --primary-color: #6366f1;
+            --secondary-color: #ec4899;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --text-muted: #718096;
+            --background: #f7fafc;
             --surface: rgba(255, 255, 255, 0.95);
             --surface-elevated: rgba(255, 255, 255, 0.98);
-            --text-primary: #1f2937;
-            --text-secondary: #4b5563;
-            --text-muted: #6b7280;
+
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 25px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 40px rgba(0,0,0,0.12);
+
+            --radius-sm: 8px;
             --radius-md: 12px;
             --radius-lg: 16px;
             --radius-xl: 24px;
-            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.12);
-            --transition-smooth: all 0.3s ease;
+            --radius-full: 9999px;
+
+            --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 25%, #ec4899 50%, #10b981 100%);
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 20%, #ec4899 40%, #f43f5e 60%, #10b981 80%, #34d399 100%);
+            background-size: 400% 400%;
+            animation: gradientFlow 25s ease infinite;
             min-height: 100vh;
             color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes gradientFlow {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem 1.5rem 4rem;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
         }
 
+        /* Enhanced Header */
         .app-header {
             background: var(--surface-elevated);
+            backdrop-filter: blur(20px) saturate(180%);
             border-radius: var(--radius-xl);
             padding: 2.5rem 2rem;
-            margin-bottom: 2rem;
+            margin: 2rem 0;
             box-shadow: var(--shadow-lg);
-            position: relative;
             text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
         }
 
         .app-title {
-            font-size: clamp(2rem, 4vw, 3rem);
+            font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 800;
-            margin-bottom: 0.5rem;
             background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0 0 0.5rem 0;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
         }
 
         .app-subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
             color: var(--text-secondary);
             font-weight: 500;
             margin: 0;
+            opacity: 0.9;
         }
 
-        .home-button {
+        /* Enhanced Mode Indicator */
+        .mode-indicator {
+            background: var(--surface);
+            backdrop-filter: blur(15px);
+            color: var(--text-primary);
+            padding: 1.25rem 2.5rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            transition: var(--transition-smooth);
+        }
+
+        .mode-indicator::before {
+            content: '';
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            display: inline-flex;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--primary-gradient);
+            opacity: 0.1;
+            border-radius: var(--radius-full);
+            z-index: -1;
+        }
+
+        /* Home Button Styles */
+        .home-button {
+            display: flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.6rem 1rem;
+            padding: 0.75rem 1rem;
             background: var(--surface);
-            border-radius: 999px;
+            backdrop-filter: blur(15px);
+            border-radius: var(--radius-full);
             text-decoration: none;
             color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.9rem;
             box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             transition: var(--transition-smooth);
+            z-index: 10;
         }
 
         .home-button:hover {
             transform: translateY(-2px);
-            color: #4338ca;
+            box-shadow: var(--shadow-lg);
+            color: var(--primary-color);
+            text-decoration: none;
         }
 
-        .lesson-section {
-            background: var(--surface-elevated);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow-md);
+        .home-icon {
+            font-size: 1.2rem;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
         }
 
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
+        /* Enhanced Card Styles */
+        .card {
+            background: var(--surface);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition-smooth);
+            overflow: hidden;
         }
 
-        .section-subtitle {
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
+        .card:hover {
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-4px);
         }
 
-        .letter-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 1rem;
-        }
-
-        .letter-card {
-            border-radius: var(--radius-md);
-            padding: 1.5rem 1rem;
+        /* Letter Form Cards */
+        .letter-form-card {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 2rem 1.5rem;
             text-align: center;
-            font-family: 'Amiri', serif;
-            font-size: 2.2rem;
-            font-weight: 700;
+            cursor: pointer;
+            border-radius: var(--radius-lg);
+            transition: var(--transition-bounce);
+            position: relative;
+            overflow: hidden;
             box-shadow: var(--shadow-md);
+            border: none;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform-origin: center;
+        }
+
+        .letter-form-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .letter-form-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), transparent);
+            opacity: 0;
             transition: var(--transition-smooth);
         }
 
-        .letter-card span {
-            display: block;
-            font-size: 0.9rem;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            margin-top: 0.5rem;
+        .letter-form-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: var(--shadow-xl);
         }
 
-        .letter-card--standalone {
-            background: var(--primary-gradient);
-            color: #fff;
+        .letter-form-card:hover::before {
+            left: 100%;
         }
 
-        .letter-card--connected {
-            background: var(--secondary-gradient);
-            color: #fff;
+        .letter-form-card:hover::after {
+            opacity: 1;
         }
 
-        .form-table {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 1rem;
+        .letter-form-card:active {
+            transform: translateY(-3px) scale(1.01);
         }
 
-        .form-card {
-            background: #f9fafb;
-            border-radius: var(--radius-md);
-            padding: 1.25rem;
-            border: 1px solid rgba(99, 102, 241, 0.2);
-        }
-
-        .form-card h4 {
-            font-size: 1rem;
-            color: var(--text-secondary);
+        .letter-form-arabic {
+            font-family: 'Amiri', serif;
+            font-size: clamp(2.5rem, 7vw, 3.5rem);
+            font-weight: 700;
             margin-bottom: 0.75rem;
+            letter-spacing: 2px;
+            line-height: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
-        .form-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.5rem;
+        .letter-form-label {
+            font-size: clamp(0.75rem, 2vw, 0.9rem);
+            font-weight: 600;
+            opacity: 0.95;
+            letter-spacing: 0.5px;
+        }
+
+        /* Enhanced Status Classes */
+        .correct {
+            background: var(--success-gradient) !important;
+            animation: successPulse 0.6s ease !important;
+        }
+
+        .incorrect {
+            background: var(--error-gradient) !important;
+            animation: errorShake 0.6s ease !important;
+        }
+
+        @keyframes successPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes errorShake {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(-4px) rotate(-1deg); }
+            75% { transform: translateX(4px) rotate(1deg); }
+        }
+
+        /* Enhanced Score Display */
+        .score-card {
+            text-align: center;
+            padding: 2rem 1.5rem;
+        }
+
+        .score-display {
+            font-size: clamp(2.5rem, 7vw, 3.5rem);
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 1rem 0;
+            letter-spacing: 2px;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
             margin-bottom: 0.5rem;
         }
 
-        .form-label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
+        /* Enhanced Button Styles */
+        .btn-enhanced {
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            padding: 1rem 1.75rem;
+            font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+            border: none;
+            transition: var(--transition-bounce);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.3px;
+            width: 100%;
+            box-shadow: var(--shadow-md);
+            backdrop-filter: blur(10px);
         }
 
-        .form-pill {
+        .btn-enhanced::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-enhanced:hover::before {
+            left: 100%;
+        }
+
+        .btn-enhanced:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-enhanced:active {
+            transform: translateY(-1px) scale(1.01);
+        }
+
+        .btn-primary-enhanced {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .btn-secondary-enhanced {
+            background: var(--secondary-gradient);
+            color: white;
+        }
+
+        .btn-success-enhanced {
             background: var(--success-gradient);
-            color: #fff;
-            padding: 0.3rem 0.8rem;
-            border-radius: 999px;
-            font-family: 'Amiri', serif;
-            font-size: 1.5rem;
+            color: white;
         }
 
-        .form-pill--standalone {
+        .btn-warning-enhanced {
             background: var(--warning-gradient);
+            color: white;
         }
 
-        .practice-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: grid;
-            gap: 0.75rem;
+        .btn-neutral-enhanced {
+            background: var(--neutral-gradient);
+            color: white;
         }
 
-        .practice-item {
-            background: #f3f4f6;
-            border-radius: var(--radius-md);
-            padding: 0.75rem 1rem;
+        /* Enhanced Status Badges */
+        .status-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        .status-badge {
+            flex: 1;
+            padding: 1rem;
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            text-align: center;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-smooth);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .status-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .status-correct {
+            background: var(--success-gradient);
+            color: white;
+        }
+
+        .status-incorrect {
+            background: var(--error-gradient);
+            color: white;
+        }
+
+        /* Enhanced Instructions */
+        .instructions {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+            backdrop-filter: blur(15px);
+            padding: 1.75rem;
+            border-radius: var(--radius-lg);
+            margin-top: 1.5rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .instructions-title {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .instructions-content {
+            color: var(--text-secondary);
             font-weight: 500;
+            font-size: clamp(0.85rem, 2vw, 0.95rem);
+            line-height: 1.7;
         }
 
+        .instructions-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-number {
+            background: var(--primary-gradient);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        /* Responsive Enhancements */
         @media (max-width: 768px) {
-            .home-button {
-                position: static;
-                margin-bottom: 1rem;
+            .container {
+                padding: 0 15px;
             }
 
             .app-header {
-                text-align: right;
+                padding: 2rem 1.5rem;
+                margin: 1.5rem 0;
+            }
+
+            .mode-indicator {
+                padding: 1rem 2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .letter-form-card {
+                min-height: 160px;
+                padding: 1.5rem 1rem;
+            }
+
+            .score-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .btn-enhanced {
+                padding: 0.875rem 1.5rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .status-container {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .instructions {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Accessibility Enhancements */
+        .letter-form-card:focus,
+        .btn-enhanced:focus {
+            outline: 3px solid rgba(46, 139, 87, 0.5);
+            outline-offset: 3px;
+        }
+
+        /* Prevent white flash on button clicks */
+        .btn-enhanced,
+        .letter-form-card {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border: none !important;
+            backface-visibility: hidden !important;
+        }
+
+        /* Footer Styles */
+        .app-footer {
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+            margin-top: 3rem;
+            padding: 2rem 0;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: none;
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .footer-content p {
+            color: var(--text-muted);
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .attribution {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .attribution p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .creator-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+        }
+
+        .creator-link:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
@@ -214,632 +604,455 @@
 <body>
     <div class="container">
         <header class="app-header">
-            <a href="../../index.html" class="home-button" aria-label="Back to Home">
-                <span>🏠</span>
-                <span>Home</span>
-            </a>
+            <div style="position: absolute; top: 1rem; right: 1rem;">
+                <a href="../../index.html" class="home-button" aria-label="Back to Home">
+                    <span class="home-icon">🏠</span>
+                    <span class="home-text">Home</span>
+                </a>
+            </div>
             <h1 class="app-title">📖 إقرأ ٥ - Iqra 5</h1>
-            <p class="app-subtitle">أشكال الحروف في أول ووسط وآخر الكلمة - Letter Forms by Position</p>
+            <p class="app-subtitle">Letter Forms & Positions - تعلم أشكال الحروف</p>
         </header>
 
-        <main>
-            <section class="lesson-section">
-                <h2 class="section-title">🎯 أهداف الدرس - Lesson Goals</h2>
-                <p class="section-subtitle">
-                    نميّز بين الحروف منفردة والحروف المتصلة، ونتدرّب على شكل الحرف في الكلمة.
-                </p>
-                <ul class="practice-list">
-                    <li class="practice-item">التعرّف على الحروف منفردة (Standalone)</li>
-                    <li class="practice-item">مشاهدة شكل الحرف في أول، وسط، وآخر الكلمة</li>
-                    <li class="practice-item">ربط الحروف المتصلة بصوتها الصحيح</li>
-                </ul>
-            </section>
+        <div class="mode-indicator" id="modeIndicator">
+            🔤 Mode: Learn Letter Forms - تعلم أشكال الحروف
+        </div>
 
-            <section class="lesson-section">
-                <h2 class="section-title">🔤 الحروف منفردة ومتّصلة - Standalone vs Connected</h2>
-                <p class="section-subtitle">
-                    البطاقات الزرقاء للحروف منفردة، والوردية للحروف المتصلة داخل الكلمة.
-                </p>
-                <div class="letter-grid">
-                    <div class="letter-card letter-card--standalone">ب<span>منفرد</span></div>
-                    <div class="letter-card letter-card--connected">بـ<span>متصل</span></div>
-                    <div class="letter-card letter-card--standalone">ت<span>منفرد</span></div>
-                    <div class="letter-card letter-card--connected">تـ<span>متصل</span></div>
-                    <div class="letter-card letter-card--standalone">س<span>منفرد</span></div>
-                    <div class="letter-card letter-card--connected">سـ<span>متصل</span></div>
-                    <div class="letter-card letter-card--standalone">م<span>منفرد</span></div>
-                    <div class="letter-card letter-card--connected">مـ<span>متصل</span></div>
-                    <div class="letter-card letter-card--standalone">ع<span>منفرد</span></div>
-                    <div class="letter-card letter-card--connected">ـعـ<span>متصل</span></div>
-                    <div class="letter-card letter-card--standalone">ي<span>منفرد</span></div>
-                    <div class="letter-card letter-card--connected">ـي<span>متصل</span></div>
-                </div>
-            </section>
-
-            <section class="lesson-section">
-                <h2 class="section-title">📚 أشكال الحروف في الكلمة - All Arabic Letters</h2>
-                <p class="section-subtitle">
-                    كل بطاقة تُظهر الحرف منفردًا ثم في أول، وسط، وآخر الكلمة. (28 حرفًا)
-                </p>
-                <div class="form-table">
-                    <!-- Alif -->
-                    <div class="form-card">
-                        <h4>حرف ألف - Alif</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">ا</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">ا</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـا</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـا</span>
-                        </div>
-                    </div>
-                    <!-- Ba -->
-                    <div class="form-card">
-                        <h4>حرف باء - Ba</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">ب</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">بـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـبـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـب</span>
-                        </div>
-                    </div>
-                    <!-- Ta -->
-                    <div class="form-card">
-                        <h4>حرف تاء - Ta</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">ت</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">تـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـتـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـت</span>
-                        </div>
-                    </div>
-                    <!-- Tha -->
-                    <div class="form-card">
-                        <h4>حرف ثاء - Tha</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">ث</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">ثـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـثـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـث</span>
-                        </div>
-                    </div>
-                    <!-- Jeem -->
-                    <div class="form-card">
-                        <h4>حرف جيم - Jeem</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">ج</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">جـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـجـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـج</span>
-                        </div>
-                    </div>
-                    <!-- Ha -->
-                    <div class="form-card">
-                        <h4>حرف حاء - Ha</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">ح</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">حـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـحـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـح</span>
-                        </div>
-                    </div>
-                    <!-- Kha -->
-                    <div class="form-card">
-                        <h4>حرف خاء - Kha</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">خ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">خـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـخـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـخ</span>
-                        </div>
-                    </div>
-                    <!-- Dal -->
-                    <div class="form-card">
-                        <h4>حرف دال - Dal</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">د</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">د</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـد</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـد</span>
-                        </div>
-                    </div>
-                    <!-- Dhal -->
-                    <div class="form-card">
-                        <h4>حرف ذال - Dhal</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">ذ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">ذ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـذ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـذ</span>
-                        </div>
-                    </div>
-                    <!-- Ra -->
-                    <div class="form-card">
-                        <h4>حرف راء - Ra</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">ر</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">ر</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـر</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـر</span>
-                        </div>
-                    </div>
-                    <!-- Zay -->
-                    <div class="form-card">
-                        <h4>حرف زاي - Zay</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">ز</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">ز</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـز</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـز</span>
-                        </div>
-                    </div>
-                    <!-- Seen -->
-                    <div class="form-card">
-                        <h4>حرف سين - Seen</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">س</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">سـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـسـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـس</span>
-                        </div>
-                    </div>
-                    <!-- Sheen -->
-                    <div class="form-card">
-                        <h4>حرف شين - Sheen</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">ش</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">شـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـشـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـش</span>
-                        </div>
-                    </div>
-                    <!-- Sad -->
-                    <div class="form-card">
-                        <h4>حرف صاد - Sad</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">ص</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">صـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـصـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـص</span>
-                        </div>
-                    </div>
-                    <!-- Dad -->
-                    <div class="form-card">
-                        <h4>حرف ضاد - Dad</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">ض</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">ضـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـضـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـض</span>
-                        </div>
-                    </div>
-                    <!-- Ta -->
-                    <div class="form-card">
-                        <h4>حرف طاء - Ta (emphatic)</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">ط</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">طـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـطـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـط</span>
-                        </div>
-                    </div>
-                    <!-- Dha -->
-                    <div class="form-card">
-                        <h4>حرف ظاء - Dha (emphatic)</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">ظ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">ظـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـظـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـظ</span>
-                        </div>
-                    </div>
-                    <!-- Ain -->
-                    <div class="form-card">
-                        <h4>حرف عين - Ain</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">ع</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">عـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـعـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـع</span>
-                        </div>
-                    </div>
-                    <!-- Ghain -->
-                    <div class="form-card">
-                        <h4>حرف غين - Ghain</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">غ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">غـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـغـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـغ</span>
-                        </div>
-                    </div>
-                    <!-- Fa -->
-                    <div class="form-card">
-                        <h4>حرف فاء - Fa</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">ف</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">فـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـفـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـف</span>
-                        </div>
-                    </div>
-                    <!-- Qaf -->
-                    <div class="form-card">
-                        <h4>حرف قاف - Qaf</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">ق</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">قـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـقـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـق</span>
-                        </div>
-                    </div>
-                    <!-- Kaf -->
-                    <div class="form-card">
-                        <h4>حرف كاف - Kaf</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">ك</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">كـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـكـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـك</span>
-                        </div>
-                    </div>
-                    <!-- Lam -->
-                    <div class="form-card">
-                        <h4>حرف لام - Lam</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">ل</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">لـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـلـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـل</span>
-                        </div>
-                    </div>
-                    <!-- Meem -->
-                    <div class="form-card">
-                        <h4>حرف ميم - Meem</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">م</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">مـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـمـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـم</span>
-                        </div>
-                    </div>
-                    <!-- Noon -->
-                    <div class="form-card">
-                        <h4>حرف نون - Noon</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">ن</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">نـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـنـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـن</span>
-                        </div>
-                    </div>
-                    <!-- Ha -->
-                    <div class="form-card">
-                        <h4>حرف هاء - Ha</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">ه</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">هـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـهـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـه</span>
-                        </div>
-                    </div>
-                    <!-- Waw -->
-                    <div class="form-card">
-                        <h4>حرف واو - Waw</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">و</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">و</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـو</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـو</span>
-                        </div>
-                    </div>
-                    <!-- Ya -->
-                    <div class="form-card">
-                        <h4>حرف ياء - Ya</h4>
-                        <div class="form-row">
-                            <span class="form-label">منفرد</span>
-                            <span class="form-pill form-pill--standalone">ي</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">أول</span>
-                            <span class="form-pill">يـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">وسط</span>
-                            <span class="form-pill">ـيـ</span>
-                        </div>
-                        <div class="form-row">
-                            <span class="form-label">آخر</span>
-                            <span class="form-pill">ـي</span>
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row g-3" id="letterGrid">
+                            <!-- Letter form cards will be generated here -->
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <section class="lesson-section">
-                <h2 class="section-title">🧠 تدرّب الآن - Quick Practice</h2>
-                <p class="section-subtitle">لاحظ الفرق بين شكل الحرف منفردًا ومتصلًا.</p>
-                <div class="letter-grid">
-                    <div class="letter-card letter-card--standalone">ف</div>
-                    <div class="letter-card letter-card--connected">فـ</div>
-                    <div class="letter-card letter-card--standalone">ل</div>
-                    <div class="letter-card letter-card--connected">ـلـ</div>
-                    <div class="letter-card letter-card--standalone">ه</div>
-                    <div class="letter-card letter-card--connected">ـهـ</div>
-                    <div class="letter-card letter-card--standalone">ق</div>
-                    <div class="letter-card letter-card--connected">ـق</div>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body score-card">
+                        <div class="score-label">🎯 Score - النتيجة</div>
+                        <div class="score-display" id="scoreDisplay">0/12</div>
+
+                        <div class="d-grid gap-3 mb-4">
+                            <button class="btn btn-primary-enhanced btn-enhanced" onclick="refreshLetters()">
+                                🔄 New Letters - حروف جديدة
+                            </button>
+                            <button class="btn btn-warning-enhanced btn-enhanced" onclick="showIncorrectOnly()" id="retryBtn" disabled>
+                                🔁 Retry Wrong - إعادة الخطأ
+                            </button>
+                            <button class="btn btn-success-enhanced btn-enhanced" onclick="resetGame()">
+                                🎮 Start Over - البداية
+                            </button>
+                        </div>
+
+                        <div class="status-container">
+                            <div class="status-badge status-correct">
+                                ✅ Correct<br>صحيح<br><span id="correctCount">0</span>
+                            </div>
+                            <div class="status-badge status-incorrect">
+                                ❌ Wrong<br>خطأ<br><span id="incorrectCount">0</span>
+                            </div>
+                        </div>
+
+                        <div class="instructions">
+                            <div class="instructions-title">🎯 How to Play:</div>
+                            <div class="instructions-content">
+                                <div class="instructions-step">
+                                    <div class="step-number">1</div>
+                                    <div>Click on letter forms to practice</div>
+                                </div>
+                                <div class="instructions-step">
+                                    <div class="step-number">2</div>
+                                    <div>Green = Correct 💚, Red = Wrong ❤️</div>
+                                </div>
+                                <div class="instructions-step">
+                                    <div class="step-number">3</div>
+                                    <div>Learn how letters change in words</div>
+                                </div>
+                                <div class="instructions-step">
+                                    <div class="step-number">4</div>
+                                    <div>Practice until you master all forms</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </section>
-        </main>
+            </div>
+        </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // All 28 Arabic letters with their different forms
+        const allLetterForms = [
+            {letter: "ا", name: "Alif", forms: ["ا", "ا", "ـا", "ـا"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "ب", name: "Ba", forms: ["ب", "بـ", "ـبـ", "ـب"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "ت", name: "Ta", forms: ["ت", "تـ", "ـتـ", "ـت"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "ث", name: "Tha", forms: ["ث", "ثـ", "ـثـ", "ـث"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "ج", name: "Jeem", forms: ["ج", "جـ", "ـجـ", "ـج"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "ح", name: "Ha", forms: ["ح", "حـ", "ـحـ", "ـح"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "خ", name: "Kha", forms: ["خ", "خـ", "ـخـ", "ـخ"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "د", name: "Dal", forms: ["د", "د", "ـد", "ـد"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "ذ", name: "Dhal", forms: ["ذ", "ذ", "ـذ", "ـذ"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "ر", name: "Ra", forms: ["ر", "ر", "ـر", "ـر"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "ز", name: "Zay", forms: ["ز", "ز", "ـز", "ـز"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "س", name: "Seen", forms: ["س", "سـ", "ـسـ", "ـس"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "ش", name: "Sheen", forms: ["ش", "شـ", "ـشـ", "ـش"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "ص", name: "Sad", forms: ["ص", "صـ", "ـصـ", "ـص"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "ض", name: "Dad", forms: ["ض", "ضـ", "ـضـ", "ـض"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "ط", name: "Ta", forms: ["ط", "طـ", "ـطـ", "ـط"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "ظ", name: "Dha", forms: ["ظ", "ظـ", "ـظـ", "ـظ"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "ع", name: "Ain", forms: ["ع", "عـ", "ـعـ", "ـع"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "غ", name: "Ghain", forms: ["غ", "غـ", "ـغـ", "ـغ"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "ف", name: "Fa", forms: ["ف", "فـ", "ـفـ", "ـف"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "ق", name: "Qaf", forms: ["ق", "قـ", "ـقـ", "ـق"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "ك", name: "Kaf", forms: ["ك", "كـ", "ـكـ", "ـك"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "ل", name: "Lam", forms: ["ل", "لـ", "ـلـ", "ـل"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "م", name: "Meem", forms: ["م", "مـ", "ـمـ", "ـم"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "ن", name: "Noon", forms: ["ن", "نـ", "ـنـ", "ـن"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "ه", name: "Ha", forms: ["ه", "هـ", "ـهـ", "ـه"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "و", name: "Waw", forms: ["و", "و", "ـو", "ـو"], labels: ["Alone", "Beginning", "Middle", "End"]},
+            {letter: "ي", name: "Ya", forms: ["ي", "يـ", "ـيـ", "ـي"], labels: ["Alone", "Beginning", "Middle", "End"]}
+        ];
+
+        let currentLetterForms = [];
+        let letterFormStatus = {};
+        let currentMode = 'normal';
+        let correctCount = 0;
+        let incorrectCount = 0;
+
+        function initGame() {
+            refreshLetters();
+        }
+
+        function refreshLetters() {
+            currentMode = 'normal';
+            updateModeIndicator();
+
+            // Shuffle and select 3 random letters (each with 4 forms = 12 cards)
+            const shuffled = [...allLetterForms].sort(() => 0.5 - Math.random());
+            const selectedLetters = shuffled.slice(0, 3);
+
+            // Expand to individual letter forms
+            currentLetterForms = [];
+            selectedLetters.forEach(letterData => {
+                letterData.forms.forEach((form, index) => {
+                    currentLetterForms.push({
+                        form: form,
+                        name: letterData.name,
+                        label: letterData.labels[index],
+                        letter: letterData.letter
+                    });
+                });
+            });
+
+            // Shuffle the forms
+            currentLetterForms = currentLetterForms.sort(() => 0.5 - Math.random());
+
+            letterFormStatus = {};
+            currentLetterForms.forEach(item => {
+                letterFormStatus[item.form + item.label] = 'unmarked';
+            });
+
+            correctCount = 0;
+            incorrectCount = 0;
+
+            renderLetterForms();
+            updateDisplay();
+        }
+
+        function showIncorrectOnly() {
+            currentMode = 'incorrect';
+            updateModeIndicator();
+
+            const incorrectForms = [];
+            currentLetterForms.forEach(item => {
+                const key = item.form + item.label;
+                if (letterFormStatus[key] === 'incorrect') {
+                    incorrectForms.push(item);
+                }
+            });
+
+            if (incorrectForms.length === 0) {
+                showCustomAlert('🎉 Excellent! No wrong letters to retry! - ممتاز! لا توجد حروف خاطئة!', 'success');
+                return;
+            }
+
+            incorrectForms.forEach(item => {
+                const key = item.form + item.label;
+                letterFormStatus[key] = 'unmarked';
+            });
+
+            currentLetterForms = incorrectForms;
+            correctCount = 0;
+            incorrectCount = 0;
+
+            renderLetterForms();
+            updateDisplay();
+        }
+
+        function resetGame() {
+            currentMode = 'normal';
+            updateModeIndicator();
+            correctCount = 0;
+            incorrectCount = 0;
+            letterFormStatus = {};
+            refreshLetters();
+        }
+
+        function updateModeIndicator() {
+            const indicator = document.getElementById('modeIndicator');
+            if (currentMode === 'normal') {
+                indicator.textContent = '🔤 Mode: Learn Letter Forms - تعلم أشكال الحروف';
+            } else {
+                indicator.textContent = '🔄 Mode: Retry Wrong Letters - إعادة الحروف الخاطئة';
+            }
+        }
+
+        function renderLetterForms() {
+            const grid = document.getElementById('letterGrid');
+            grid.innerHTML = '';
+
+            currentLetterForms.forEach(item => {
+                const col = document.createElement('div');
+                col.className = 'col-6 col-md-4 col-xl-3 mb-3';
+
+                const card = document.createElement('div');
+                card.className = 'letter-form-card';
+                card.setAttribute('tabindex', '0');
+                card.setAttribute('role', 'button');
+                card.setAttribute('aria-label', `${item.name} - ${item.label}: ${item.form}`);
+
+                const key = item.form + item.label;
+
+                card.innerHTML = `
+                    <div class="letter-form-arabic">${item.form}</div>
+                    <div class="letter-form-label">${item.name} - ${item.label}</div>
+                `;
+
+                card.onclick = () => toggleLetterForm(key);
+                card.onkeydown = (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleLetterForm(key);
+                    }
+                };
+
+                if (letterFormStatus[key] === 'correct') {
+                    card.classList.add('correct');
+                } else if (letterFormStatus[key] === 'incorrect') {
+                    card.classList.add('incorrect');
+                } else {
+                    card.classList.add('unmarked');
+                }
+
+                col.appendChild(card);
+                grid.appendChild(col);
+            });
+        }
+
+        function toggleLetterForm(key) {
+            const cards = document.querySelectorAll('.letter-form-card');
+            let targetCard = null;
+
+            cards.forEach((card, index) => {
+                const item = currentLetterForms[index];
+                const itemKey = item.form + item.label;
+                if (itemKey === key) {
+                    targetCard = card;
+                }
+            });
+
+            if (!targetCard) return;
+
+            if (letterFormStatus[key] === 'unmarked') {
+                letterFormStatus[key] = 'correct';
+                correctCount++;
+                playSuccessSound();
+                targetCard.classList.remove('incorrect', 'unmarked');
+                targetCard.classList.add('correct');
+            } else if (letterFormStatus[key] === 'correct') {
+                letterFormStatus[key] = 'incorrect';
+                correctCount--;
+                incorrectCount++;
+                playErrorSound();
+                targetCard.classList.remove('correct', 'unmarked');
+                targetCard.classList.add('incorrect');
+            } else if (letterFormStatus[key] === 'incorrect') {
+                letterFormStatus[key] = 'unmarked';
+                incorrectCount--;
+                targetCard.classList.remove('correct', 'incorrect');
+                targetCard.classList.add('unmarked');
+            }
+
+            updateDisplay();
+        }
+
+        function playSuccessSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+
+                oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime);
+                oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1);
+                oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.2);
+
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.3);
+            } catch (e) {
+                // Audio not supported
+            }
+        }
+
+        function playErrorSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+
+                oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+                oscillator.frequency.setValueAtTime(150, audioContext.currentTime + 0.1);
+
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.2);
+            } catch (e) {
+                // Audio not supported
+            }
+        }
+
+        function playCompletionSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+
+                const notes = [523.25, 659.25, 783.99, 1046.50];
+                let time = audioContext.currentTime;
+
+                notes.forEach((note, index) => {
+                    oscillator.frequency.setValueAtTime(note, time + index * 0.15);
+                });
+
+                gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.6);
+
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.6);
+            } catch (e) {
+                // Audio not supported
+            }
+        }
+
+        function updateDisplay() {
+            document.getElementById('scoreDisplay').textContent = `${correctCount}/${currentLetterForms.length}`;
+            document.getElementById('correctCount').textContent = correctCount;
+            document.getElementById('incorrectCount').textContent = incorrectCount;
+
+            const retryBtn = document.getElementById('retryBtn');
+            const hasIncorrect = Object.values(letterFormStatus).some(status => status === 'incorrect');
+            retryBtn.disabled = !hasIncorrect || currentMode === 'incorrect';
+
+            if (correctCount + incorrectCount === currentLetterForms.length) {
+                setTimeout(() => {
+                    if (incorrectCount === 0) {
+                        showCustomAlert('🎉 Excellent! All letter forms correct! - ممتاز! جميع الحروف صحيحة!', 'success');
+                        playCompletionSound();
+                    } else if (currentMode === 'normal') {
+                        showCustomAlert(`🌟 Well done! You got ${correctCount} out of ${currentLetterForms.length} correct! - أحسنت!`, 'info');
+                    } else if (currentMode === 'incorrect') {
+                        setTimeout(() => {
+                            showIncorrectOnly();
+                        }, 1000);
+                    }
+                }, 500);
+            }
+        }
+
+        function showCustomAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            const alertClass = type === 'success' ? 'alert-success' : type === 'info' ? 'alert-info' : 'alert-warning';
+            alertDiv.className = `alert ${alertClass} alert-dismissible fade show position-fixed`;
+            alertDiv.style.cssText = `
+                top: 30px;
+                right: 30px;
+                z-index: 9999;
+                min-width: 350px;
+                max-width: 90vw;
+                border-radius: var(--radius-lg);
+                box-shadow: var(--shadow-xl);
+                font-weight: 600;
+                border: none;
+                backdrop-filter: blur(10px);
+                font-size: 1.1rem;
+                padding: 1.25rem 1.5rem;
+            `;
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            `;
+            document.body.appendChild(alertDiv);
+
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.classList.remove('show');
+                    setTimeout(() => {
+                        if (alertDiv.parentNode) {
+                            alertDiv.parentNode.removeChild(alertDiv);
+                        }
+                    }, 150);
+                }
+            }, 5000);
+        }
+
+        // Initialize game when page loads
+        document.addEventListener('DOMContentLoaded', initGame);
+
+        // Enhanced keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case 'r':
+                        e.preventDefault();
+                        refreshLetters();
+                        break;
+                }
+            }
+        });
+
+        // Add touch feedback for mobile
+        if ('ontouchstart' in window) {
+            document.addEventListener('touchstart', function() {}, {passive: true});
+        }
+    </script>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>🌈 Making learning fun and accessible for every child</p>
+                <div class="attribution">
+                    <p>Made with ❤️ by <a href="https://www.linkedin.com/in/muzaffarmohamed/?originalSubdomain=my" target="_blank" rel="noopener noreferrer" class="creator-link">Exrienz</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

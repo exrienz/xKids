@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="rtl">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,184 +10,593 @@
 
         :root {
             --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            --secondary-gradient: linear-gradient(135deg, #14b8a6 0%, #22c55e 100%);
-            --accent-gradient: linear-gradient(135deg, #f97316 0%, #facc15 100%);
-            --surface: rgba(255, 255, 255, 0.96);
-            --text-primary: #1f2937;
-            --text-secondary: #4b5563;
-            --text-muted: #6b7280;
+            --secondary-gradient: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+            --success-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            --warning-gradient: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+            --error-gradient: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+            --neutral-gradient: linear-gradient(135deg, #64748b 0%, #94a3b8 100%);
+
+            --primary-color: #6366f1;
+            --secondary-color: #ec4899;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --text-muted: #718096;
+            --background: #f7fafc;
+            --surface: rgba(255, 255, 255, 0.95);
+            --surface-elevated: rgba(255, 255, 255, 0.98);
+
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 25px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 40px rgba(0,0,0,0.12);
+
+            --radius-sm: 8px;
             --radius-md: 12px;
-            --radius-lg: 18px;
-            --radius-xl: 26px;
-            --shadow-md: 0 6px 14px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 14px 26px rgba(0, 0, 0, 0.12);
-            --transition-smooth: all 0.3s ease;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+
+            --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #4338ca 0%, #6366f1 40%, #14b8a6 100%);
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 20%, #ec4899 40%, #f43f5e 60%, #10b981 80%, #34d399 100%);
+            background-size: 400% 400%;
+            animation: gradientFlow 25s ease infinite;
             min-height: 100vh;
             color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes gradientFlow {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem 1.5rem 4rem;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
         }
 
+        /* Enhanced Header */
         .app-header {
-            background: var(--surface);
+            background: var(--surface-elevated);
+            backdrop-filter: blur(20px) saturate(180%);
             border-radius: var(--radius-xl);
             padding: 2.5rem 2rem;
-            margin-bottom: 2rem;
+            margin: 2rem 0;
             box-shadow: var(--shadow-lg);
-            position: relative;
             text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
         }
 
         .app-title {
-            font-size: clamp(2rem, 4vw, 3rem);
+            font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 800;
-            margin-bottom: 0.5rem;
             background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0 0 0.5rem 0;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
         }
 
         .app-subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
             color: var(--text-secondary);
             font-weight: 500;
             margin: 0;
+            opacity: 0.9;
         }
 
-        .home-button {
+        /* Enhanced Mode Indicator */
+        .mode-indicator {
+            background: var(--surface);
+            backdrop-filter: blur(15px);
+            color: var(--text-primary);
+            padding: 1.25rem 2.5rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            transition: var(--transition-smooth);
+        }
+
+        .mode-indicator::before {
+            content: '';
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            display: inline-flex;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--primary-gradient);
+            opacity: 0.1;
+            border-radius: var(--radius-full);
+            z-index: -1;
+        }
+
+        /* Home Button Styles */
+        .home-button {
+            display: flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.6rem 1rem;
-            background: #fff;
-            border-radius: 999px;
+            padding: 0.75rem 1rem;
+            background: var(--surface);
+            backdrop-filter: blur(15px);
+            border-radius: var(--radius-full);
             text-decoration: none;
             color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.9rem;
             box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             transition: var(--transition-smooth);
+            z-index: 10;
         }
 
         .home-button:hover {
             transform: translateY(-2px);
-            color: #4338ca;
+            box-shadow: var(--shadow-lg);
+            color: var(--primary-color);
+            text-decoration: none;
         }
 
-        .lesson-section {
+        .home-icon {
+            font-size: 1.2rem;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+        }
+
+        /* Enhanced Card Styles */
+        .card {
             background: var(--surface);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow-md);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition-smooth);
+            overflow: hidden;
         }
 
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
+        .card:hover {
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-4px);
         }
 
-        .section-subtitle {
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-        }
-
-        .blend-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1rem;
-        }
-
-        .blend-card {
+        /* Word Cards */
+        .word-card {
             background: var(--primary-gradient);
-            color: #fff;
-            border-radius: var(--radius-md);
-            padding: 1.5rem;
+            color: white;
+            padding: 2rem 1.5rem;
             text-align: center;
+            cursor: pointer;
+            border-radius: var(--radius-lg);
+            transition: var(--transition-bounce);
+            position: relative;
+            overflow: hidden;
             box-shadow: var(--shadow-md);
+            border: none;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform-origin: center;
+        }
+
+        .word-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .word-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), transparent);
+            opacity: 0;
             transition: var(--transition-smooth);
         }
 
-        .blend-card span {
-            display: block;
+        .word-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .word-card:hover::before {
+            left: 100%;
+        }
+
+        .word-card:hover::after {
+            opacity: 1;
+        }
+
+        .word-card:active {
+            transform: translateY(-3px) scale(1.01);
+        }
+
+        .word-arabic {
             font-family: 'Amiri', serif;
-            font-size: 2rem;
+            font-size: clamp(2.5rem, 7vw, 3.5rem);
             font-weight: 700;
+            margin-bottom: 0.75rem;
+            letter-spacing: 2px;
+            line-height: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .word-label {
+            font-size: clamp(0.75rem, 2vw, 0.9rem);
+            font-weight: 600;
+            opacity: 0.95;
+            letter-spacing: 0.5px;
+        }
+
+        /* Enhanced Status Classes */
+        .correct {
+            background: var(--success-gradient) !important;
+            animation: successPulse 0.6s ease !important;
+        }
+
+        .incorrect {
+            background: var(--error-gradient) !important;
+            animation: errorShake 0.6s ease !important;
+        }
+
+        @keyframes successPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes errorShake {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(-4px) rotate(-1deg); }
+            75% { transform: translateX(4px) rotate(1deg); }
+        }
+
+        /* Enhanced Score Display */
+        .score-card {
+            text-align: center;
+            padding: 2rem 1.5rem;
+        }
+
+        .score-display {
+            font-size: clamp(2.5rem, 7vw, 3.5rem);
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 1rem 0;
+            letter-spacing: 2px;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
             margin-bottom: 0.5rem;
         }
 
-        .blend-card small {
-            display: block;
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        .word-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 1rem;
-        }
-
-        .word-card {
-            background: var(--secondary-gradient);
-            color: #fff;
-            border-radius: var(--radius-md);
-            padding: 1.25rem;
-            text-align: center;
-            font-family: 'Amiri', serif;
-            font-size: 2rem;
-            font-weight: 700;
-            box-shadow: var(--shadow-md);
-        }
-
-        .word-card span {
-            display: block;
-            font-size: 0.9rem;
-            font-family: 'Poppins', sans-serif;
-            margin-top: 0.4rem;
-        }
-
-        .blend-steps {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: grid;
-            gap: 0.75rem;
-        }
-
-        .blend-steps li {
-            background: #f3f4f6;
-            border-radius: var(--radius-md);
-            padding: 0.75rem 1rem;
-            font-weight: 500;
-        }
-
-        .accent-panel {
-            background: var(--accent-gradient);
-            color: #fff;
-            border-radius: var(--radius-md);
-            padding: 1.25rem 1.5rem;
+        /* Enhanced Button Styles */
+        .btn-enhanced {
+            border-radius: var(--radius-full);
             font-weight: 600;
+            padding: 1rem 1.75rem;
+            font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+            border: none;
+            transition: var(--transition-bounce);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.3px;
+            width: 100%;
+            box-shadow: var(--shadow-md);
+            backdrop-filter: blur(10px);
         }
 
+        .btn-enhanced::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-enhanced:hover::before {
+            left: 100%;
+        }
+
+        .btn-enhanced:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-enhanced:active {
+            transform: translateY(-1px) scale(1.01);
+        }
+
+        .btn-primary-enhanced {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .btn-secondary-enhanced {
+            background: var(--secondary-gradient);
+            color: white;
+        }
+
+        .btn-success-enhanced {
+            background: var(--success-gradient);
+            color: white;
+        }
+
+        .btn-warning-enhanced {
+            background: var(--warning-gradient);
+            color: white;
+        }
+
+        .btn-neutral-enhanced {
+            background: var(--neutral-gradient);
+            color: white;
+        }
+
+        /* Enhanced Status Badges */
+        .status-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        .status-badge {
+            flex: 1;
+            padding: 1rem;
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            text-align: center;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-smooth);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .status-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .status-correct {
+            background: var(--success-gradient);
+            color: white;
+        }
+
+        .status-incorrect {
+            background: var(--error-gradient);
+            color: white;
+        }
+
+        /* Enhanced Instructions */
+        .instructions {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+            backdrop-filter: blur(15px);
+            padding: 1.75rem;
+            border-radius: var(--radius-lg);
+            margin-top: 1.5rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .instructions-title {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .instructions-content {
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: clamp(0.85rem, 2vw, 0.95rem);
+            line-height: 1.7;
+        }
+
+        .instructions-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-number {
+            background: var(--primary-gradient);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        /* Responsive Enhancements */
         @media (max-width: 768px) {
-            .home-button {
-                position: static;
-                margin-bottom: 1rem;
+            .container {
+                padding: 0 15px;
             }
 
             .app-header {
-                text-align: right;
+                padding: 2rem 1.5rem;
+                margin: 1.5rem 0;
+            }
+
+            .mode-indicator {
+                padding: 1rem 2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .word-card {
+                min-height: 160px;
+                padding: 1.5rem 1rem;
+            }
+
+            .score-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .btn-enhanced {
+                padding: 0.875rem 1.5rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .status-container {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .instructions {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Accessibility Enhancements */
+        .word-card:focus,
+        .btn-enhanced:focus {
+            outline: 3px solid rgba(46, 139, 87, 0.5);
+            outline-offset: 3px;
+        }
+
+        /* Prevent white flash on button clicks */
+        .btn-enhanced,
+        .word-card {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border: none !important;
+            backface-visibility: hidden !important;
+        }
+
+        /* Footer Styles */
+        .app-footer {
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+            margin-top: 3rem;
+            padding: 2rem 0;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: none;
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .footer-content p {
+            color: var(--text-muted);
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .attribution {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .attribution p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .creator-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+        }
+
+        .creator-link:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
@@ -195,107 +604,430 @@
 <body>
     <div class="container">
         <header class="app-header">
-            <a href="../../index.html" class="home-button" aria-label="Back to Home">
-                <span>🏠</span>
-                <span>Home</span>
-            </a>
+            <div style="position: absolute; top: 1rem; right: 1rem;">
+                <a href="../../index.html" class="home-button" aria-label="Back to Home">
+                    <span class="home-icon">🏠</span>
+                    <span class="home-text">Home</span>
+                </a>
+            </div>
             <h1 class="app-title">📖 إقرأ ٦ - Iqra 6</h1>
-            <p class="app-subtitle">دمج الحروف وقراءة كلمات قصيرة - Blending for Fluent Reading</p>
+            <p class="app-subtitle">Blending & Short Words - دمج الحروف وقراءة كلمات قصيرة</p>
         </header>
 
-        <main>
-            <section class="lesson-section">
-                <h2 class="section-title">🎯 خطوات الدمج - Blending Steps</h2>
-                <p class="section-subtitle">
-                    نتدرّب على دمج صوتين ثم ثلاثة أصوات لقراءة الكلمة بسرعة.
-                </p>
-                <ul class="blend-steps">
-                    <li>انطق الحرف الأول مع الحركة: بَ</li>
-                    <li>أضف الحرف الثاني تدريجيًا: بَ + تَ = بَتَ</li>
-                    <li>اقرأ الكلمة كاملة دون توقف</li>
-                </ul>
-            </section>
+        <div class="mode-indicator" id="modeIndicator">
+            📚 Mode: Learn Short Words - تعلم الكلمات القصيرة
+        </div>
 
-            <section class="lesson-section">
-                <h2 class="section-title">🔤 دمج حرفين مع الحركات</h2>
-                <p class="section-subtitle">كل بطاقة تُظهر الدمج خطوة بخطوة.</p>
-                <div class="blend-grid">
-                    <div class="blend-card">
-                        <span>بَ + تَ = بَتَ</span>
-                        <small>ba + ta = bata</small>
-                    </div>
-                    <div class="blend-card">
-                        <span>سُ + مِ = سُمِ</span>
-                        <small>su + mi = sumi</small>
-                    </div>
-                    <div class="blend-card">
-                        <span>دُ + رُ = دُرُ</span>
-                        <small>du + ru = duru</small>
-                    </div>
-                    <div class="blend-card">
-                        <span>فِ + يَ = فِيَ</span>
-                        <small>fi + ya = fiya</small>
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row g-3" id="wordGrid">
+                            <!-- Word cards will be generated here -->
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <section class="lesson-section">
-                <h2 class="section-title">📚 دمج ثلاثة أحرف</h2>
-                <p class="section-subtitle">نتدرّب على قراءة ثلاثة أحرف متصلة.</p>
-                <div class="blend-grid">
-                    <div class="blend-card">
-                        <span>بَ + دَ + رَ = بَدَرَ</span>
-                        <small>ba + da + ra = badara</small>
-                    </div>
-                    <div class="blend-card">
-                        <span>كَ + تَ + بَ = كَتَبَ</span>
-                        <small>ka + ta + ba = kataba</small>
-                    </div>
-                    <div class="blend-card">
-                        <span>سَ + مَ + كَ = سَمَكَ</span>
-                        <small>sa + ma + ka = samaka</small>
-                    </div>
-                </div>
-            </section>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body score-card">
+                        <div class="score-label">🎯 Score - النتيجة</div>
+                        <div class="score-display" id="scoreDisplay">0/18</div>
 
-            <section class="lesson-section">
-                <h2 class="section-title">📖 كلمات قصيرة جاهزة للقراءة</h2>
-                <p class="section-subtitle">اقرأ الكلمة بصوت واضح مع الحركة.</p>
-                <div class="word-grid">
-                    <div class="word-card">بَاب<span>باب - Door</span></div>
-                    <div class="word-card">نُور<span>نور - Light</span></div>
-                    <div class="word-card">كِتَاب<span>كتاب - Book</span></div>
-                    <div class="word-card">مُسْلِم<span>مسلم - Muslim</span></div>
-                    <div class="word-card">سَمَك<span>سمك - Fish</span></div>
-                    <div class="word-card">قَلَم<span>قلم - Pen</span></div>
-                    <div class="word-card">وَلَد<span>ولد - Boy</span></div>
-                    <div class="word-card">بِنْت<span>بنت - Girl</span></div>
-                    <div class="word-card">مَاء<span>ماء - Water</span></div>
-                    <div class="word-card">شَمْس<span>شمس - Sun</span></div>
-                    <div class="word-card">قَمَر<span>قمر - Moon</span></div>
-                    <div class="word-card">بَيْت<span>بيت - House</span></div>
-                </div>
-            </section>
+                        <div class="d-grid gap-3 mb-4">
+                            <button class="btn btn-primary-enhanced btn-enhanced" onclick="refreshWords()">
+                                🔄 New Words - كلمات جديدة
+                            </button>
+                            <button class="btn btn-warning-enhanced btn-enhanced" onclick="showIncorrectOnly()" id="retryBtn" disabled>
+                                🔁 Retry Wrong - إعادة الخطأ
+                            </button>
+                            <button class="btn btn-success-enhanced btn-enhanced" onclick="resetGame()">
+                                🎮 Start Over - البداية
+                            </button>
+                        </div>
 
-            <section class="lesson-section">
-                <h2 class="section-title">🌙 كلمات إضافية من القرآن</h2>
-                <p class="section-subtitle">تدرّب على كلمات قصيرة من القرآن الكريم.</p>
-                <div class="word-grid">
-                    <div class="word-card">رَبّ<span>رب - Lord</span></div>
-                    <div class="word-card">نُور<span>نور - Light</span></div>
-                    <div class="word-card">حَقّ<span>حق - Truth</span></div>
-                    <div class="word-card">خَيْر<span>خير - Good</span></div>
-                    <div class="word-card">فَضْل<span>فضل - Grace</span></div>
-                    <div class="word-card">عِلْم<span>علم - Knowledge</span></div>
-                    <div class="word-card">صِدْق<span>صدق - Truth</span></div>
-                    <div class="word-card">عَدْل<span>عدل - Justice</span></div>
-                    <div class="word-card">أَمْن<span>أمن - Safety</span></div>
+                        <div class="status-container">
+                            <div class="status-badge status-correct">
+                                ✅ Correct<br>صحيح<br><span id="correctCount">0</span>
+                            </div>
+                            <div class="status-badge status-incorrect">
+                                ❌ Wrong<br>خطأ<br><span id="incorrectCount">0</span>
+                            </div>
+                        </div>
+
+                        <div class="instructions">
+                            <div class="instructions-title">🎯 How to Play:</div>
+                            <div class="instructions-content">
+                                <div class="instructions-step">
+                                    <div class="step-number">1</div>
+                                    <div>Click on words to practice reading</div>
+                                </div>
+                                <div class="instructions-step">
+                                    <div class="step-number">2</div>
+                                    <div>Green = Correct 💚, Red = Wrong ❤️</div>
+                                </div>
+                                <div class="instructions-step">
+                                    <div class="step-number">3</div>
+                                    <div>Learn to blend letters into words</div>
+                                </div>
+                                <div class="instructions-step">
+                                    <div class="step-number">4</div>
+                                    <div>Practice until you master all words</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="accent-panel mt-4">
-                    🌟 ركّز على دمج الأصوات بسرعة لتصبح القراءة سلسة وسهلة!
-                </div>
-            </section>
-        </main>
+            </div>
+        </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Short Arabic words with meanings
+        const allWords = [
+            {arabic: "بَاب", meaning: "باب - Door"},
+            {arabic: "نُور", meaning: "نور - Light"},
+            {arabic: "كِتَاب", meaning: "كتاب - Book"},
+            {arabic: "مُسْلِم", meaning: "مسلم - Muslim"},
+            {arabic: "سَمَك", meaning: "سمك - Fish"},
+            {arabic: "قَلَم", meaning: "قلم - Pen"},
+            {arabic: "وَلَد", meaning: "ولد - Boy"},
+            {arabic: "بِنْت", meaning: "بنت - Girl"},
+            {arabic: "مَاء", meaning: "ماء - Water"},
+            {arabic: "شَمْس", meaning: "شمس - Sun"},
+            {arabic: "قَمَر", meaning: "قمر - Moon"},
+            {arabic: "بَيْت", meaning: "بيت - House"},
+            {arabic: "مَسْجِد", meaning: "مسجد - Mosque"},
+            {arabic: "كَلْب", meaning: "كلب - Dog"},
+            {arabic: "قَلْب", meaning: "قلب - Heart"},
+            {arabic: "رَبّ", meaning: "رب - Lord"},
+            {arabic: "حَقّ", meaning: "حق - Truth"},
+            {arabic: "خَيْر", meaning: "خير - Good"},
+            {arabic: "فَضْل", meaning: "فضل - Grace"},
+            {arabic: "عِلْم", meaning: "علم - Knowledge"},
+            {arabic: "صِدْق", meaning: "صدق - Truth"},
+            {arabic: "عَدْل", meaning: "عدل - Justice"},
+            {arabic: "أَمْن", meaning: "أمن - Safety"},
+            {arabic: "حَمْد", meaning: "حمد - Praise"}
+        ];
+
+        let currentWords = [];
+        let wordStatus = {};
+        let currentMode = 'normal';
+        let correctCount = 0;
+        let incorrectCount = 0;
+
+        function initGame() {
+            refreshWords();
+        }
+
+        function refreshWords() {
+            currentMode = 'normal';
+            updateModeIndicator();
+
+            // Shuffle and select 18 random words
+            const shuffled = [...allWords].sort(() => 0.5 - Math.random());
+            currentWords = shuffled.slice(0, 18);
+
+            wordStatus = {};
+            currentWords.forEach(word => {
+                wordStatus[word.arabic] = 'unmarked';
+            });
+
+            correctCount = 0;
+            incorrectCount = 0;
+
+            renderWords();
+            updateDisplay();
+        }
+
+        function showIncorrectOnly() {
+            currentMode = 'incorrect';
+            updateModeIndicator();
+
+            const incorrectWords = [];
+            currentWords.forEach(word => {
+                if (wordStatus[word.arabic] === 'incorrect') {
+                    incorrectWords.push(word);
+                }
+            });
+
+            if (incorrectWords.length === 0) {
+                showCustomAlert('🎉 Excellent! No wrong words to retry! - ممتاز! لا توجد كلمات خاطئة!', 'success');
+                return;
+            }
+
+            incorrectWords.forEach(word => {
+                wordStatus[word.arabic] = 'unmarked';
+            });
+
+            currentWords = incorrectWords;
+            correctCount = 0;
+            incorrectCount = 0;
+
+            renderWords();
+            updateDisplay();
+        }
+
+        function resetGame() {
+            currentMode = 'normal';
+            updateModeIndicator();
+            correctCount = 0;
+            incorrectCount = 0;
+            wordStatus = {};
+            refreshWords();
+        }
+
+        function updateModeIndicator() {
+            const indicator = document.getElementById('modeIndicator');
+            if (currentMode === 'normal') {
+                indicator.textContent = '📚 Mode: Learn Short Words - تعلم الكلمات القصيرة';
+            } else {
+                indicator.textContent = '🔄 Mode: Retry Wrong Words - إعادة الكلمات الخاطئة';
+            }
+        }
+
+        function renderWords() {
+            const grid = document.getElementById('wordGrid');
+            grid.innerHTML = '';
+
+            currentWords.forEach(word => {
+                const col = document.createElement('div');
+                col.className = 'col-6 col-md-4 col-xl-3 mb-3';
+
+                const card = document.createElement('div');
+                card.className = 'word-card';
+                card.setAttribute('tabindex', '0');
+                card.setAttribute('role', 'button');
+                card.setAttribute('aria-label', `${word.arabic} - ${word.meaning}`);
+
+                card.innerHTML = `
+                    <div class="word-arabic">${word.arabic}</div>
+                    <div class="word-label">${word.meaning}</div>
+                `;
+
+                card.onclick = () => toggleWord(word.arabic);
+                card.onkeydown = (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleWord(word.arabic);
+                    }
+                };
+
+                if (wordStatus[word.arabic] === 'correct') {
+                    card.classList.add('correct');
+                } else if (wordStatus[word.arabic] === 'incorrect') {
+                    card.classList.add('incorrect');
+                } else {
+                    card.classList.add('unmarked');
+                }
+
+                col.appendChild(card);
+                grid.appendChild(col);
+            });
+        }
+
+        function toggleWord(arabic) {
+            const cards = document.querySelectorAll('.word-card');
+            let targetCard = null;
+
+            cards.forEach((card, index) => {
+                const word = currentWords[index];
+                if (word.arabic === arabic) {
+                    targetCard = card;
+                }
+            });
+
+            if (!targetCard) return;
+
+            if (wordStatus[arabic] === 'unmarked') {
+                wordStatus[arabic] = 'correct';
+                correctCount++;
+                playSuccessSound();
+                targetCard.classList.remove('incorrect', 'unmarked');
+                targetCard.classList.add('correct');
+            } else if (wordStatus[arabic] === 'correct') {
+                wordStatus[arabic] = 'incorrect';
+                correctCount--;
+                incorrectCount++;
+                playErrorSound();
+                targetCard.classList.remove('correct', 'unmarked');
+                targetCard.classList.add('incorrect');
+            } else if (wordStatus[arabic] === 'incorrect') {
+                wordStatus[arabic] = 'unmarked';
+                incorrectCount--;
+                targetCard.classList.remove('correct', 'incorrect');
+                targetCard.classList.add('unmarked');
+            }
+
+            updateDisplay();
+        }
+
+        function playSuccessSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+
+                oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime);
+                oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1);
+                oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.2);
+
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.3);
+            } catch (e) {
+                // Audio not supported
+            }
+        }
+
+        function playErrorSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+
+                oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+                oscillator.frequency.setValueAtTime(150, audioContext.currentTime + 0.1);
+
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.2);
+            } catch (e) {
+                // Audio not supported
+            }
+        }
+
+        function playCompletionSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+
+                const notes = [523.25, 659.25, 783.99, 1046.50];
+                let time = audioContext.currentTime;
+
+                notes.forEach((note, index) => {
+                    oscillator.frequency.setValueAtTime(note, time + index * 0.15);
+                });
+
+                gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.6);
+
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.6);
+            } catch (e) {
+                // Audio not supported
+            }
+        }
+
+        function updateDisplay() {
+            document.getElementById('scoreDisplay').textContent = `${correctCount}/${currentWords.length}`;
+            document.getElementById('correctCount').textContent = correctCount;
+            document.getElementById('incorrectCount').textContent = incorrectCount;
+
+            const retryBtn = document.getElementById('retryBtn');
+            const hasIncorrect = Object.values(wordStatus).some(status => status === 'incorrect');
+            retryBtn.disabled = !hasIncorrect || currentMode === 'incorrect';
+
+            if (correctCount + incorrectCount === currentWords.length) {
+                setTimeout(() => {
+                    if (incorrectCount === 0) {
+                        showCustomAlert('🎉 Excellent! All words correct! - ممتاز! جميع الكلمات صحيحة!', 'success');
+                        playCompletionSound();
+                    } else if (currentMode === 'normal') {
+                        showCustomAlert(`🌟 Well done! You got ${correctCount} out of ${currentWords.length} correct! - أحسنت!`, 'info');
+                    } else if (currentMode === 'incorrect') {
+                        setTimeout(() => {
+                            showIncorrectOnly();
+                        }, 1000);
+                    }
+                }, 500);
+            }
+        }
+
+        function showCustomAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            const alertClass = type === 'success' ? 'alert-success' : type === 'info' ? 'alert-info' : 'alert-warning';
+            alertDiv.className = `alert ${alertClass} alert-dismissible fade show position-fixed`;
+            alertDiv.style.cssText = `
+                top: 30px;
+                right: 30px;
+                z-index: 9999;
+                min-width: 350px;
+                max-width: 90vw;
+                border-radius: var(--radius-lg);
+                box-shadow: var(--shadow-xl);
+                font-weight: 600;
+                border: none;
+                backdrop-filter: blur(10px);
+                font-size: 1.1rem;
+                padding: 1.25rem 1.5rem;
+            `;
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            `;
+            document.body.appendChild(alertDiv);
+
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.classList.remove('show');
+                    setTimeout(() => {
+                        if (alertDiv.parentNode) {
+                            alertDiv.parentNode.removeChild(alertDiv);
+                        }
+                    }, 150);
+                }
+            }, 5000);
+        }
+
+        // Initialize game when page loads
+        document.addEventListener('DOMContentLoaded', initGame);
+
+        // Enhanced keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case 'r':
+                        e.preventDefault();
+                        refreshWords();
+                        break;
+                }
+            }
+        });
+
+        // Add touch feedback for mobile
+        if ('ontouchstart' in window) {
+            document.addEventListener('touchstart', function() {}, {passive: true});
+        }
+    </script>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>🌈 Making learning fun and accessible for every child</p>
+                <div class="attribution">
+                    <p>Made with ❤️ by <a href="https://www.linkedin.com/in/muzaffarmohamed/?originalSubdomain=my" target="_blank" rel="noopener noreferrer" class="creator-link">Exrienz</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

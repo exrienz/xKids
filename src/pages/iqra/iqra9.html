@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="rtl">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,277 +9,594 @@
         @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
         :root {
-            --primary-gradient: linear-gradient(135deg, #059669 0%, #10b981 100%);
-            --secondary-gradient: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
-            --accent-gradient: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
-            --gold-gradient: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
-            --teal-gradient: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
-            --surface: rgba(255, 255, 255, 0.96);
-            --text-primary: #1f2937;
-            --text-secondary: #4b5563;
-            --text-muted: #6b7280;
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --secondary-gradient: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+            --success-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            --warning-gradient: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+            --error-gradient: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+            --neutral-gradient: linear-gradient(135deg, #64748b 0%, #94a3b8 100%);
+
+            --primary-color: #6366f1;
+            --secondary-color: #ec4899;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --text-muted: #718096;
+            --background: #f7fafc;
+            --surface: rgba(255, 255, 255, 0.95);
+            --surface-elevated: rgba(255, 255, 255, 0.98);
+
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 25px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 40px rgba(0,0,0,0.12);
+
+            --radius-sm: 8px;
             --radius-md: 12px;
-            --radius-lg: 18px;
-            --radius-xl: 26px;
-            --shadow-md: 0 6px 14px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 14px 26px rgba(0, 0, 0, 0.12);
-            --transition-smooth: all 0.3s ease;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+
+            --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #059669 0%, #10b981 30%, #7c3aed 70%, #dc2626 100%);
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 20%, #ec4899 40%, #f43f5e 60%, #10b981 80%, #34d399 100%);
+            background-size: 400% 400%;
+            animation: gradientFlow 25s ease infinite;
             min-height: 100vh;
             color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes gradientFlow {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem 1.5rem 4rem;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
         }
 
+        /* Enhanced Header */
         .app-header {
-            background: var(--surface);
+            background: var(--surface-elevated);
+            backdrop-filter: blur(20px) saturate(180%);
             border-radius: var(--radius-xl);
             padding: 2.5rem 2rem;
-            margin-bottom: 2rem;
+            margin: 2rem 0;
             box-shadow: var(--shadow-lg);
-            position: relative;
             text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
         }
 
         .app-title {
-            font-size: clamp(2rem, 4vw, 3rem);
+            font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 800;
-            margin-bottom: 0.5rem;
             background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0 0 0.5rem 0;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
         }
 
         .app-subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
             color: var(--text-secondary);
             font-weight: 500;
             margin: 0;
+            opacity: 0.9;
         }
 
-        .home-button {
+        /* Enhanced Mode Indicator */
+        .mode-indicator {
+            background: var(--surface);
+            backdrop-filter: blur(15px);
+            color: var(--text-primary);
+            padding: 1.25rem 2.5rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            transition: var(--transition-smooth);
+        }
+
+        .mode-indicator::before {
+            content: '';
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            display: inline-flex;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--primary-gradient);
+            opacity: 0.1;
+            border-radius: var(--radius-full);
+            z-index: -1;
+        }
+
+        /* Home Button Styles */
+        .home-button {
+            display: flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.6rem 1rem;
-            background: #fff;
-            border-radius: 999px;
+            padding: 0.75rem 1rem;
+            background: var(--surface);
+            backdrop-filter: blur(15px);
+            border-radius: var(--radius-full);
             text-decoration: none;
             color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.9rem;
             box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             transition: var(--transition-smooth);
+            z-index: 10;
         }
 
         .home-button:hover {
             transform: translateY(-2px);
-            color: #059669;
+            box-shadow: var(--shadow-lg);
+            color: var(--primary-color);
+            text-decoration: none;
         }
 
-        .lesson-section {
+        .home-icon {
+            font-size: 1.2rem;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+        }
+
+        /* Enhanced Card Styles */
+        .card {
             background: var(--surface);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow-md);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition-smooth);
+            overflow: hidden;
         }
 
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
+        .card:hover {
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-4px);
         }
 
-        .section-subtitle {
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-        }
-
-        .tajweed-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1rem;
-        }
-
-        .tajweed-card {
+        /* Phrase Cards - Made larger for longer text */
+        .phrase-card {
             background: var(--primary-gradient);
-            color: #fff;
-            border-radius: var(--radius-md);
-            padding: 1.5rem;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition-smooth);
-        }
-
-        .tajweed-card:hover {
-            transform: translateY(-2px);
-        }
-
-        .tajweed-card h4 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-        }
-
-        .tajweed-card p {
-            font-size: 0.9rem;
-            margin: 0;
-            opacity: 0.95;
-            line-height: 1.5;
-        }
-
-        .tajweed-card .example {
-            font-family: 'Amiri', serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-top: 0.75rem;
-            padding-top: 0.75rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .quran-verse {
-            background: var(--secondary-gradient);
-            color: #fff;
+            color: white;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            cursor: pointer;
             border-radius: var(--radius-lg);
-            padding: 2rem;
-            margin-bottom: 1.5rem;
+            transition: var(--transition-bounce);
+            position: relative;
+            overflow: hidden;
             box-shadow: var(--shadow-md);
+            border: none;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform-origin: center;
         }
 
-        .quran-verse .arabic {
-            font-family: 'Amiri', serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            line-height: 2;
-            text-align: center;
-            margin-bottom: 1rem;
+        .phrase-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
         }
 
-        .quran-verse .reference {
-            text-align: center;
-            font-size: 1rem;
-            font-weight: 600;
-            opacity: 0.95;
-            margin-bottom: 0.5rem;
-        }
-
-        .quran-verse .translation {
-            text-align: center;
-            font-size: 0.95rem;
-            opacity: 0.9;
-            font-style: italic;
-        }
-
-        .practice-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        .practice-card {
-            background: var(--gold-gradient);
-            color: #fff;
-            border-radius: var(--radius-md);
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: var(--shadow-md);
+        .phrase-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), transparent);
+            opacity: 0;
             transition: var(--transition-smooth);
         }
 
-        .practice-card:hover {
-            transform: translateY(-2px);
+        .phrase-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: var(--shadow-xl);
         }
 
-        .practice-card .arabic {
+        .phrase-card:hover::before {
+            left: 100%;
+        }
+
+        .phrase-card:hover::after {
+            opacity: 1;
+        }
+
+        .phrase-card:active {
+            transform: translateY(-3px) scale(1.01);
+        }
+
+        .phrase-arabic {
             font-family: 'Amiri', serif;
-            font-size: 2rem;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+            line-height: 1.6;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
-        .practice-card .meaning {
-            font-size: 0.9rem;
+        .phrase-label {
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            font-weight: 600;
             opacity: 0.95;
+            letter-spacing: 0.5px;
         }
 
-        .info-box {
-            background: #f3f4f6;
-            border-left: 4px solid #059669;
-            border-radius: var(--radius-md);
-            padding: 1.25rem 1.5rem;
-            margin-bottom: 1.5rem;
+        /* Enhanced Status Classes */
+        .correct {
+            background: var(--success-gradient) !important;
+            animation: successPulse 0.6s ease !important;
         }
 
-        .info-box h4 {
+        .incorrect {
+            background: var(--error-gradient) !important;
+            animation: errorShake 0.6s ease !important;
+        }
+
+        @keyframes successPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes errorShake {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(-4px) rotate(-1deg); }
+            75% { transform: translateX(4px) rotate(1deg); }
+        }
+
+        /* Enhanced Score Display */
+        .score-card {
+            text-align: center;
+            padding: 2rem 1.5rem;
+        }
+
+        .score-display {
+            font-size: clamp(2.5rem, 7vw, 3.5rem);
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 1rem 0;
+            letter-spacing: 2px;
+            line-height: 1;
+        }
+
+        .score-label {
             font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-
-        .info-box p {
-            margin: 0;
+            font-weight: 600;
             color: var(--text-secondary);
+            margin-bottom: 0.5rem;
         }
 
-        .accent-panel {
-            background: var(--accent-gradient);
-            color: #fff;
-            border-radius: var(--radius-md);
-            padding: 1.5rem;
+        /* Enhanced Button Styles */
+        .btn-enhanced {
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            padding: 1rem 1.75rem;
+            font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+            border: none;
+            transition: var(--transition-bounce);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.3px;
+            width: 100%;
+            box-shadow: var(--shadow-md);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-enhanced::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-enhanced:hover::before {
+            left: 100%;
+        }
+
+        .btn-enhanced:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-enhanced:active {
+            transform: translateY(-1px) scale(1.01);
+        }
+
+        .btn-primary-enhanced {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .btn-secondary-enhanced {
+            background: var(--secondary-gradient);
+            color: white;
+        }
+
+        .btn-success-enhanced {
+            background: var(--success-gradient);
+            color: white;
+        }
+
+        .btn-warning-enhanced {
+            background: var(--warning-gradient);
+            color: white;
+        }
+
+        .btn-neutral-enhanced {
+            background: var(--neutral-gradient);
+            color: white;
+        }
+
+        /* Enhanced Status Badges */
+        .status-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        .status-badge {
+            flex: 1;
+            padding: 1rem;
+            border-radius: var(--radius-lg);
             font-weight: 600;
             text-align: center;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-smooth);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .status-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .status-correct {
+            background: var(--success-gradient);
+            color: white;
+        }
+
+        .status-incorrect {
+            background: var(--error-gradient);
+            color: white;
+        }
+
+        /* Enhanced Instructions */
+        .instructions {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+            backdrop-filter: blur(15px);
+            padding: 1.75rem;
+            border-radius: var(--radius-lg);
+            margin-top: 1.5rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .instructions-title {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
             font-size: 1.1rem;
         }
 
-        .surah-card {
-            background: var(--teal-gradient);
-            color: #fff;
-            border-radius: var(--radius-md);
-            padding: 1.75rem;
-            margin-bottom: 1.5rem;
-            box-shadow: var(--shadow-md);
+        .instructions-content {
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: clamp(0.85rem, 2vw, 0.95rem);
+            line-height: 1.7;
         }
 
-        .surah-card .surah-name {
-            font-size: 1.3rem;
-            font-weight: 700;
+        .instructions-step {
+            display: flex;
+            align-items: center;
             margin-bottom: 0.5rem;
         }
 
-        .surah-card .surah-arabic {
-            font-family: 'Amiri', serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            line-height: 1.8;
-            margin: 1rem 0;
+        .step-number {
+            background: var(--primary-gradient);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
         }
 
-        .surah-card .surah-translation {
-            font-size: 0.95rem;
-            opacity: 0.95;
-            font-style: italic;
-        }
-
+        /* Responsive Enhancements */
         @media (max-width: 768px) {
-            .home-button {
-                position: static;
-                margin-bottom: 1rem;
+            .container {
+                padding: 0 15px;
             }
 
             .app-header {
-                text-align: right;
+                padding: 2rem 1.5rem;
+                margin: 1.5rem 0;
             }
 
-            .quran-verse .arabic {
-                font-size: 2rem;
+            .mode-indicator {
+                padding: 1rem 2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .phrase-card {
+                min-height: 180px;
+                padding: 2rem 1.5rem;
+            }
+
+            .score-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .btn-enhanced {
+                padding: 0.875rem 1.5rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .status-container {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .instructions {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Accessibility Enhancements */
+        .phrase-card:focus,
+        .btn-enhanced:focus {
+            outline: 3px solid rgba(46, 139, 87, 0.5);
+            outline-offset: 3px;
+        }
+
+        /* Prevent white flash on button clicks */
+        .btn-enhanced,
+        .phrase-card {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border: none !important;
+            backface-visibility: hidden !important;
+        }
+
+        /* Footer Styles */
+        .app-footer {
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+            margin-top: 3rem;
+            padding: 2rem 0;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: none;
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .footer-content p {
+            color: var(--text-muted);
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .attribution {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .attribution p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .creator-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+        }
+
+        .creator-link:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
@@ -287,168 +604,431 @@
 <body>
     <div class="container">
         <header class="app-header">
-            <a href="../../index.html" class="home-button" aria-label="Back to Home">
-                <span>🏠</span>
-                <span>Home</span>
-            </a>
+            <div style="position: absolute; top: 1rem; right: 1rem;">
+                <a href="../../index.html" class="home-button" aria-label="Back to Home">
+                    <span class="home-icon">🏠</span>
+                    <span class="home-text">Home</span>
+                </a>
+            </div>
             <h1 class="app-title">📖 إقرأ ٩ - Iqra 9</h1>
-            <p class="app-subtitle">قراءة القرآن وأساسيات التجويد - Quranic Reading & Tajweed Basics</p>
+            <p class="app-subtitle">Quranic Reading & Tajweed - قراءة القرآن وأساسيات التجويد</p>
         </header>
 
-        <main>
-            <section class="lesson-section">
-                <h2 class="section-title">🎯 ما هو التجويد؟ - What is Tajweed?</h2>
-                <div class="info-box">
-                    <h4>التجويد - Tajweed</h4>
-                    <p>التجويد هو علم يُعنى بتحسين تلاوة القرآن الكريم وإعطاء كل حرف حقه ومستحقه من الصفات والأحكام.</p>
-                    <p class="mt-2">Tajweed is the science of reciting the Quran correctly, giving each letter its rights and characteristics.</p>
-                </div>
-            </section>
+        <div class="mode-indicator" id="modeIndicator">
+            🌙 Mode: Learn Quranic Phrases - تعلم الآيات القرآنية
+        </div>
 
-            <section class="lesson-section">
-                <h2 class="section-title">📚 قواعد أساسية - Basic Rules</h2>
-                <p class="section-subtitle">تعرّف على بعض القواعد المهمة في التجويد.</p>
-                <div class="tajweed-grid">
-                    <div class="tajweed-card">
-                        <h4>الإدغام - Idgham</h4>
-                        <p>إدماج التنوين أو النون الساكنة في الحرف التالي</p>
-                        <div class="example">مِنْ رَبِّهِمْ</div>
-                    </div>
-                    <div class="tajweed-card">
-                        <h4>الإخفاء - Ikhfa</h4>
-                        <p>إخفاء صوت النون الساكنة أو التنوين</p>
-                        <div class="example">مَنْ شَاءَ</div>
-                    </div>
-                    <div class="tajweed-card">
-                        <h4>الإظهار - Izhar</h4>
-                        <p>إظهار النون الساكنة أو التنوين بوضوح</p>
-                        <div class="example">مِنْ أَمْرِ</div>
-                    </div>
-                    <div class="tajweed-card">
-                        <h4>القلقلة - Qalqalah</h4>
-                        <p>صوت ارتداد عند حروف: ق ط ب ج د</p>
-                        <div class="example">الْحَقّ</div>
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row g-3" id="phraseGrid">
+                            <!-- Phrase cards will be generated here -->
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <section class="lesson-section">
-                <h2 class="section-title">🌟 سور قصيرة للتدريب - Short Surahs for Practice</h2>
-                <p class="section-subtitle">ابدأ بالسور القصيرة من جزء عم.</p>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body score-card">
+                        <div class="score-label">🎯 Score - النتيجة</div>
+                        <div class="score-display" id="scoreDisplay">0/15</div>
 
-                <div class="surah-card">
-                    <div class="surah-name">سورة الإخلاص - Surah Al-Ikhlas (112)</div>
-                    <div class="surah-arabic">
-                        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ<br>
-                        قُلْ هُوَ اللَّهُ أَحَدٌ ۝<br>
-                        اللَّهُ الصَّمَدُ ۝<br>
-                        لَمْ يَلِدْ وَلَمْ يُولَدْ ۝<br>
-                        وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ ۝
-                    </div>
-                    <div class="surah-translation">
-                        Say: He is Allah, the One. Allah, the Eternal. He begets not, nor was He begotten. And there is none comparable to Him.
-                    </div>
-                </div>
+                        <div class="d-grid gap-3 mb-4">
+                            <button class="btn btn-primary-enhanced btn-enhanced" onclick="refreshPhrases()">
+                                🔄 New Phrases - آيات جديدة
+                            </button>
+                            <button class="btn btn-warning-enhanced btn-enhanced" onclick="showIncorrectOnly()" id="retryBtn" disabled>
+                                🔁 Retry Wrong - إعادة الخطأ
+                            </button>
+                            <button class="btn btn-success-enhanced btn-enhanced" onclick="resetGame()">
+                                🎮 Start Over - البداية
+                            </button>
+                        </div>
 
-                <div class="surah-card">
-                    <div class="surah-name">سورة الفلق - Surah Al-Falaq (113)</div>
-                    <div class="surah-arabic">
-                        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ<br>
-                        قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۝<br>
-                        مِن شَرِّ مَا خَلَقَ ۝<br>
-                        وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ۝<br>
-                        وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ۝<br>
-                        وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ ۝
-                    </div>
-                    <div class="surah-translation">
-                        Say: I seek refuge in the Lord of daybreak, from the evil of what He created, and from the evil of darkness when it settles, and from the evil of the blowers in knots, and from the evil of an envier when he envies.
-                    </div>
-                </div>
+                        <div class="status-container">
+                            <div class="status-badge status-correct">
+                                ✅ Correct<br>صحيح<br><span id="correctCount">0</span>
+                            </div>
+                            <div class="status-badge status-incorrect">
+                                ❌ Wrong<br>خطأ<br><span id="incorrectCount">0</span>
+                            </div>
+                        </div>
 
-                <div class="surah-card">
-                    <div class="surah-name">سورة الناس - Surah An-Nas (114)</div>
-                    <div class="surah-arabic">
-                        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ<br>
-                        قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝<br>
-                        مَلِكِ النَّاسِ ۝<br>
-                        إِلَٰهِ النَّاسِ ۝<br>
-                        مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ۝<br>
-                        الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۝<br>
-                        مِنَ الْجِنَّةِ وَالنَّاسِ ۝
-                    </div>
-                    <div class="surah-translation">
-                        Say: I seek refuge in the Lord of mankind, the Sovereign of mankind, the God of mankind, from the evil of the retreating whisperer, who whispers in the hearts of mankind, from among the jinn and mankind.
-                    </div>
-                </div>
-            </section>
-
-            <section class="lesson-section">
-                <h2 class="section-title">🌙 كلمات وعبارات قرآنية شائعة</h2>
-                <p class="section-subtitle">تدرّب على الكلمات التي تتكرر كثيرًا في القرآن.</p>
-                <div class="practice-grid">
-                    <div class="practice-card">
-                        <div class="arabic">بِسْمِ اللَّهِ</div>
-                        <div class="meaning">Bismillah - In the name of Allah</div>
-                    </div>
-                    <div class="practice-card">
-                        <div class="arabic">الْحَمْدُ لِلَّهِ</div>
-                        <div class="meaning">Alhamdulillah - Praise be to Allah</div>
-                    </div>
-                    <div class="practice-card">
-                        <div class="arabic">سُبْحَانَ اللَّهِ</div>
-                        <div class="meaning">Subhanallah - Glory to Allah</div>
-                    </div>
-                    <div class="practice-card">
-                        <div class="arabic">اللَّهُ أَكْبَر</div>
-                        <div class="meaning">Allahu Akbar - Allah is Greatest</div>
-                    </div>
-                    <div class="practice-card">
-                        <div class="arabic">لَا إِلَٰهَ إِلَّا اللَّهُ</div>
-                        <div class="meaning">La ilaha illallah - No god but Allah</div>
-                    </div>
-                    <div class="practice-card">
-                        <div class="arabic">إِنْ شَاءَ اللَّهُ</div>
-                        <div class="meaning">In sha Allah - If Allah wills</div>
-                    </div>
-                    <div class="practice-card">
-                        <div class="arabic">مَا شَاءَ اللَّهُ</div>
-                        <div class="meaning">Ma sha Allah - As Allah willed</div>
-                    </div>
-                    <div class="practice-card">
-                        <div class="arabic">جَزَاكَ اللَّهُ خَيْرًا</div>
-                        <div class="meaning">May Allah reward you with good</div>
+                        <div class="instructions">
+                            <div class="instructions-title">🎯 How to Play:</div>
+                            <div class="instructions-content">
+                                <div class="instructions-step">
+                                    <div class="step-number">1</div>
+                                    <div>Click on verses to practice reading</div>
+                                </div>
+                                <div class="instructions-step">
+                                    <div class="step-number">2</div>
+                                    <div>Green = Correct 💚, Red = Wrong ❤️</div>
+                                </div>
+                                <div class="instructions-step">
+                                    <div class="step-number">3</div>
+                                    <div>Learn Quranic phrases & Tajweed</div>
+                                </div>
+                                <div class="instructions-step">
+                                    <div class="step-number">4</div>
+                                    <div>Practice until you master all verses</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
-
-            <section class="lesson-section">
-                <h2 class="section-title">🎓 نصائح لتحسين التلاوة - Tips for Better Recitation</h2>
-                <div class="info-box">
-                    <h4>١. الاستماع المتكرر</h4>
-                    <p>استمع إلى قراء مشهورين مثل الشيخ عبد الباسط عبد الصمد والشيخ محمد صديق المنشاوي.</p>
-                </div>
-                <div class="info-box">
-                    <h4>٢. التدرب اليومي</h4>
-                    <p>خصص وقتًا يوميًا لقراءة القرآن ولو صفحة واحدة.</p>
-                </div>
-                <div class="info-box">
-                    <h4>٣. التعلم من معلم</h4>
-                    <p>ابحث عن معلم تجويد لتصحيح مخارج الحروف والأحكام.</p>
-                </div>
-                <div class="info-box">
-                    <h4>٤. الترتيل ببطء</h4>
-                    <p>لا تستعجل في القراءة، اقرأ بتأنٍّ وتمعّن.</p>
-                </div>
-            </section>
-
-            <section class="lesson-section">
-                <div class="accent-panel">
-                    🌟 مبروك! أنهيت دروس إقرأ التسعة!<br>
-                    أنت الآن جاهز لقراءة القرآن الكريم بإتقان. واصل التدرب والتحسين.<br>
-                    بَارَكَ اللَّهُ فِيكَ
-                </div>
-            </section>
-        </main>
+            </div>
+        </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Quranic phrases and short surahs
+        const allPhrases = [
+            {arabic: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ", meaning: "In the name of Allah, the Most Gracious, the Most Merciful"},
+            {arabic: "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ", meaning: "Praise be to Allah, Lord of the Worlds"},
+            {arabic: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ", meaning: "Glory be to Allah and praise Him"},
+            {arabic: "اللَّهُ أَكْبَر", meaning: "Allah is the Greatest"},
+            {arabic: "لَا إِلَٰهَ إِلَّا اللَّهُ", meaning: "There is no god but Allah"},
+            {arabic: "إِنْ شَاءَ اللَّهُ", meaning: "If Allah wills"},
+            {arabic: "مَا شَاءَ اللَّهُ", meaning: "What Allah willed"},
+            {arabic: "جَزَاكَ اللَّهُ خَيْرًا", meaning: "May Allah reward you with good"},
+            {arabic: "قُلْ هُوَ اللَّهُ أَحَدٌ", meaning: "Say: He is Allah, the One - Surah Al-Ikhlas (1)"},
+            {arabic: "اللَّهُ الصَّمَدُ", meaning: "Allah, the Eternal Refuge - Surah Al-Ikhlas (2)"},
+            {arabic: "لَمْ يَلِدْ وَلَمْ يُولَدْ", meaning: "He neither begets nor is born - Surah Al-Ikhlas (3)"},
+            {arabic: "وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ", meaning: "Nor is there to Him any equivalent - Surah Al-Ikhlas (4)"},
+            {arabic: "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ", meaning: "Say: I seek refuge in the Lord of daybreak - Surah Al-Falaq (1)"},
+            {arabic: "مِن شَرِّ مَا خَلَقَ", meaning: "From the evil of that which He created - Surah Al-Falaq (2)"},
+            {arabic: "وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ", meaning: "And from the evil of darkness when it settles - Surah Al-Falaq (3)"},
+            {arabic: "وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ", meaning: "And from the evil of the blowers in knots - Surah Al-Falaq (4)"},
+            {arabic: "وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ", meaning: "And from the evil of an envier when he envies - Surah Al-Falaq (5)"},
+            {arabic: "قُلْ أَعُوذُ بِرَبِّ النَّاسِ", meaning: "Say: I seek refuge in the Lord of mankind - Surah An-Nas (1)"},
+            {arabic: "مَلِكِ النَّاسِ", meaning: "The Sovereign of mankind - Surah An-Nas (2)"},
+            {arabic: "إِلَٰهِ النَّاسِ", meaning: "The God of mankind - Surah An-Nas (3)"},
+            {arabic: "مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ", meaning: "From the evil of the retreating whisperer - Surah An-Nas (4)"},
+            {arabic: "الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ", meaning: "Who whispers in the hearts of mankind - Surah An-Nas (5)"},
+            {arabic: "مِنَ الْجِنَّةِ وَالنَّاسِ", meaning: "From among the jinn and mankind - Surah An-Nas (6)"},
+            {arabic: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً", meaning: "Our Lord, give us in this world good"},
+            {arabic: "وَفِي الْآخِرَةِ حَسَنَةً", meaning: "And in the Hereafter good"}
+        ];
+
+        let currentPhrases = [];
+        let phraseStatus = {};
+        let currentMode = 'normal';
+        let correctCount = 0;
+        let incorrectCount = 0;
+
+        function initGame() {
+            refreshPhrases();
+        }
+
+        function refreshPhrases() {
+            currentMode = 'normal';
+            updateModeIndicator();
+
+            // Shuffle and select 15 random phrases
+            const shuffled = [...allPhrases].sort(() => 0.5 - Math.random());
+            currentPhrases = shuffled.slice(0, 15);
+
+            phraseStatus = {};
+            currentPhrases.forEach(phrase => {
+                phraseStatus[phrase.arabic] = 'unmarked';
+            });
+
+            correctCount = 0;
+            incorrectCount = 0;
+
+            renderPhrases();
+            updateDisplay();
+        }
+
+        function showIncorrectOnly() {
+            currentMode = 'incorrect';
+            updateModeIndicator();
+
+            const incorrectPhrases = [];
+            currentPhrases.forEach(phrase => {
+                if (phraseStatus[phrase.arabic] === 'incorrect') {
+                    incorrectPhrases.push(phrase);
+                }
+            });
+
+            if (incorrectPhrases.length === 0) {
+                showCustomAlert('🎉 Excellent! No wrong phrases to retry! - ممتاز! لا توجد آيات خاطئة!', 'success');
+                return;
+            }
+
+            incorrectPhrases.forEach(phrase => {
+                phraseStatus[phrase.arabic] = 'unmarked';
+            });
+
+            currentPhrases = incorrectPhrases;
+            correctCount = 0;
+            incorrectCount = 0;
+
+            renderPhrases();
+            updateDisplay();
+        }
+
+        function resetGame() {
+            currentMode = 'normal';
+            updateModeIndicator();
+            correctCount = 0;
+            incorrectCount = 0;
+            phraseStatus = {};
+            refreshPhrases();
+        }
+
+        function updateModeIndicator() {
+            const indicator = document.getElementById('modeIndicator');
+            if (currentMode === 'normal') {
+                indicator.textContent = '🌙 Mode: Learn Quranic Phrases - تعلم الآيات القرآنية';
+            } else {
+                indicator.textContent = '🔄 Mode: Retry Wrong Phrases - إعادة الآيات الخاطئة';
+            }
+        }
+
+        function renderPhrases() {
+            const grid = document.getElementById('phraseGrid');
+            grid.innerHTML = '';
+
+            currentPhrases.forEach(phrase => {
+                const col = document.createElement('div');
+                col.className = 'col-12 col-md-6 mb-3';
+
+                const card = document.createElement('div');
+                card.className = 'phrase-card';
+                card.setAttribute('tabindex', '0');
+                card.setAttribute('role', 'button');
+                card.setAttribute('aria-label', `${phrase.arabic} - ${phrase.meaning}`);
+
+                card.innerHTML = `
+                    <div class="phrase-arabic">${phrase.arabic}</div>
+                    <div class="phrase-label">${phrase.meaning}</div>
+                `;
+
+                card.onclick = () => togglePhrase(phrase.arabic);
+                card.onkeydown = (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        togglePhrase(phrase.arabic);
+                    }
+                };
+
+                if (phraseStatus[phrase.arabic] === 'correct') {
+                    card.classList.add('correct');
+                } else if (phraseStatus[phrase.arabic] === 'incorrect') {
+                    card.classList.add('incorrect');
+                } else {
+                    card.classList.add('unmarked');
+                }
+
+                col.appendChild(card);
+                grid.appendChild(col);
+            });
+        }
+
+        function togglePhrase(arabic) {
+            const cards = document.querySelectorAll('.phrase-card');
+            let targetCard = null;
+
+            cards.forEach((card, index) => {
+                const phrase = currentPhrases[index];
+                if (phrase.arabic === arabic) {
+                    targetCard = card;
+                }
+            });
+
+            if (!targetCard) return;
+
+            if (phraseStatus[arabic] === 'unmarked') {
+                phraseStatus[arabic] = 'correct';
+                correctCount++;
+                playSuccessSound();
+                targetCard.classList.remove('incorrect', 'unmarked');
+                targetCard.classList.add('correct');
+            } else if (phraseStatus[arabic] === 'correct') {
+                phraseStatus[arabic] = 'incorrect';
+                correctCount--;
+                incorrectCount++;
+                playErrorSound();
+                targetCard.classList.remove('correct', 'unmarked');
+                targetCard.classList.add('incorrect');
+            } else if (phraseStatus[arabic] === 'incorrect') {
+                phraseStatus[arabic] = 'unmarked';
+                incorrectCount--;
+                targetCard.classList.remove('correct', 'incorrect');
+                targetCard.classList.add('unmarked');
+            }
+
+            updateDisplay();
+        }
+
+        function playSuccessSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+
+                oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime);
+                oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1);
+                oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.2);
+
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.3);
+            } catch (e) {
+                // Audio not supported
+            }
+        }
+
+        function playErrorSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+
+                oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+                oscillator.frequency.setValueAtTime(150, audioContext.currentTime + 0.1);
+
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.2);
+            } catch (e) {
+                // Audio not supported
+            }
+        }
+
+        function playCompletionSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+
+                const notes = [523.25, 659.25, 783.99, 1046.50];
+                let time = audioContext.currentTime;
+
+                notes.forEach((note, index) => {
+                    oscillator.frequency.setValueAtTime(note, time + index * 0.15);
+                });
+
+                gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.6);
+
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.6);
+            } catch (e) {
+                // Audio not supported
+            }
+        }
+
+        function updateDisplay() {
+            document.getElementById('scoreDisplay').textContent = `${correctCount}/${currentPhrases.length}`;
+            document.getElementById('correctCount').textContent = correctCount;
+            document.getElementById('incorrectCount').textContent = incorrectCount;
+
+            const retryBtn = document.getElementById('retryBtn');
+            const hasIncorrect = Object.values(phraseStatus).some(status => status === 'incorrect');
+            retryBtn.disabled = !hasIncorrect || currentMode === 'incorrect';
+
+            if (correctCount + incorrectCount === currentPhrases.length) {
+                setTimeout(() => {
+                    if (incorrectCount === 0) {
+                        showCustomAlert('🎉 Excellent! All phrases correct! بَارَكَ اللَّهُ فِيكَ - جميع الآيات صحيحة!', 'success');
+                        playCompletionSound();
+                    } else if (currentMode === 'normal') {
+                        showCustomAlert(`🌟 Well done! You got ${correctCount} out of ${currentPhrases.length} correct! - أحسنت!`, 'info');
+                    } else if (currentMode === 'incorrect') {
+                        setTimeout(() => {
+                            showIncorrectOnly();
+                        }, 1000);
+                    }
+                }, 500);
+            }
+        }
+
+        function showCustomAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            const alertClass = type === 'success' ? 'alert-success' : type === 'info' ? 'alert-info' : 'alert-warning';
+            alertDiv.className = `alert ${alertClass} alert-dismissible fade show position-fixed`;
+            alertDiv.style.cssText = `
+                top: 30px;
+                right: 30px;
+                z-index: 9999;
+                min-width: 350px;
+                max-width: 90vw;
+                border-radius: var(--radius-lg);
+                box-shadow: var(--shadow-xl);
+                font-weight: 600;
+                border: none;
+                backdrop-filter: blur(10px);
+                font-size: 1.1rem;
+                padding: 1.25rem 1.5rem;
+            `;
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            `;
+            document.body.appendChild(alertDiv);
+
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.classList.remove('show');
+                    setTimeout(() => {
+                        if (alertDiv.parentNode) {
+                            alertDiv.parentNode.removeChild(alertDiv);
+                        }
+                    }, 150);
+                }
+            }, 5000);
+        }
+
+        // Initialize game when page loads
+        document.addEventListener('DOMContentLoaded', initGame);
+
+        // Enhanced keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case 'r':
+                        e.preventDefault();
+                        refreshPhrases();
+                        break;
+                }
+            }
+        });
+
+        // Add touch feedback for mobile
+        if ('ontouchstart' in window) {
+            document.addEventListener('touchstart', function() {}, {passive: true});
+        }
+    </script>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>🌈 Making learning fun and accessible for every child</p>
+                <div class="attribution">
+                    <p>Made with ❤️ by <a href="https://www.linkedin.com/in/muzaffarmohamed/?originalSubdomain=my" target="_blank" rel="noopener noreferrer" class="creator-link">Exrienz</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

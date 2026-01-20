@@ -15,6 +15,57 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Lesson 9: Fun with Multiplication (conceptual groups)
   - Lesson 10: Basic Division - Sharing concept
 
+## [0.5.0] - 2026-01-20
+
+### 🎮 Major Update: Iqra Interactive Games & English Instructions
+
+#### Added
+- **Complete Interactive Game Conversion for Iqra 5-9**
+  - Iqra 5: Letter forms interactive game with all 28 Arabic letters
+  - Iqra 6: Blending & short words game with 24 words
+  - Iqra 7: Sukun & Shaddah game with 24 advanced words
+  - Iqra 8: Tanween & long vowels game with 30 words
+  - Iqra 9: Quranic reading game with 25 phrases and verses
+
+- **Interactive Game Features** (All Iqra Lessons 5-9)
+  - Click-to-toggle card system (unmarked → correct → incorrect)
+  - Real-time score tracking and progress display
+  - "New Letters/Words" button for fresh content
+  - "Retry Wrong" mode to focus on mistakes
+  - "Start Over" for complete reset
+  - Audio feedback (success, error, completion sounds)
+  - Visual animations (pulse for correct, shake for incorrect)
+  - Responsive design for all devices
+  - Keyboard and TV remote navigation support
+
+#### Changed
+- **Unified English Instructions Across All Iqra Lessons (1-9)**
+  - Converted all UI text to English-first with Arabic translations
+  - Standardized button labels: "New Letters - حروف جديدة"
+  - Standardized score display: "Score - النتيجة"
+  - Standardized status badges: "Correct - صحيح", "Wrong - خطأ"
+  - All instruction steps now in clear English
+  - Mode indicators show English first
+  - Alert messages display English first
+
+- **Consistency Improvements**
+  - All 9 Iqra lessons now use the same interactive game pattern
+  - Unified visual design and color scheme
+  - Consistent audio feedback across all lessons
+  - Standardized keyboard shortcuts and navigation
+
+#### Documentation
+- Updated README.md with Iqra interactive game features
+- Added checkmarks (✅) for all completed Iqra lessons
+- Updated feature list to highlight new interactive capabilities
+- Documented English instruction standard
+
+### Impact
+- **User Experience**: Significantly improved engagement through interactive gameplay
+- **Accessibility**: English instructions make lessons accessible to non-Arabic speaking parents/teachers
+- **Consistency**: Uniform experience across all 9 Iqra lessons
+- **Learning Effectiveness**: Progress tracking and retry features enhance learning outcomes
+
 ## [0.4.0] - 2026-01-20
 
 ### Added

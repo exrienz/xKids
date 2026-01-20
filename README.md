@@ -11,16 +11,16 @@ Educational web applications for children to learn Malaysian and Arabic reading 
   - Level 4: Asas 3 Suku-Kata (Basic 3 Syllables)
   - Level 5: Ayat Ringkas (Simple Sentences)
 
-- **Arabic Reading (Iqra 1-9)** - Traditional Islamic reading curriculum for ages 3-9
-  - Iqra 1: Basic Arabic letters
-  - Iqra 2: Vowel marks (harakat) with letters
-  - Iqra 3: Word formation
-  - Iqra 4: Three-letter word reading
-  - Iqra 5: Letter forms in all positions (all 28 letters)
-  - Iqra 6: Letter blending and short words
-  - Iqra 7: Sukun and Shaddah (advanced combinations)
-  - Iqra 8: Tanween and long vowels (madd)
-  - Iqra 9: Quranic reading with basic tajweed
+- **Arabic Reading (Iqra 1-9)** - Traditional Islamic reading curriculum for ages 3-9 (All interactive games! ✅)
+  - Iqra 1: Basic Arabic letters ✅
+  - Iqra 2: Vowel marks (harakat) with letters ✅
+  - Iqra 3: Word formation ✅
+  - Iqra 4: Three-letter word reading ✅
+  - Iqra 5: Letter forms in all positions (all 28 letters) ✅
+  - Iqra 6: Letter blending and short words ✅
+  - Iqra 7: Sukun and Shaddah (advanced combinations) ✅
+  - Iqra 8: Tanween and long vowels (madd) ✅
+  - Iqra 9: Quranic reading with basic tajweed ✅
 
 - **Math Module (Levels 1-10)** - Interactive math learning for ages 3-6
   - Level 1: Number Recognition (1-10) ✅
@@ -95,10 +95,13 @@ docker build --platform linux/arm64 -t xkids-learning-center .
 
 - **Responsive Design** - Works on mobile, tablet, desktop, and smart TVs
 - **Keyboard Navigation** - TV remote and keyboard support
-- **Interactive Learning** - Click-based syllable recognition and answer submission
-- **Hidden Answer Logic** - Math answers revealed only after correct submission (NEW!)
+- **Interactive Learning** - Click-based games with instant feedback
+- **Unified Game Experience** - All Iqra lessons (1-9) now use interactive game format (NEW!)
+- **English Instructions** - All UI text in English with Arabic translations (NEW!)
+- **Hidden Answer Logic** - Math answers revealed only after correct submission
 - **Visual Feedback** - Animations and sounds for engagement
-- **Age-Appropriate Content** - Tailored for children ages 3-7
+- **Progress Tracking** - Score tracking, retry wrong answers, and completion celebrations
+- **Age-Appropriate Content** - Tailored for children ages 3-9
 - **Multi-language** - Supports English, Malay, and Arabic
 - **Offline Ready** - No external dependencies required
 - **Security Hardened** - CSP, rate limiting, and security headers
