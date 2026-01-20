@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📖 إقرأ ٨ - Iqra 8 - Tanween & Long Vowels</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            --secondary-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --accent-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --purple-gradient: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            --pink-gradient: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+            --surface: rgba(255, 255, 255, 0.96);
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --text-muted: #6b7280;
+            --radius-md: 12px;
+            --radius-lg: 18px;
+            --radius-xl: 26px;
+            --shadow-md: 0 6px 14px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 14px 26px rgba(0, 0, 0, 0.12);
+            --transition-smooth: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        .app-header {
+            background: var(--surface);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            text-align: center;
+        }
+
+        .app-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .app-subtitle {
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .home-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            background: #fff;
+            border-radius: 999px;
+            text-decoration: none;
+            color: var(--text-primary);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-smooth);
+        }
+
+        .home-button:hover {
+            transform: translateY(-2px);
+            color: #3b82f6;
+        }
+
+        .lesson-section {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .tanween-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .tanween-card {
+            background: var(--primary-gradient);
+            color: #fff;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-smooth);
+        }
+
+        .tanween-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .tanween-card .letter {
+            font-family: 'Amiri', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .tanween-card .name {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .tanween-card .sound {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .long-vowel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .long-vowel-card {
+            background: var(--secondary-gradient);
+            color: #fff;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-smooth);
+        }
+
+        .long-vowel-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .long-vowel-card .letter {
+            font-family: 'Amiri', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .long-vowel-card .description {
+            font-size: 0.9rem;
+            opacity: 0.95;
+        }
+
+        .word-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem;
+        }
+
+        .word-card {
+            background: var(--purple-gradient);
+            color: #fff;
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            text-align: center;
+            font-family: 'Amiri', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-smooth);
+        }
+
+        .word-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .word-card span {
+            display: block;
+            font-size: 0.9rem;
+            font-family: 'Poppins', sans-serif;
+            margin-top: 0.4rem;
+        }
+
+        .info-box {
+            background: #f3f4f6;
+            border-left: 4px solid #3b82f6;
+            border-radius: var(--radius-md);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-box h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .info-box p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        .accent-panel {
+            background: var(--pink-gradient);
+            color: #fff;
+            border-radius: var(--radius-md);
+            padding: 1.25rem 1.5rem;
+            font-weight: 600;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .comparison-card {
+            background: #f9fafb;
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .comparison-card h5 {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .comparison-card .arabic {
+            font-family: 'Amiri', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .home-button {
+                position: static;
+                margin-bottom: 1rem;
+            }
+
+            .app-header {
+                text-align: right;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <a href="../../index.html" class="home-button" aria-label="Back to Home">
+                <span>🏠</span>
+                <span>Home</span>
+            </a>
+            <h1 class="app-title">📖 إقرأ ٨ - Iqra 8</h1>
+            <p class="app-subtitle">التنوين والمدود - Tanween & Long Vowels</p>
+        </header>
+
+        <main>
+            <section class="lesson-section">
+                <h2 class="section-title">🎯 التنوين - Tanween (Nunation)</h2>
+                <div class="info-box">
+                    <h4>ما هو التنوين؟ - What is Tanween?</h4>
+                    <p>التنوين هو نون ساكنة تُضاف في نهاية الكلمة، ولها ثلاثة أنواع: فتحتان، ضمتان، كسرتان.</p>
+                    <p class="mt-2">Tanween is a doubled vowel mark that adds an "n" sound at the end of a word. There are three types.</p>
+                </div>
+                <div class="tanween-grid">
+                    <div class="tanween-card">
+                        <span class="letter">بً</span>
+                        <span class="name">فتحتان</span>
+                        <span class="sound">ban</span>
+                    </div>
+                    <div class="tanween-card">
+                        <span class="letter">بٌ</span>
+                        <span class="name">ضمتان</span>
+                        <span class="sound">bun</span>
+                    </div>
+                    <div class="tanween-card">
+                        <span class="letter">بٍ</span>
+                        <span class="name">كسرتان</span>
+                        <span class="sound">bin</span>
+                    </div>
+                    <div class="tanween-card">
+                        <span class="letter">مً</span>
+                        <span class="name">فتحتان</span>
+                        <span class="sound">man</span>
+                    </div>
+                    <div class="tanween-card">
+                        <span class="letter">مٌ</span>
+                        <span class="name">ضمتان</span>
+                        <span class="sound">mun</span>
+                    </div>
+                    <div class="tanween-card">
+                        <span class="letter">مٍ</span>
+                        <span class="name">كسرتان</span>
+                        <span class="sound">min</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2 class="section-title">📚 كلمات بالتنوين</h2>
+                <p class="section-subtitle">تدرّب على قراءة كلمات تحتوي على التنوين.</p>
+                <div class="word-grid">
+                    <div class="word-card">كِتَابًا<span>كتابا - A book</span></div>
+                    <div class="word-card">قَلَمًا<span>قلما - A pen</span></div>
+                    <div class="word-card">نُورًا<span>نورا - A light</span></div>
+                    <div class="word-card">رَجُلٌ<span>رجل - A man</span></div>
+                    <div class="word-card">كَرِيمٌ<span>كريم - Generous</span></div>
+                    <div class="word-card">رَحِيمٌ<span>رحيم - Merciful</span></div>
+                    <div class="word-card">عَلِيمٌ<span>عليم - Knowing</span></div>
+                    <div class="word-card">حَكِيمٌ<span>حكيم - Wise</span></div>
+                    <div class="word-card">سَمِيعٌ<span>سميع - Hearing</span></div>
+                    <div class="word-card">بَصِيرٌ<span>بصير - Seeing</span></div>
+                    <div class="word-card">قَدِيرٌ<span>قدير - Powerful</span></div>
+                    <div class="word-card">لَطِيفٌ<span>لطيف - Gentle</span></div>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2 class="section-title">🌟 المدود - Long Vowels (Madd)</h2>
+                <div class="info-box">
+                    <h4>المدود الثلاثة - Three Long Vowels</h4>
+                    <p>المد هو إطالة الصوت. في العربية ثلاثة أنواع من المدود: الألف، الواو، والياء.</p>
+                    <p class="mt-2">Madd is elongation of the vowel sound. Arabic has three long vowels: Alif, Waw, and Ya.</p>
+                </div>
+                <div class="long-vowel-grid">
+                    <div class="long-vowel-card">
+                        <span class="letter">بَا</span>
+                        <span class="description">مد بالألف - baa (long)</span>
+                    </div>
+                    <div class="long-vowel-card">
+                        <span class="letter">بُو</span>
+                        <span class="description">مد بالواو - boo (long)</span>
+                    </div>
+                    <div class="long-vowel-card">
+                        <span class="letter">بِي</span>
+                        <span class="description">مد بالياء - bee (long)</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2 class="section-title">📖 مقارنة: حركات قصيرة وطويلة</h2>
+                <p class="section-subtitle">لاحظ الفرق بين الحركات القصيرة والطويلة.</p>
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <h5>قصير - Short</h5>
+                        <p class="arabic">بَ</p>
+                    </div>
+                    <div class="comparison-card">
+                        <h5>طويل - Long</h5>
+                        <p class="arabic">بَا</p>
+                    </div>
+                    <div class="comparison-card">
+                        <h5>قصير - Short</h5>
+                        <p class="arabic">بُ</p>
+                    </div>
+                    <div class="comparison-card">
+                        <h5>طويل - Long</h5>
+                        <p class="arabic">بُو</p>
+                    </div>
+                    <div class="comparison-card">
+                        <h5>قصير - Short</h5>
+                        <p class="arabic">بِ</p>
+                    </div>
+                    <div class="comparison-card">
+                        <h5>طويل - Long</h5>
+                        <p class="arabic">بِي</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2 class="section-title">🎓 كلمات بالمدود</h2>
+                <p class="section-subtitle">تدرّب على قراءة كلمات تحتوي على المدود الثلاثة.</p>
+                <div class="word-grid">
+                    <div class="word-card">نَار<span>نار - Fire</span></div>
+                    <div class="word-card">دَار<span>دار - House</span></div>
+                    <div class="word-card">مَال<span>مال - Wealth</span></div>
+                    <div class="word-card">نُور<span>نور - Light</span></div>
+                    <div class="word-card">يَوْم<span>يوم - Day</span></div>
+                    <div class="word-card">قُوَّة<span>قوة - Power</span></div>
+                    <div class="word-card">دِين<span>دين - Religion</span></div>
+                    <div class="word-card">كَرِيم<span>كريم - Generous</span></div>
+                    <div class="word-card">رَحِيم<span>رحيم - Merciful</span></div>
+                    <div class="word-card">سَمَاء<span>سماء - Sky</span></div>
+                    <div class="word-card">إِيمَان<span>إيمان - Faith</span></div>
+                    <div class="word-card">قُرْآن<span>قرآن - Quran</span></div>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2 class="section-title">🌙 كلمات من القرآن</h2>
+                <p class="section-subtitle">كلمات قرآنية تجمع التنوين والمدود.</p>
+                <div class="word-grid">
+                    <div class="word-card">هُدًى<span>هدى - Guidance</span></div>
+                    <div class="word-card">رَحْمَةً<span>رحمة - Mercy</span></div>
+                    <div class="word-card">نُورًا<span>نورا - Light</span></div>
+                    <div class="word-card">شُكْرًا<span>شكرا - Thanks</span></div>
+                    <div class="word-card">صَبْرًا<span>صبرا - Patience</span></div>
+                    <div class="word-card">عِلْمًا<span>علما - Knowledge</span></div>
+                    <div class="word-card">حِكْمَةً<span>حكمة - Wisdom</span></div>
+                    <div class="word-card">رِزْقًا<span>رزقا - Provision</span></div>
+                    <div class="word-card">فَضْلًا<span>فضلا - Grace</span></div>
+                </div>
+                <div class="accent-panel mt-4">
+                    🌟 ممتاز! أنت الآن تقرأ كلمات القرآن بثقة وإتقان.
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

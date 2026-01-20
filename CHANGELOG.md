@@ -15,6 +15,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Lesson 9: Fun with Multiplication (conceptual groups)
   - Lesson 10: Basic Division - Sharing concept
 
+## [0.4.0] - 2026-01-20
+
+### Added
+- **Major Iqra Curriculum Expansion** - Comprehensive 9-lesson set for ages 3-9
+  - Iqra 7: Sukun and Shaddah (advanced letter combinations)
+  - Iqra 8: Tanween and long vowels (madd)
+  - Iqra 9: Quranic reading with basic tajweed principles
+
+### Enhanced
+- **Iqra 5**: Expanded from 6 letters to all 28 Arabic letters
+  - Complete coverage of letter forms in all positions (beginning, middle, end)
+  - Systematic alphabetical organization from Alif to Ya
+  - Enhanced visual presentation with color-coded cards
+- **Iqra 6**: Added more comprehensive blending exercises
+  - Expanded word list (12+ words instead of 6)
+  - New Quranic words section for spiritual context
+  - Progressive blending from 2-letter to 3-letter combinations
+
+### Documentation
+- Updated IQRA_LESSON_GUIDE.md with comprehensive lesson descriptions
+- Added age-appropriate learning paths (3-5, 6-7, 8-9 years)
+- Documented learning outcomes for complete curriculum
+- Updated README.md to reflect Iqra 1-9 coverage
+- Added detailed content breakdown for all new lessons
+
+### Changed
+- Home page (index.html) now includes navigation for all 9 Iqra lessons
+- Arabic numerals (١-٩) used consistently across navigation
+
 ## [0.3.0] - 2026-02-10
 
 ### Added
