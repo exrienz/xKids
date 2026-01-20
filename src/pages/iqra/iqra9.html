@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📖 إقرأ ٩ - Iqra 9 - Quranic Reading & Tajweed</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            --secondary-gradient: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+            --accent-gradient: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+            --gold-gradient: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+            --teal-gradient: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
+            --surface: rgba(255, 255, 255, 0.96);
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --text-muted: #6b7280;
+            --radius-md: 12px;
+            --radius-lg: 18px;
+            --radius-xl: 26px;
+            --shadow-md: 0 6px 14px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 14px 26px rgba(0, 0, 0, 0.12);
+            --transition-smooth: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #059669 0%, #10b981 30%, #7c3aed 70%, #dc2626 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        .app-header {
+            background: var(--surface);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            text-align: center;
+        }
+
+        .app-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .app-subtitle {
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .home-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            background: #fff;
+            border-radius: 999px;
+            text-decoration: none;
+            color: var(--text-primary);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-smooth);
+        }
+
+        .home-button:hover {
+            transform: translateY(-2px);
+            color: #059669;
+        }
+
+        .lesson-section {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .tajweed-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .tajweed-card {
+            background: var(--primary-gradient);
+            color: #fff;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-smooth);
+        }
+
+        .tajweed-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .tajweed-card h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .tajweed-card p {
+            font-size: 0.9rem;
+            margin: 0;
+            opacity: 0.95;
+            line-height: 1.5;
+        }
+
+        .tajweed-card .example {
+            font-family: 'Amiri', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .quran-verse {
+            background: var(--secondary-gradient);
+            color: #fff;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .quran-verse .arabic {
+            font-family: 'Amiri', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 2;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .quran-verse .reference {
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 600;
+            opacity: 0.95;
+            margin-bottom: 0.5rem;
+        }
+
+        .quran-verse .translation {
+            text-align: center;
+            font-size: 0.95rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .practice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .practice-card {
+            background: var(--gold-gradient);
+            color: #fff;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-smooth);
+        }
+
+        .practice-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .practice-card .arabic {
+            font-family: 'Amiri', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .practice-card .meaning {
+            font-size: 0.9rem;
+            opacity: 0.95;
+        }
+
+        .info-box {
+            background: #f3f4f6;
+            border-left: 4px solid #059669;
+            border-radius: var(--radius-md);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-box h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .info-box p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        .accent-panel {
+            background: var(--accent-gradient);
+            color: #fff;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .surah-card {
+            background: var(--teal-gradient);
+            color: #fff;
+            border-radius: var(--radius-md);
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .surah-card .surah-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .surah-card .surah-arabic {
+            font-family: 'Amiri', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.8;
+            margin: 1rem 0;
+        }
+
+        .surah-card .surah-translation {
+            font-size: 0.95rem;
+            opacity: 0.95;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .home-button {
+                position: static;
+                margin-bottom: 1rem;
+            }
+
+            .app-header {
+                text-align: right;
+            }
+
+            .quran-verse .arabic {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <a href="../../index.html" class="home-button" aria-label="Back to Home">
+                <span>🏠</span>
+                <span>Home</span>
+            </a>
+            <h1 class="app-title">📖 إقرأ ٩ - Iqra 9</h1>
+            <p class="app-subtitle">قراءة القرآن وأساسيات التجويد - Quranic Reading & Tajweed Basics</p>
+        </header>
+
+        <main>
+            <section class="lesson-section">
+                <h2 class="section-title">🎯 ما هو التجويد؟ - What is Tajweed?</h2>
+                <div class="info-box">
+                    <h4>التجويد - Tajweed</h4>
+                    <p>التجويد هو علم يُعنى بتحسين تلاوة القرآن الكريم وإعطاء كل حرف حقه ومستحقه من الصفات والأحكام.</p>
+                    <p class="mt-2">Tajweed is the science of reciting the Quran correctly, giving each letter its rights and characteristics.</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2 class="section-title">📚 قواعد أساسية - Basic Rules</h2>
+                <p class="section-subtitle">تعرّف على بعض القواعد المهمة في التجويد.</p>
+                <div class="tajweed-grid">
+                    <div class="tajweed-card">
+                        <h4>الإدغام - Idgham</h4>
+                        <p>إدماج التنوين أو النون الساكنة في الحرف التالي</p>
+                        <div class="example">مِنْ رَبِّهِمْ</div>
+                    </div>
+                    <div class="tajweed-card">
+                        <h4>الإخفاء - Ikhfa</h4>
+                        <p>إخفاء صوت النون الساكنة أو التنوين</p>
+                        <div class="example">مَنْ شَاءَ</div>
+                    </div>
+                    <div class="tajweed-card">
+                        <h4>الإظهار - Izhar</h4>
+                        <p>إظهار النون الساكنة أو التنوين بوضوح</p>
+                        <div class="example">مِنْ أَمْرِ</div>
+                    </div>
+                    <div class="tajweed-card">
+                        <h4>القلقلة - Qalqalah</h4>
+                        <p>صوت ارتداد عند حروف: ق ط ب ج د</p>
+                        <div class="example">الْحَقّ</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2 class="section-title">🌟 سور قصيرة للتدريب - Short Surahs for Practice</h2>
+                <p class="section-subtitle">ابدأ بالسور القصيرة من جزء عم.</p>
+
+                <div class="surah-card">
+                    <div class="surah-name">سورة الإخلاص - Surah Al-Ikhlas (112)</div>
+                    <div class="surah-arabic">
+                        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ<br>
+                        قُلْ هُوَ اللَّهُ أَحَدٌ ۝<br>
+                        اللَّهُ الصَّمَدُ ۝<br>
+                        لَمْ يَلِدْ وَلَمْ يُولَدْ ۝<br>
+                        وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ ۝
+                    </div>
+                    <div class="surah-translation">
+                        Say: He is Allah, the One. Allah, the Eternal. He begets not, nor was He begotten. And there is none comparable to Him.
+                    </div>
+                </div>
+
+                <div class="surah-card">
+                    <div class="surah-name">سورة الفلق - Surah Al-Falaq (113)</div>
+                    <div class="surah-arabic">
+                        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ<br>
+                        قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۝<br>
+                        مِن شَرِّ مَا خَلَقَ ۝<br>
+                        وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ۝<br>
+                        وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ۝<br>
+                        وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ ۝
+                    </div>
+                    <div class="surah-translation">
+                        Say: I seek refuge in the Lord of daybreak, from the evil of what He created, and from the evil of darkness when it settles, and from the evil of the blowers in knots, and from the evil of an envier when he envies.
+                    </div>
+                </div>
+
+                <div class="surah-card">
+                    <div class="surah-name">سورة الناس - Surah An-Nas (114)</div>
+                    <div class="surah-arabic">
+                        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ<br>
+                        قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝<br>
+                        مَلِكِ النَّاسِ ۝<br>
+                        إِلَٰهِ النَّاسِ ۝<br>
+                        مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ۝<br>
+                        الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۝<br>
+                        مِنَ الْجِنَّةِ وَالنَّاسِ ۝
+                    </div>
+                    <div class="surah-translation">
+                        Say: I seek refuge in the Lord of mankind, the Sovereign of mankind, the God of mankind, from the evil of the retreating whisperer, who whispers in the hearts of mankind, from among the jinn and mankind.
+                    </div>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2 class="section-title">🌙 كلمات وعبارات قرآنية شائعة</h2>
+                <p class="section-subtitle">تدرّب على الكلمات التي تتكرر كثيرًا في القرآن.</p>
+                <div class="practice-grid">
+                    <div class="practice-card">
+                        <div class="arabic">بِسْمِ اللَّهِ</div>
+                        <div class="meaning">Bismillah - In the name of Allah</div>
+                    </div>
+                    <div class="practice-card">
+                        <div class="arabic">الْحَمْدُ لِلَّهِ</div>
+                        <div class="meaning">Alhamdulillah - Praise be to Allah</div>
+                    </div>
+                    <div class="practice-card">
+                        <div class="arabic">سُبْحَانَ اللَّهِ</div>
+                        <div class="meaning">Subhanallah - Glory to Allah</div>
+                    </div>
+                    <div class="practice-card">
+                        <div class="arabic">اللَّهُ أَكْبَر</div>
+                        <div class="meaning">Allahu Akbar - Allah is Greatest</div>
+                    </div>
+                    <div class="practice-card">
+                        <div class="arabic">لَا إِلَٰهَ إِلَّا اللَّهُ</div>
+                        <div class="meaning">La ilaha illallah - No god but Allah</div>
+                    </div>
+                    <div class="practice-card">
+                        <div class="arabic">إِنْ شَاءَ اللَّهُ</div>
+                        <div class="meaning">In sha Allah - If Allah wills</div>
+                    </div>
+                    <div class="practice-card">
+                        <div class="arabic">مَا شَاءَ اللَّهُ</div>
+                        <div class="meaning">Ma sha Allah - As Allah willed</div>
+                    </div>
+                    <div class="practice-card">
+                        <div class="arabic">جَزَاكَ اللَّهُ خَيْرًا</div>
+                        <div class="meaning">May Allah reward you with good</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2 class="section-title">🎓 نصائح لتحسين التلاوة - Tips for Better Recitation</h2>
+                <div class="info-box">
+                    <h4>١. الاستماع المتكرر</h4>
+                    <p>استمع إلى قراء مشهورين مثل الشيخ عبد الباسط عبد الصمد والشيخ محمد صديق المنشاوي.</p>
+                </div>
+                <div class="info-box">
+                    <h4>٢. التدرب اليومي</h4>
+                    <p>خصص وقتًا يوميًا لقراءة القرآن ولو صفحة واحدة.</p>
+                </div>
+                <div class="info-box">
+                    <h4>٣. التعلم من معلم</h4>
+                    <p>ابحث عن معلم تجويد لتصحيح مخارج الحروف والأحكام.</p>
+                </div>
+                <div class="info-box">
+                    <h4>٤. الترتيل ببطء</h4>
+                    <p>لا تستعجل في القراءة، اقرأ بتأنٍّ وتمعّن.</p>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <div class="accent-panel">
+                    🌟 مبروك! أنهيت دروس إقرأ التسعة!<br>
+                    أنت الآن جاهز لقراءة القرآن الكريم بإتقان. واصل التدرب والتحسين.<br>
+                    بَارَكَ اللَّهُ فِيكَ
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📖 إقرأ ٧ - Iqra 7 - Sukun & Advanced Combinations</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --secondary-gradient: linear-gradient(135deg, #14b8a6 0%, #22c55e 100%);
+            --accent-gradient: linear-gradient(135deg, #f97316 0%, #facc15 100%);
+            --purple-gradient: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+            --surface: rgba(255, 255, 255, 0.96);
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --text-muted: #6b7280;
+            --radius-md: 12px;
+            --radius-lg: 18px;
+            --radius-xl: 26px;
+            --shadow-md: 0 6px 14px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 14px 26px rgba(0, 0, 0, 0.12);
+            --transition-smooth: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #7c3aed 0%, #6366f1 40%, #ec4899 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        .app-header {
+            background: var(--surface);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            text-align: center;
+        }
+
+        .app-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .app-subtitle {
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .home-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            background: #fff;
+            border-radius: 999px;
+            text-decoration: none;
+            color: var(--text-primary);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-smooth);
+        }
+
+        .home-button:hover {
+            transform: translateY(-2px);
+            color: #4338ca;
+        }
+
+        .lesson-section {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .sukun-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .sukun-card {
+            background: var(--purple-gradient);
+            color: #fff;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-smooth);
+        }
+
+        .sukun-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .sukun-card .letter {
+            font-family: 'Amiri', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .sukun-card .sound {
+            font-size: 0.9rem;
+            opacity: 0.95;
+        }
+
+        .word-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem;
+        }
+
+        .word-card {
+            background: var(--secondary-gradient);
+            color: #fff;
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            text-align: center;
+            font-family: 'Amiri', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-smooth);
+        }
+
+        .word-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .word-card span {
+            display: block;
+            font-size: 0.9rem;
+            font-family: 'Poppins', sans-serif;
+            margin-top: 0.4rem;
+        }
+
+        .info-box {
+            background: #f3f4f6;
+            border-left: 4px solid #7c3aed;
+            border-radius: var(--radius-md);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-box h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .info-box p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        .combination-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .combination-card {
+            background: var(--accent-gradient);
+            color: #fff;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .combination-card .arabic {
+            font-family: 'Amiri', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .combination-card .transliteration {
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        .accent-panel {
+            background: var(--purple-gradient);
+            color: #fff;
+            border-radius: var(--radius-md);
+            padding: 1.25rem 1.5rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .home-button {
+                position: static;
+                margin-bottom: 1rem;
+            }
+
+            .app-header {
+                text-align: right;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <a href="../../index.html" class="home-button" aria-label="Back to Home">
+                <span>🏠</span>
+                <span>Home</span>
+            </a>
+            <h1 class="app-title">📖 إقرأ ٧ - Iqra 7</h1>
+            <p class="app-subtitle">السكون والتشكيلات المتقدمة - Sukun & Advanced Combinations</p>
+        </header>
+
+        <main>
+            <section class="lesson-section">
+                <h2 class="section-title">🎯 مفهوم السكون - Understanding Sukun</h2>
+                <div class="info-box">
+                    <h4>ما هو السكون؟ - What is Sukun?</h4>
+                    <p>السكون (◌ْ) علامة توضع فوق الحرف لتدل على عدم وجود حركة بعده. الحرف الساكن يُنطق بدون أي صوت حركة.</p>
+                    <p class="mt-2">Sukun (◌ْ) is a diacritical mark placed above a letter to indicate that it has no vowel sound following it.</p>
+                </div>
+                <div class="sukun-grid">
+                    <div class="sukun-card">
+                        <span class="letter">بْ</span>
+                        <span class="sound">B (no vowel)</span>
+                    </div>
+                    <div class="sukun-card">
+                        <span class="letter">تْ</span>
+                        <span class="sound">T (no vowel)</span>
+                    </div>
+                    <div class="sukun-card">
+                        <span class="letter">مْ</span>
+                        <span class="sound">M (no vowel)</span>
+                    </div>
+                    <div class="sukun-card">
+                        <span class="letter">نْ</span>
+                        <span class="sound">N (no vowel)</span>
+                    </div>
+                    <div class="sukun-card">
+                        <span class="letter">لْ</span>
+                        <span class="sound">L (no vowel)</span>
+                    </div>
+                    <div class="sukun-card">
+                        <span class="letter">رْ</span>
+                        <span class="sound">R (no vowel)</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2 class="section-title">🔤 كلمات تحتوي على السكون</h2>
+                <p class="section-subtitle">تدرّب على قراءة كلمات بها حروف ساكنة.</p>
+                <div class="word-grid">
+                    <div class="word-card">مَسْجِد<span>مسجد - Mosque</span></div>
+                    <div class="word-card">كَلْب<span>كلب - Dog</span></div>
+                    <div class="word-card">شَمْس<span>شمس - Sun</span></div>
+                    <div class="word-card">قَلْب<span>قلب - Heart</span></div>
+                    <div class="word-card">عِلْم<span>علم - Knowledge</span></div>
+                    <div class="word-card">حَمْد<span>حمد - Praise</span></div>
+                    <div class="word-card">صَبْر<span>صبر - Patience</span></div>
+                    <div class="word-card">فَضْل<span>فضل - Grace</span></div>
+                    <div class="word-card">رِزْق<span>رزق - Provision</span></div>
+                    <div class="word-card">نَصْر<span>نصر - Victory</span></div>
+                    <div class="word-card">عَقْل<span>عقل - Mind</span></div>
+                    <div class="word-card">فِكْر<span>فكر - Thought</span></div>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2 class="section-title">🌟 الشدّة - Shaddah (Doubling)</h2>
+                <div class="info-box">
+                    <h4>الشدّة (◌ّ)</h4>
+                    <p>الشدّة علامة توضع فوق الحرف لتدل على تضعيفه - أي نطقه مرتين.</p>
+                    <p class="mt-2">Shaddah (◌ّ) indicates that a letter is doubled or pronounced twice.</p>
+                </div>
+                <div class="combination-grid">
+                    <div class="combination-card">
+                        <span class="arabic">بَّ</span>
+                        <span class="transliteration">ba + ba = bba</span>
+                    </div>
+                    <div class="combination-card">
+                        <span class="arabic">لَّ</span>
+                        <span class="transliteration">la + la = lla</span>
+                    </div>
+                    <div class="combination-card">
+                        <span class="arabic">مَّ</span>
+                        <span class="transliteration">ma + ma = mma</span>
+                    </div>
+                    <div class="combination-card">
+                        <span class="arabic">نَّ</span>
+                        <span class="transliteration">na + na = nna</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2 class="section-title">📚 كلمات بالشدّة</h2>
+                <p class="section-subtitle">اقرأ الكلمات التي تحتوي على الشدّة.</p>
+                <div class="word-grid">
+                    <div class="word-card">رَبّ<span>رب - Lord</span></div>
+                    <div class="word-card">حَقّ<span>حق - Truth</span></div>
+                    <div class="word-card">عَمّ<span>عم - Uncle</span></div>
+                    <div class="word-card">جَدّ<span>جد - Grandfather</span></div>
+                    <div class="word-card">حَجّ<span>حج - Pilgrimage</span></div>
+                    <div class="word-card">شَرّ<span>شر - Evil</span></div>
+                    <div class="word-card">خَيْر<span>خير - Good</span></div>
+                    <div class="word-card">صَلَّى<span>صلى - He prayed</span></div>
+                    <div class="word-card">كُلّ<span>كل - All</span></div>
+                </div>
+            </section>
+
+            <section class="lesson-section">
+                <h2 class="section-title">🎓 تمارين متقدمة - Advanced Practice</h2>
+                <p class="section-subtitle">كلمات تجمع بين السكون والشدّة.</p>
+                <div class="word-grid">
+                    <div class="word-card">مُحَمَّد<span>محمد - Muhammad</span></div>
+                    <div class="word-card">اللَّه<span>الله - Allah</span></div>
+                    <div class="word-card">صَلَّى<span>صلى - Prayed</span></div>
+                    <div class="word-card">سَلَّم<span>سلم - Peace</span></div>
+                    <div class="word-card">كَرَّم<span>كرم - Honored</span></div>
+                    <div class="word-card">عَلَّم<span>علم - Taught</span></div>
+                </div>
+                <div class="accent-panel mt-4">
+                    🌟 أحسنت! أنت الآن جاهز لقراءة كلمات أكثر تعقيدًا من القرآن الكريم.
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

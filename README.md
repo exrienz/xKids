@@ -11,13 +11,16 @@ Educational web applications for children to learn Malaysian and Arabic reading 
   - Level 4: Asas 3 Suku-Kata (Basic 3 Syllables)
   - Level 5: Ayat Ringkas (Simple Sentences)
 
-- **Arabic Reading (Iqra 1-6)** - Traditional Islamic reading curriculum
+- **Arabic Reading (Iqra 1-9)** - Traditional Islamic reading curriculum for ages 3-9
   - Iqra 1: Basic Arabic letters
   - Iqra 2: Vowel marks (harakat) with letters
   - Iqra 3: Word formation
   - Iqra 4: Three-letter word reading
-  - Iqra 5: Letter forms (beginning, middle, end)
+  - Iqra 5: Letter forms in all positions (all 28 letters)
   - Iqra 6: Letter blending and short words
+  - Iqra 7: Sukun and Shaddah (advanced combinations)
+  - Iqra 8: Tanween and long vowels (madd)
+  - Iqra 9: Quranic reading with basic tajweed
 
 - **Math Module (Levels 1-10)** - Interactive math learning for ages 3-6
   - Level 1: Number Recognition (1-10) ✅
@@ -134,8 +137,11 @@ src/
     │   ├── iqra2.html     # Iqra 2: Harakat with letters
     │   ├── iqra3.html     # Iqra 3: Word formation
     │   ├── iqra4.html     # Iqra 4: Three-letter words
-    │   ├── iqra5.html     # Iqra 5: Letter forms by position
-    │   └── iqra6.html     # Iqra 6: Blending and short words
+    │   ├── iqra5.html     # Iqra 5: All 28 letter forms by position
+    │   ├── iqra6.html     # Iqra 6: Blending and short words
+    │   ├── iqra7.html     # Iqra 7: Sukun and Shaddah
+    │   ├── iqra8.html     # Iqra 8: Tanween and long vowels
+    │   └── iqra9.html     # Iqra 9: Quranic reading with tajweed
     └── math/              # Math learning module (NEW!)
         ├── math1.html     # Level 1: Number Recognition
         ├── math2.html     # Level 2: Addition within 5
