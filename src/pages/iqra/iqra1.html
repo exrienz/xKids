@@ -777,7 +777,7 @@
         </header>
 
         <div class="mode-indicator" id="modeIndicator">
-            🔤 Mode: تعلم الحروف الأساسية - Basic Letter Learning
+            🔤 Mode: Basic Letter Learning - تعلم الحروف الأساسية
         </div>
 
         <div class="row g-4">
@@ -794,72 +794,72 @@
             <div class="col-lg-4">
                 <div class="card">
                     <div class="card-body score-card">
-                        <div class="score-label">🎯 النتيجة - Score</div>
+                        <div class="score-label">🎯 Score - النتيجة</div>
                         <div class="score-display" id="scoreDisplay">0/14</div>
                         
                         <!-- Range Selection Controls -->
                         <div class="range-selection mb-4" style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,0.2);">
                             <div class="range-title" style="font-weight: 600; margin-bottom: 0.75rem; text-align: center; color: var(--text-primary);">
-                                📍 اختيار المدى - Select Range
+                                📍 Select Range - اختيار المدى
                             </div>
                             <div class="row g-2 mb-3">
                                 <div class="col-6">
                                     <select id="startLetter" class="form-select" style="border-radius: var(--radius-md); font-family: 'Amiri', serif; font-size: 1.1rem;">
                                         <!-- Options will be populated by JavaScript -->
                                     </select>
-                                    <small style="color: var(--text-muted); font-size: 0.8rem;">من - From</small>
+                                    <small style="color: var(--text-muted); font-size: 0.8rem;">From - من</small>
                                 </div>
                                 <div class="col-6">
                                     <select id="endLetter" class="form-select" style="border-radius: var(--radius-md); font-family: 'Amiri', serif; font-size: 1.1rem;">
                                         <!-- Options will be populated by JavaScript -->
                                     </select>
-                                    <small style="color: var(--text-muted); font-size: 0.8rem;">إلى - To</small>
+                                    <small style="color: var(--text-muted); font-size: 0.8rem;">To - إلى</small>
                                 </div>
                             </div>
                             <button class="btn btn-neutral-enhanced btn-enhanced btn-sm" onclick="applyRange()" style="width: 100%; font-size: 0.9rem;">
-                                ✅ تطبيق المدى - Apply Range
+                                ✅ Apply Range - تطبيق المدى
                             </button>
                         </div>
 
                         <div class="d-grid gap-3 mb-4">
                             <button class="btn btn-primary-enhanced btn-enhanced" onclick="refreshLetters()">
-                                🔄 حروف جديدة - New Letters
+                                🔄 New Letters - حروف جديدة
                             </button>
                             <button class="btn btn-warning-enhanced btn-enhanced" onclick="showIncorrectOnly()" id="retryBtn" disabled>
-                                🔁 إعادة الخطأ - Retry Wrong
+                                🔁 Retry Wrong - إعادة الخطأ
                             </button>
                             <button class="btn btn-success-enhanced btn-enhanced" onclick="resetGame()">
-                                🎮 البداية - Start Over
+                                🎮 Start Over - البداية
                             </button>
                         </div>
                         
                         <div class="status-container">
                             <div class="status-badge status-correct">
-                                ✅ صحيح<br><span id="correctCount">0</span>
+                                ✅ Correct<br>صحيح<br><span id="correctCount">0</span>
                             </div>
                             <div class="status-badge status-incorrect">
-                                ❌ خطأ<br><span id="incorrectCount">0</span>
+                                ❌ Wrong<br>خطأ<br><span id="incorrectCount">0</span>
                             </div>
                         </div>
                         
                         <div class="instructions">
-                            <div class="instructions-title">🎯 طريقة اللعب - How to Play:</div>
+                            <div class="instructions-title">🎯 How to Play:</div>
                             <div class="instructions-content">
                                 <div class="instructions-step">
                                     <div class="step-number">1</div>
-                                    <div>اضغط على الحرف لتسمع صوته - Click letter to hear sound</div>
+                                    <div>Click letter to hear sound</div>
                                 </div>
                                 <div class="instructions-step">
                                     <div class="step-number">2</div>
-                                    <div>أخضر = صحيح 💚، أحمر = خطأ ❤️ - Green = Correct, Red = Wrong</div>
+                                    <div>Green = Correct 💚, Red = Wrong ❤️</div>
                                 </div>
                                 <div class="instructions-step">
                                     <div class="step-number">3</div>
-                                    <div>تعلم النطق الصحيح - Learn correct pronunciation</div>
+                                    <div>Learn correct pronunciation</div>
                                 </div>
                                 <div class="instructions-step">
                                     <div class="step-number">4</div>
-                                    <div>كرر الحروف الخاطئة - Repeat wrong letters</div>
+                                    <div>Repeat wrong letters</div>
                                 </div>
                             </div>
                         </div>
@@ -926,7 +926,7 @@
             const endIndex = parseInt(document.getElementById('endLetter').value);
             
             if (startIndex > endIndex) {
-                showCustomAlert('⚠️ تحذير: يجب أن يكون الحرف الأول قبل الحرف الأخير! - Warning: Start letter must come before end letter!', 'warning');
+                showCustomAlert('⚠️ Warning: Start letter must come before end letter! - تحذير: يجب أن يكون الحرف الأول قبل الحرف الأخير!', 'warning');
                 return;
             }
             
@@ -935,7 +935,7 @@
             
             const startLetter = allLetters[startIndex];
             const endLetter = allLetters[endIndex];
-            showCustomAlert(`✅ تم تطبيق المدى من ${startLetter} إلى ${endLetter} - Range applied from ${startLetter} to ${endLetter}`, 'success');
+            showCustomAlert(`✅ Range applied from ${startLetter} to ${endLetter} - تم تطبيق المدى من ${startLetter} إلى ${endLetter}`, 'success');
         }
 
         function addFloatingShapes() {
@@ -999,7 +999,7 @@
             }
             
             if (incorrectLetters.length === 0) {
-                showCustomAlert('🎉 ممتاز! لا توجد حروف خاطئة للإعادة! - Excellent! No wrong letters to retry!', 'success');
+                showCustomAlert('🎉 Excellent! No wrong letters to retry! - ممتاز! لا توجد حروف خاطئة للإعادة!', 'success');
                 return;
             }
             
@@ -1027,10 +1027,10 @@
         function updateModeIndicator() {
             const indicator = document.getElementById('modeIndicator');
             if (currentMode === 'normal') {
-                indicator.textContent = '🔤 Mode: تعلم الحروف الأساسية - Basic Letter Learning';
+                indicator.textContent = '🔤 Mode: Basic Letter Learning - تعلم الحروف الأساسية';
                 indicator.style.setProperty('--indicator-color', 'var(--primary-color)');
             } else {
-                indicator.textContent = '🔄 Mode: إعادة الحروف الخاطئة - Retry Wrong Letters';
+                indicator.textContent = '🔄 Mode: Retry Wrong Letters - إعادة الحروف الخاطئة';
                 indicator.style.setProperty('--indicator-color', 'var(--warning-color)');
             }
         }
@@ -1170,10 +1170,10 @@
             if (correctCount + incorrectCount === currentLetters.length) {
                 setTimeout(() => {
                     if (incorrectCount === 0) {
-                        showCustomAlert('🎉 ممتاز! جميع الحروف صحيحة! - Excellent! All letters correct!', 'success');
+                        showCustomAlert('🎉 Excellent! All letters correct! - ممتاز! جميع الحروف صحيحة!', 'success');
                         playCompletionSound();
                     } else if (currentMode === 'normal') {
-                        showCustomAlert(`🌟 أحسنت! حصلت على ${correctCount} من أصل ${currentLetters.length} حرف صحيح! - Well done! You got ${correctCount} out of ${currentLetters.length} letters correct!`, 'info');
+                        showCustomAlert(`🌟 Well done! You got ${correctCount} out of ${currentLetters.length} letters correct! - أحسنت! حصلت على ${correctCount} من أصل ${currentLetters.length} حرف صحيح!`, 'info');
                     } else if (currentMode === 'incorrect') {
                         // Automatically continue with incorrect letters only
                         setTimeout(() => {

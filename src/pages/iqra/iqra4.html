@@ -865,7 +865,7 @@
 
 
         <div class="mode-indicator" id="modeIndicator">
-            📚 Mode: تعلم الكلمات الثلاثية - Learning Three Letter Words
+            📚 Mode: Learning Three Letter Words - تعلم الكلمات الثلاثية
         </div>
 
         <div class="row g-4">
@@ -882,72 +882,72 @@
             <div class="col-lg-4">
                 <div class="card">
                     <div class="card-body score-card">
-                        <div class="score-label">🎯 النتيجة - Score</div>
+                        <div class="score-label">🎯 Score - النتيجة</div>
                         <div class="score-display" id="scoreDisplay">0/20</div>
                         
                         <!-- Range Selection Controls -->
                         <div class="range-selection mb-4" style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,0.2);">
                             <div class="range-title" style="font-weight: 600; margin-bottom: 0.75rem; text-align: center; color: var(--text-primary);">
-                                📍 اختيار المدى - Select Range
+                                📍 Select Range - اختيار المدى
                             </div>
                             <div class="row g-2 mb-3">
                                 <div class="col-6">
                                     <select id="startLetter" class="form-select" style="border-radius: var(--radius-md); font-family: 'Amiri', serif; font-size: 1.1rem;">
                                         <!-- Options will be populated by JavaScript -->
                                     </select>
-                                    <small style="color: var(--text-muted); font-size: 0.8rem;">من - From</small>
+                                    <small style="color: var(--text-muted); font-size: 0.8rem;">From - من</small>
                                 </div>
                                 <div class="col-6">
                                     <select id="endLetter" class="form-select" style="border-radius: var(--radius-md); font-family: 'Amiri', serif; font-size: 1.1rem;">
                                         <!-- Options will be populated by JavaScript -->
                                     </select>
-                                    <small style="color: var(--text-muted); font-size: 0.8rem;">إلى - To</small>
+                                    <small style="color: var(--text-muted); font-size: 0.8rem;">To - إلى</small>
                                 </div>
                             </div>
                             <button class="btn btn-neutral-enhanced btn-enhanced btn-sm" onclick="applyRange()" style="width: 100%; font-size: 0.9rem;">
-                                ✅ تطبيق المدى - Apply Range
+                                ✅ Apply Range - تطبيق المدى
                             </button>
                         </div>
 
                         <div class="d-grid gap-3 mb-4">
                             <button class="btn btn-primary-enhanced btn-enhanced" onclick="refreshWords()">
-                                🔄 كلمات جديدة - New Words
+                                🔄 New Words - كلمات جديدة
                             </button>
                             <button class="btn btn-warning-enhanced btn-enhanced" onclick="showIncorrectOnly()" id="retryBtn" disabled>
-                                🔁 إعادة الخطأ - Retry Wrong
+                                🔁 Retry Wrong - إعادة الخطأ
                             </button>
                             <button class="btn btn-success-enhanced btn-enhanced" onclick="resetGame()">
-                                🎮 البداية - Start Over
+                                🎮 Start Over - البداية
                             </button>
                         </div>
                         
                         <div class="status-container">
                             <div class="status-badge status-correct">
-                                ✅ صحيح<br><span id="correctCount">0</span>
+                                ✅ Correct<br>صحيح<br><span id="correctCount">0</span>
                             </div>
                             <div class="status-badge status-incorrect">
-                                ❌ خطأ<br><span id="incorrectCount">0</span>
+                                ❌ Wrong<br>خطأ<br><span id="incorrectCount">0</span>
                             </div>
                         </div>
                         
                         <div class="instructions">
-                            <div class="instructions-title">🎯 طريقة اللعب - How to Play:</div>
+                            <div class="instructions-title">🎯 How to Play:</div>
                             <div class="instructions-content">
                                 <div class="instructions-step">
                                     <div class="step-number">1</div>
-                                    <div>اختر نطاق الحروف أولاً - Choose letter range first</div>
+                                    <div>Choose letter range first</div>
                                 </div>
                                 <div class="instructions-step">
                                     <div class="step-number">2</div>
-                                    <div>اضغط على الكلمة لتعلم قراءتها - Click word to learn reading</div>
+                                    <div>Click word to learn reading</div>
                                 </div>
                                 <div class="instructions-step">
                                     <div class="step-number">3</div>
-                                    <div>تعلم تركيب الحروف الثلاثة - Learn three letter combinations</div>
+                                    <div>Learn three letter combinations</div>
                                 </div>
                                 <div class="instructions-step">
                                     <div class="step-number">4</div>
-                                    <div>كرر الكلمات حتى الإتقان - Repeat until mastery</div>
+                                    <div>Repeat until mastery</div>
                                 </div>
                             </div>
                         </div>
@@ -1010,7 +1010,7 @@
             const endIndex = parseInt(document.getElementById('endLetter').value);
             
             if (startIndex > endIndex) {
-                showCustomAlert('⚠️ تحذير: يجب أن يكون الحرف الأول قبل الحرف الأخير! - Warning: Start letter must come before end letter!', 'warning');
+                showCustomAlert('⚠️ Warning: Start letter must come before end letter! - تحذير: يجب أن يكون الحرف الأول قبل الحرف الأخير!', 'warning');
                 return;
             }
             
@@ -1020,7 +1020,7 @@
             
             const startLetter = allLetters[startIndex];
             const endLetter = allLetters[endIndex];
-            showCustomAlert(`✅ تم تطبيق المدى من ${startLetter} إلى ${endLetter} - Range applied from ${startLetter} to ${endLetter}`, 'success');
+            showCustomAlert(`✅ Range applied from ${startLetter} to ${endLetter} - تم تطبيق المدى من ${startLetter} إلى ${endLetter}`, 'success');
         }
 
         function initGame() {
@@ -1122,7 +1122,7 @@
             }
             
             if (incorrectWords.length === 0) {
-                showCustomAlert('🎉 ممتاز! لا توجد كلمات خاطئة للإعادة! - Excellent! No wrong words to retry!', 'success');
+                showCustomAlert('🎉 Excellent! No wrong words to retry! - ممتاز! لا توجد كلمات خاطئة للإعادة!', 'success');
                 return;
             }
             
@@ -1150,10 +1150,10 @@
         function updateModeIndicator() {
             const indicator = document.getElementById('modeIndicator');
             if (currentMode === 'normal') {
-                indicator.textContent = '📚 Mode: تعلم الكلمات الثلاثية - Learning Three Letter Words';
+                indicator.textContent = '📚 Mode: Learning Three Letter Words - تعلم الكلمات الثلاثية';
                 indicator.style.setProperty('--indicator-color', 'var(--primary-color)');
             } else {
-                indicator.textContent = '🔄 Mode: إعادة الكلمات الخاطئة - Retry Wrong Words';
+                indicator.textContent = '🔄 Mode: Retry Wrong Words - إعادة الكلمات الخاطئة';
                 indicator.style.setProperty('--indicator-color', 'var(--warning-color)');
             }
         }
@@ -1298,10 +1298,10 @@
             if (correctCount + incorrectCount === currentWords.length) {
                 setTimeout(() => {
                     if (incorrectCount === 0) {
-                        showCustomAlert('🎉 ممتاز! جميع الكلمات صحيحة! - Excellent! All words correct!', 'success');
+                        showCustomAlert('🎉 Excellent! All words correct! - ممتاز! جميع الكلمات صحيحة!', 'success');
                         playCompletionSound();
                     } else if (currentMode === 'normal') {
-                        showCustomAlert(`🌟 أحسنت! حصلت على ${correctCount} من أصل ${currentWords.length} كلمة صحيحة! - Well done! You got ${correctCount} out of ${currentWords.length} words correct!`, 'info');
+                        showCustomAlert(`🌟 Well done! You got ${correctCount} out of ${currentWords.length} words correct! - أحسنت! حصلت على ${correctCount} من أصل ${currentWords.length} كلمة صحيحة!`, 'info');
                     } else if (currentMode === 'incorrect') {
                         // Automatically continue with incorrect words only
                         setTimeout(() => {
