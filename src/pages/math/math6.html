@@ -3,19 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>➕ Fun Math - Two-digit Addition</title>
+    <title>➖ Fun Math - Subtraction within 10</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
         :root {
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
             --error-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
             --math-gradient: linear-gradient(135deg, #ff6b6b 0%, #feca57 50%, #48dbfb 100%);
 
+            --primary-color: #667eea;
+            --success-color: #4facfe;
+            --error-color: #fa709a;
+            --math-color: #ff6b6b;
+
             --text-primary: #2d3748;
             --text-secondary: #4a5568;
+            --background: #f7fafc;
             --surface: rgba(255, 255, 255, 0.95);
 
             --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
@@ -30,6 +38,10 @@
             --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 20%, #f093fb 40%, #f5576c 60%, #4facfe 80%, #00f2fe 100%);
@@ -37,11 +49,14 @@
             animation: gradientFlow 20s ease infinite;
             min-height: 100vh;
             color: var(--text-primary);
+            overflow-x: hidden;
         }
 
         @keyframes gradientFlow {
             0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
         }
 
         .container {
@@ -60,6 +75,7 @@
             margin: 2rem 0;
             box-shadow: var(--shadow-lg);
             text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             position: relative;
         }
 
@@ -82,12 +98,14 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin: 0 0 0.5rem 0;
+            letter-spacing: -0.02em;
         }
 
         .app-subtitle {
             font-size: clamp(1.1rem, 3vw, 1.4rem);
             color: var(--text-secondary);
             font-weight: 500;
+            margin: 0;
         }
 
         .home-button {
@@ -96,6 +114,7 @@
             gap: 0.5rem;
             padding: 0.75rem 1rem;
             background: var(--surface);
+            backdrop-filter: blur(15px);
             border-radius: var(--radius-full);
             text-decoration: none;
             color: var(--text-primary);
@@ -106,7 +125,8 @@
 
         .home-button:hover {
             transform: translateY(-2px);
-            color: var(--text-primary);
+            box-shadow: var(--shadow-lg);
+            color: var(--primary-color);
             text-decoration: none;
         }
 
@@ -128,6 +148,7 @@
             border-radius: var(--radius-xl);
             box-shadow: var(--shadow-lg);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition-smooth);
         }
 
         .problem-card {
@@ -135,30 +156,20 @@
             color: white;
             padding: 2rem 1.5rem;
             text-align: center;
-            cursor: pointer;
             border-radius: var(--radius-lg);
-            transition: var(--transition-bounce);
             box-shadow: var(--shadow-md);
-            min-height: 160px;
+            min-height: 320px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            -webkit-tap-highlight-color: transparent;
+            align-items: center;
+            position: relative;
+            transition: var(--transition-smooth);
         }
 
-        .problem-card:hover {
-            transform: translateY(-6px) scale(1.03);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .problem-card.correct {
+        .problem-card.solved {
             background: var(--success-gradient) !important;
             animation: successPulse 0.6s ease;
-        }
-
-        .problem-card.incorrect {
-            background: var(--error-gradient) !important;
-            animation: errorShake 0.6s ease;
         }
 
         @keyframes successPulse {
@@ -172,20 +183,138 @@
             75% { transform: translateX(8px); }
         }
 
-        .problem-text {
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 800;
-            margin-bottom: 0.5rem;
+        .visual-math {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
         }
 
-        .answer-text {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            font-weight: 700;
-            background: rgba(255, 255, 255, 0.3);
-            padding: 0.5rem 1rem;
+        .visual-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            max-width: 180px;
+        }
+
+        .star {
+            font-size: 2rem;
+            animation: starPop 0.3s ease;
+        }
+
+        .star.removed {
+            opacity: 0.3;
+            text-decoration: line-through;
+        }
+
+        @keyframes starPop {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .operator {
+            font-size: 3rem;
+            font-weight: 800;
+            opacity: 0.9;
+        }
+
+        .problem-text {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 800;
+            margin: 1rem 0;
+        }
+
+        .answer-revealed {
+            font-size: clamp(4rem, 10vw, 6rem);
+            font-weight: 800;
+            margin: 1rem 0;
+            animation: revealAnswer 0.5s ease;
+        }
+
+        @keyframes revealAnswer {
+            0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0); opacity: 1; }
+        }
+
+        .number-pad {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .number-btn {
+            background: white;
+            border: 3px solid var(--primary-color);
             border-radius: var(--radius-lg);
-            margin-top: 0.5rem;
-            display: inline-block;
+            padding: 1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: var(--transition-bounce);
+            box-shadow: var(--shadow-md);
+        }
+
+        .number-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: var(--shadow-lg);
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .number-btn.selected {
+            background: var(--primary-gradient);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .submit-btn {
+            background: var(--success-gradient);
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            padding: 1rem 2rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition-bounce);
+            box-shadow: var(--shadow-md);
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .feedback-message {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            border-radius: var(--radius-lg);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback-error {
+            background: rgba(250, 112, 154, 0.2);
+            color: #cc0066;
         }
 
         .score-display {
@@ -208,7 +337,6 @@
             font-family: 'Poppins', sans-serif;
             width: 100%;
             box-shadow: var(--shadow-md);
-            -webkit-tap-highlight-color: transparent;
         }
 
         .btn-enhanced:hover {
@@ -218,19 +346,18 @@
 
         .btn-primary-enhanced { background: var(--primary-gradient); color: white; }
         .btn-success-enhanced { background: var(--success-gradient); color: white; }
-        .btn-warning-enhanced { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; }
 
-        .status-badge {
-            flex: 1;
-            padding: 1rem;
-            border-radius: var(--radius-lg);
-            font-weight: 600;
-            text-align: center;
-            box-shadow: var(--shadow-md);
+        .stars {
+            font-size: 2rem;
+            margin: 0.5rem 0;
         }
 
-        .status-correct { background: var(--success-gradient); color: white; }
-        .status-incorrect { background: var(--error-gradient); color: white; }
+        @media (max-width: 768px) {
+            .problem-card { min-height: 280px; padding: 1.5rem 1rem; }
+            .star { font-size: 1.5rem; }
+            .operator { font-size: 2rem; }
+            .number-pad { grid-template-columns: repeat(3, 1fr); }
+        }
     </style>
 </head>
 <body>
@@ -242,20 +369,20 @@
                     <span>Home</span>
                 </a>
             </div>
-            <h1 class="app-title">➕ Fun Math Level 6</h1>
-            <p class="app-subtitle">Two-digit Addition</p>
+            <h1 class="app-title">➖ Fun Math Level 6</h1>
+            <p class="app-subtitle">Subtraction within 10</p>
         </header>
 
         <div class="mode-indicator">
-            📚 Learn: Add Two-digit Numbers!
+            ⭐ Take away the stars!
         </div>
 
         <div class="row g-4">
             <div class="col-lg-8">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row g-3" id="problemGrid">
-                            <!-- Problem cards will be generated here -->
+                        <div id="currentProblem">
+                            <!-- Current problem will be rendered here -->
                         </div>
                     </div>
                 </div>
@@ -264,37 +391,26 @@
             <div class="col-lg-4">
                 <div class="card">
                     <div class="card-body text-center p-4">
-                        <div style="font-weight: 600; color: var(--text-secondary); margin-bottom: 0.5rem;">🎯 Your Score</div>
+                        <div style="font-weight: 600; color: var(--text-secondary); margin-bottom: 0.5rem;">🌟 Your Progress</div>
                         <div class="score-display" id="scoreDisplay">0/20</div>
+                        <div class="stars" id="starsDisplay"></div>
 
                         <div class="d-grid gap-3 mb-4">
-                            <button class="btn btn-primary-enhanced btn-enhanced" onclick="refreshProblems()">
-                                🔄 New Problems
+                            <button class="btn btn-success-enhanced btn-enhanced" onclick="nextProblem()">
+                                ➡️ Next Problem
                             </button>
-                            <button class="btn btn-warning-enhanced btn-enhanced" onclick="retryIncorrect()" id="retryBtn" disabled>
-                                🔁 Try Again
+                            <button class="btn btn-primary-enhanced btn-enhanced" onclick="resetGame()">
+                                🔄 Start Over
                             </button>
-                            <button class="btn btn-success-enhanced btn-enhanced" onclick="resetGame()">
-                                🎮 Reset Game
-                            </button>
-                        </div>
-
-                        <div class="d-flex gap-2 mb-4">
-                            <div class="status-badge status-correct">
-                                ✅ Correct<br><span id="correctCount">0</span>
-                            </div>
-                            <div class="status-badge status-incorrect">
-                                ❌ Wrong<br><span id="incorrectCount">0</span>
-                            </div>
                         </div>
 
                         <div style="background: rgba(255,255,255,0.5); padding: 1.5rem; border-radius: var(--radius-lg);">
-                            <div style="font-weight: 700; margin-bottom: 1rem;">🎯 How to Play:</div>
+                            <div style="font-weight: 700; margin-bottom: 1rem; color: var(--math-color);">🎮 How to Play:</div>
                             <div style="text-align: left; font-size: 0.9rem; line-height: 1.8;">
-                                1️⃣ Read the problem<br>
-                                2️⃣ Add the two numbers<br>
-                                3️⃣ Click to mark if you got it right<br>
-                                4️⃣ Green = Correct! 💚
+                                1️⃣ Count the stars we start with<br>
+                                2️⃣ See how many are crossed out<br>
+                                3️⃣ Figure out how many are left<br>
+                                4️⃣ Click your answer! 🎉
                             </div>
                         </div>
                     </div>
@@ -305,118 +421,203 @@
 
     <script>
         const allProblems = [
-            { a: 12, b: 13, answer: 25 },
-            { a: 24, b: 15, answer: 39 },
-            { a: 31, b: 22, answer: 53 },
-            { a: 14, b: 25, answer: 39 },
-            { a: 32, b: 17, answer: 49 },
-            { a: 11, b: 18, answer: 29 },
-            { a: 23, b: 26, answer: 49 },
-            { a: 41, b: 12, answer: 53 },
-            { a: 22, b: 14, answer: 36 },
-            { a: 33, b: 16, answer: 49 },
-            { a: 15, b: 23, answer: 38 },
-            { a: 26, b: 13, answer: 39 },
-            { a: 21, b: 28, answer: 49 },
-            { a: 34, b: 25, answer: 59 },
-            { a: 13, b: 15, answer: 28 },
-            { a: 42, b: 17, answer: 59 },
-            { a: 25, b: 24, answer: 49 },
-            { a: 16, b: 13, answer: 29 },
-            { a: 35, b: 14, answer: 49 },
-            { a: 27, b: 22, answer: 49 }
+            { a: 5, b: 1, answer: 4 },
+            { a: 5, b: 2, answer: 3 },
+            { a: 6, b: 2, answer: 4 },
+            { a: 6, b: 3, answer: 3 },
+            { a: 7, b: 2, answer: 5 },
+            { a: 7, b: 3, answer: 4 },
+            { a: 7, b: 4, answer: 3 },
+            { a: 8, b: 2, answer: 6 },
+            { a: 8, b: 3, answer: 5 },
+            { a: 8, b: 4, answer: 4 },
+            { a: 8, b: 5, answer: 3 },
+            { a: 9, b: 2, answer: 7 },
+            { a: 9, b: 3, answer: 6 },
+            { a: 9, b: 4, answer: 5 },
+            { a: 9, b: 5, answer: 4 },
+            { a: 10, b: 3, answer: 7 },
+            { a: 10, b: 4, answer: 6 },
+            { a: 10, b: 5, answer: 5 },
+            { a: 10, b: 6, answer: 4 },
+            { a: 10, b: 7, answer: 3 }
         ];
 
-        let currentProblems = [];
-        let problemStatus = {};
+        let problems = [];
+        let currentProblemIndex = 0;
+        let selectedAnswer = null;
         let correctCount = 0;
-        let incorrectCount = 0;
 
         function initGame() {
-            refreshProblems();
-        }
-
-        function refreshProblems() {
-            const shuffled = [...allProblems].sort(() => Math.random() - 0.5);
-            currentProblems = shuffled.slice(0, 20);
-            problemStatus = {};
-            currentProblems.forEach((_, i) => problemStatus[i] = 'unmarked');
+            problems = shuffleArray([...allProblems]);
+            currentProblemIndex = 0;
             correctCount = 0;
-            incorrectCount = 0;
-            renderProblems();
-            updateDisplay();
+            selectedAnswer = null;
+            renderProblem();
+            updateScore();
         }
 
-        function renderProblems() {
-            const grid = document.getElementById('problemGrid');
-            grid.innerHTML = '';
-
-            currentProblems.forEach((problem, index) => {
-                const col = document.createElement('div');
-                col.className = 'col-6 col-md-4 col-xl-3 mb-3';
-
-                const card = document.createElement('div');
-                card.className = 'problem-card';
-                if (problemStatus[index] === 'correct') card.classList.add('correct');
-                if (problemStatus[index] === 'incorrect') card.classList.add('incorrect');
-
-                card.innerHTML = `
-                    <div class="problem-text">${problem.a} + ${problem.b}</div>
-                    <div class="answer-text">= ${problem.answer}</div>
-                `;
-
-                card.onclick = () => toggleProblem(index);
-                col.appendChild(card);
-                grid.appendChild(col);
-            });
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
         }
 
-        function toggleProblem(index) {
-            if (problemStatus[index] === 'unmarked') {
-                problemStatus[index] = 'correct';
+        function renderProblem() {
+            const container = document.getElementById('currentProblem');
+            const problem = problems[currentProblemIndex];
+            const isSolved = problem.solved;
+
+            const stars = Array(problem.a)
+                .fill(0)
+                .map((_, i) => {
+                    const isRemoved = i < problem.b;
+                    return `<span class="star ${isRemoved ? 'removed' : ''}" style="animation-delay: ${i * 0.05}s">⭐</span>`;
+                })
+                .join('');
+
+            container.innerHTML = `
+                <div class="problem-card ${isSolved ? 'solved' : ''}">
+                    ${isSolved ? '<div class="stars">⭐⭐⭐</div>' : ''}
+
+                    <div style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem;">
+                        ${isSolved ? 'Excellent!' : 'Take away the crossed-out stars!'}
+                    </div>
+
+                    <div class="visual-math">
+                        <div class="visual-group">${stars}</div>
+                    </div>
+
+                    <div class="problem-text">${problem.a} - ${problem.b} = ?</div>
+
+                    ${isSolved
+                        ? `<div class="answer-revealed">${problem.answer}</div>
+                           <div style="font-size: 1.2rem; opacity: 0.9;">${problem.a} - ${problem.b} = ${problem.answer}! 🎉</div>`
+                        : `<div style="font-size: 1.1rem; margin-bottom: 1rem;">How many are left?</div>
+                           <div class="number-pad">
+                               ${[0,1,2,3,4,5,6,7,8,9,10,'×'].map(num =>
+                                   num === '×'
+                                   ? `<button class="number-btn" onclick="clearAnswer()">✖️</button>`
+                                   : `<button class="number-btn ${selectedAnswer === num ? 'selected' : ''}" onclick="selectAnswer(${num})">${num}</button>`
+                               ).join('')}
+                           </div>
+                           <button class="submit-btn" onclick="checkAnswer()" ${selectedAnswer === null ? 'disabled' : ''}>
+                               ✅ Check Answer
+                           </button>
+                           <div id="feedback"></div>`
+                    }
+                </div>
+            `;
+        }
+
+        function selectAnswer(num) {
+            if (problems[currentProblemIndex].solved) return;
+            selectedAnswer = num;
+            renderProblem();
+        }
+
+        function clearAnswer() {
+            selectedAnswer = null;
+            renderProblem();
+        }
+
+        function checkAnswer() {
+            const problem = problems[currentProblemIndex];
+            const feedback = document.getElementById('feedback');
+
+            if (selectedAnswer === problem.answer) {
+                problem.solved = true;
                 correctCount++;
                 playSuccessSound();
-            } else if (problemStatus[index] === 'correct') {
-                problemStatus[index] = 'incorrect';
-                correctCount--;
-                incorrectCount++;
-                playErrorSound();
+                renderProblem();
+                updateScore();
+
+                if (correctCount === 20) {
+                    setTimeout(() => {
+                        showCompletionMessage();
+                        playCompletionSound();
+                    }, 800);
+                }
             } else {
-                problemStatus[index] = 'unmarked';
-                incorrectCount--;
-            }
+                playErrorSound();
+                feedback.innerHTML = `
+                    <div class="feedback-message feedback-error">
+                        ${getEncouragingMessage()} Try counting again!
+                    </div>
+                `;
 
-            renderProblems();
-            updateDisplay();
-        }
-
-        function updateDisplay() {
-            document.getElementById('scoreDisplay').textContent = `${correctCount}/20`;
-            document.getElementById('correctCount').textContent = correctCount;
-            document.getElementById('incorrectCount').textContent = incorrectCount;
-            document.getElementById('retryBtn').disabled = incorrectCount === 0;
-
-            if (correctCount === 20) {
+                const problemCard = document.querySelector('.problem-card');
+                problemCard.style.animation = 'errorShake 0.6s ease';
                 setTimeout(() => {
-                    alert('🎉 Perfect! You mastered two-digit addition!');
-                    playCompletionSound();
-                }, 500);
+                    problemCard.style.animation = '';
+                }, 600);
             }
         }
 
-        function retryIncorrect() {
-            const incorrect = currentProblems.filter((_, i) => problemStatus[i] === 'incorrect');
-            currentProblems = incorrect;
-            problemStatus = {};
-            currentProblems.forEach((_, i) => problemStatus[i] = 'unmarked');
-            correctCount = 0;
-            incorrectCount = 0;
-            renderProblems();
-            updateDisplay();
+        function getEncouragingMessage() {
+            const messages = [
+                "Not quite!",
+                "Try again!",
+                "Keep trying!",
+                "You can do it!",
+                "Count carefully!"
+            ];
+            return messages[Math.floor(Math.random() * messages.length)];
+        }
+
+        function nextProblem() {
+            selectedAnswer = null;
+            if (currentProblemIndex < problems.length - 1) {
+                currentProblemIndex++;
+            } else {
+                currentProblemIndex = 0;
+            }
+            renderProblem();
         }
 
         function resetGame() {
-            refreshProblems();
+            if (confirm('Are you sure you want to start over?')) {
+                initGame();
+            }
+        }
+
+        function updateScore() {
+            document.getElementById('scoreDisplay').textContent = `${correctCount}/20`;
+            const stars = '⭐'.repeat(Math.min(correctCount, 10));
+            document.getElementById('starsDisplay').textContent = stars;
+        }
+
+        function showCompletionMessage() {
+            const message = document.createElement('div');
+            message.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 3rem;
+                border-radius: 24px;
+                box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                text-align: center;
+                z-index: 10000;
+                max-width: 90%;
+                animation: successPulse 0.6s ease;
+            `;
+            message.innerHTML = `
+                <div style="font-size: 4rem; margin-bottom: 1rem;">🎉</div>
+                <div style="font-size: 2rem; font-weight: 800; background: var(--math-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem;">
+                    Perfect Score!
+                </div>
+                <div style="font-size: 1.3rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                    You're a subtraction superstar!<br>All 20 problems correct! ⭐⭐⭐
+                </div>
+                <button onclick="this.parentElement.remove(); resetGame();" style="background: var(--success-gradient); color: white; border: none; padding: 1rem 2rem; border-radius: 50px; font-weight: 600; font-size: 1.1rem; cursor: pointer;">
+                    Play Again! 🔄
+                </button>
+            `;
+            document.body.appendChild(message);
         }
 
         function playSuccessSound() {
