@@ -272,7 +272,45 @@
         .word-card {
             transition: transform 0.2s ease, box-shadow 0.2s ease !important;
         }
-        
+
+        .tts-button {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-fast);
+            font-size: 1rem;
+        }
+
+        .tts-button:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: scale(1.05);
+        }
+
+        .tts-button:focus-visible {
+            outline: 3px solid rgba(255, 255, 255, 0.8);
+            outline-offset: 2px;
+        }
+
+        .tts-button--error {
+            animation: ttsShake 0.4s ease;
+        }
+
+        @keyframes ttsShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-3px); }
+            75% { transform: translateX(3px); }
+        }
+
         .word-main {
             font-size: clamp(1.6rem, 4.5vw, 2.2rem);
             font-weight: 700;
@@ -1050,6 +1088,7 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/tts.js"></script>
     <script>
         // 50 Easy Malaysian words with syllable breakdown
         const allWords = [
@@ -1207,9 +1246,37 @@
                 ).join('');
                 
                 wordCard.innerHTML = `
+                    <button
+                        class="tts-button"
+                        type="button"
+                        aria-label="Play pronunciation for ${wordObj.word}"
+                        data-tts-text="${wordObj.word}"
+                        data-tts-lang="ms-MY"
+                    >🔊</button>
                     <div class="word-main">${wordObj.word}</div>
                     <div class="syllable-container">${syllableHtml}</div>
                 `;
+
+                const ttsButton = wordCard.querySelector('.tts-button');
+                ttsButton.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    const played = window.playTtsAudio(wordObj.word, 'ms-MY');
+                    if (!played) {
+                        ttsButton.classList.add('tts-button--error');
+                        setTimeout(() => ttsButton.classList.remove('tts-button--error'), 400);
+                    }
+                });
+                ttsButton.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        const played = window.playTtsAudio(wordObj.word, 'ms-MY');
+                        if (!played) {
+                            ttsButton.classList.add('tts-button--error');
+                            setTimeout(() => ttsButton.classList.remove('tts-button--error'), 400);
+                        }
+                    }
+                });
                 
                 wordCard.onclick = () => toggleWord(wordObj.word);
                 wordCard.onkeydown = (e) => {

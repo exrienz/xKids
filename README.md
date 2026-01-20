@@ -103,9 +103,43 @@ docker build --platform linux/arm64 -t xkids-learning-center .
 - **Progress Tracking** - Score tracking, retry wrong answers, and completion celebrations
 - **Age-Appropriate Content** - Tailored for children ages 3-9
 - **Multi-language** - Supports English, Malay, and Arabic
+- **Text-to-Speech Pronunciation** - Play Malay and Arabic pronunciations via the Web Speech API (free, no usage caps)
 - **Offline Ready** - No external dependencies required
 - **Security Hardened** - CSP, rate limiting, and security headers
 - **Performance Optimized** - Gzip compression and asset caching
+
+## 🔊 Text-to-Speech (TTS) Pronunciation
+
+The Learn Malay and Iqra lessons now include play buttons that use the browser's built-in
+Web Speech API. This is free to use, does not require paid services, and works offline
+when the device has local voices installed. If a voice is unavailable, the UI fails
+gracefully without interrupting gameplay.
+
+### Authoring TTS Buttons
+
+To add a pronunciation button to any lesson card, include a button with `data-tts-text`
+and `data-tts-lang` attributes, then call `playTtsAudio` on click:
+
+```html
+<button
+    class="tts-button"
+    type="button"
+    aria-label="Play pronunciation for حرف"
+    data-tts-text="حرف"
+    data-tts-lang="ar-SA"
+>🔊</button>
+```
+
+```js
+button.addEventListener('click', (event) => {
+    event.stopPropagation();
+    playTtsAudio(button.dataset.ttsText, button.dataset.ttsLang);
+});
+```
+
+Recommended language codes:
+- Malay: `ms-MY`
+- Arabic: `ar-SA`
 
 ## 📘 Documentation
 
@@ -127,6 +161,7 @@ src/
 │   └── js/                # JavaScript files
 │       ├── animations.js  # Page animations
 │       ├── audio.js       # Audio functionality
+│       ├── tts.js         # Text-to-speech helpers
 │       └── navigation.js  # Navigation helpers
 └── pages/
     ├── malay/             # Malaysian reading lessons

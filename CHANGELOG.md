@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Lesson 8: Simple Two-digit Addition
   - Lesson 9: Fun with Multiplication (conceptual groups)
   - Lesson 10: Basic Division - Sharing concept
+- Text-to-speech pronunciation buttons for Learn Malay and Iqra lessons using the Web Speech API
 
 ## [0.5.0] - 2026-01-20
 
